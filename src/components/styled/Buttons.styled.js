@@ -39,7 +39,7 @@ export const PrimaryButton = styled(BasicButton)`
 
 export const SecondaryButton = styled(BasicButton)`
   background: var(--SECONDARY-BTN-BACKGROUND-CLR);
-  border: var(--BTN-BORDER-WIDTH) solid var(--SECONDARY-BTN-BORDER-CLR);
+  border: var(--BTN-BORDER-WIDTH) solid currentColor;
   padding: calc(var(--BTN-PADDING-Y) - var(--BTN-BORDER-WIDTH))
     calc(var(--BTN-PADDING-X) - var(--BTN-BORDER-WIDTH));
   position: relative;

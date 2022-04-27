@@ -11,7 +11,6 @@ export const StyledNavbar = styled.nav`
 
   button {
     --PRIMARY-BTN-BACKGROUND-CLR: var(--PRIMARY-BACKGROUND-CLR);
-    --SECONDARY-BTN-BORDER-CLR: var(--PRIMARY-BACKGROUND-CLR);
   }
 `;
 
