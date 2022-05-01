@@ -42,27 +42,6 @@ export const SecondaryButton = styled(BasicButton)`
   border: var(--BTN-BORDER-WIDTH) solid currentColor;
   padding: calc(var(--BTN-PADDING-Y) - var(--BTN-BORDER-WIDTH))
     calc(var(--BTN-PADDING-X) - var(--BTN-BORDER-WIDTH));
-  position: relative;
-  z-index: 1;
-
-  &::after {
-    background: var(--SECONDARY-BTN-HOVER-CLR);
-    border-radius: inherit;
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    transform: scaleY(0);
-    transition: transform var(--TRANSITION-DURATION);
-    transform-origin: top;
-    z-index: -1;
-  }
-
-  &:hover::after {
-    transform: scaleY(1);
-  }
 `;
 
 export const TextButton = styled(BasicButton)`
