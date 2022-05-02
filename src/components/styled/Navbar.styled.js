@@ -6,7 +6,7 @@ export const StyledNavbar = styled.nav`
   color: var(--ACCENT-FONT-CLR);
   display: flex;
   justify-content: space-between;
-  padding: 0.2rem 1rem;
+  padding: 0.2rem var(--SECTION-PADDING-X);
   width: 100%;
 
   button {
