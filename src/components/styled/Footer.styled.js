@@ -3,11 +3,7 @@ import { motion } from "framer-motion";
 
 export const StyledFooter = styled.footer`
   background: var(--ACCENT-CLR);
-  padding: 1rem;
-  postition: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  padding: var(--SECTION-PADDING-X);
 `;
 
 export const FooterUpperSection = styled.div`
