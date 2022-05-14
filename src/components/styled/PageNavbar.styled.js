@@ -6,6 +6,8 @@ export const StyledPageNavbar = styled.nav`
   border-radius: var(--BORDER-RADIUS);
   display: inline-flex;
   flex-direction: column;
+  gap: 2rem;
+  height: fit-content;
   justify-content: space-between;
   position: sticky;
   top: 50%;

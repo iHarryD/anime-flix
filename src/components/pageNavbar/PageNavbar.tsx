@@ -12,21 +12,21 @@ export default function PageNavbar() {
   return (
     <StyledPageNavbar>
       <div>
-        <PageNavItems>
+        <PageNavItems title="Explore">
           <FontAwesomeIcon icon={faCompass} />
         </PageNavItems>
-        <PageNavItems>
+        <PageNavItems title="Playlists">
           <FontAwesomeIcon icon={faList} />
         </PageNavItems>
-        <PageNavItems>
+        <PageNavItems title="History">
           <FontAwesomeIcon icon={faClockRotateLeft} />
         </PageNavItems>
-        <PageNavItems>
+        <PageNavItems title="Watch Later">
           <FontAwesomeIcon icon={faBookmark} />
         </PageNavItems>
       </div>
       <div>
-        <PageNavItems>
+        <PageNavItems title="Setting">
           <FontAwesomeIcon icon={faGear} />
         </PageNavItems>
       </div>
