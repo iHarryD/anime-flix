@@ -4,14 +4,14 @@ import "./css/variables.css";
 import "./css/typography.css";
 
 import Header from "./components/header/Header";
+import AllRoutes from "./pages/routes";
 import Footer from "./components/footer/Footer";
-import ExplorePage from "./pages/explorePage/ExplorePage";
 
 export default function App() {
   return (
     <div className="App">
       <Header />
-      <ExplorePage />
+      <AllRoutes />
       <Footer />
     </div>
   );
