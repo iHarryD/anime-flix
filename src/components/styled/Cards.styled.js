@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import ReactPlayer from "react-player/youtube";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export const VerticleCardContainer = styled.div`
   font-size: 0.85rem;
@@ -56,7 +57,7 @@ export const VideoDuration = styled.span`
   border-radius: 5px;
 `;
 
-export const VideoHeading = styled.p`
+export const VideoHeading = styled(Link)`
   font-size: 1rem;
   overflow-x: clip;
   text-overflow: ellipsis;

@@ -5,13 +5,13 @@ import "./css/typography.css";
 
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
-import ExplorePage from "./pages/explorePage/ExplorePage";
+import AllRoutes from "./pages/routes";
 
 export default function App() {
   return (
     <div className="App">
       <Header />
-      <ExplorePage />
+      <AllRoutes />
       <Footer />
     </div>
   );

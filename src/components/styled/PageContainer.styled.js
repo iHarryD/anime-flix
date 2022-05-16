@@ -6,7 +6,7 @@ export const StyledPageContainerMain = styled.main`
 `;
 
 export const PageSection = styled.section`
-  margin-left: 3rem;
+  margin-left: 2rem;
   flex-basis: 100%;
   padding: 0 1rem;
 `;

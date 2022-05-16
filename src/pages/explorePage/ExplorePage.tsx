@@ -19,23 +19,19 @@ export default function ExplorePage() {
   interface videoProp {
     url: string;
     title: string;
+    _id: string;
     uploadedOn: Date;
-  }
-
-  const observer = new IntersectionObserver(() => {});
-  if (lastVideoRef !== null) {
-    observer.observe(lastVideoRef.current);
   }
 
   return (
     <PageContainerMain>
       <ExploreVideosContainer>
         {allVideos.length > 0 &&
-          allVideos.map(({ url, title, uploadedOn }: videoProp, index) => {
+          allVideos.map(({ url, title, _id, uploadedOn }: videoProp, index) => {
             if (allVideos.length === index + 1) {
               return (
                 <VerticleVideoCard
-                  ref={lastVideoRef}
+                  videoID={_id}
                   key={index}
                   url={url}
                   title={title}
@@ -45,6 +41,7 @@ export default function ExplorePage() {
             } else {
               return (
                 <VerticleVideoCard
+                  videoID={_id}
                   key={index}
                   url={url}
                   title={title}

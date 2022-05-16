@@ -11,10 +11,16 @@ import {
 interface videoProps {
   url: string;
   title: string;
+  videoID: string;
   uploadDate: Date;
 }
 
-export function VerticleVideoCard({ url, title, uploadDate }: videoProps) {
+export function VerticleVideoCard({
+  url,
+  videoID,
+  title,
+  uploadDate,
+}: videoProps) {
   return (
     <VerticleCardContainer>
       <VideoPreviewContainer>
@@ -30,7 +36,9 @@ export function VerticleVideoCard({ url, title, uploadDate }: videoProps) {
         </VideoPreviewOverlay>
       </VideoPreviewContainer>
       <VideoCardTextContainer>
-        <VideoHeading title={title}>{title}</VideoHeading>
+        <VideoHeading title={title} to={`/watch/${videoID}`}>
+          {title}
+        </VideoHeading>
         <VideoUploadDate>
           {new Date(uploadDate).toLocaleDateString()}
         </VideoUploadDate>

@@ -13,11 +13,11 @@
 }
 
 .--has-gap {
-  gap: var(--HAS-GAP-VALUE);
+  gap: var(--HAS-GAP-VALUE, 1rem);
 }
 
 .--has-padding {
-  padding: var(--HAS-PADDING-VALUE);
+  padding: var(--HAS-PADDING-VALUE, 1rem);
 }
 
 .--has-hover-overlay {
