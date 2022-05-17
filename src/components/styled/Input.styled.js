@@ -10,3 +10,11 @@ export const StyledInput = styled.input`
   padding: calc(var(--INPUT-PADDING-Y) - var(--INPUT-BORDER-WIDTH))
     calc(var(--INPUT-PADDING-X) - var(--INPUT-BORDER-WIDTH));
 `;
+
+export const WhiteInput = styled.input`
+  background: #fff;
+  border-radius: var(--BORDER-RADIUS);
+  color: #000;
+  padding: calc(var(--INPUT-PADDING-Y) - var(--INPUT-BORDER-WIDTH))
+    calc(var(--INPUT-PADDING-X) - var(--INPUT-BORDER-WIDTH));
+`;
