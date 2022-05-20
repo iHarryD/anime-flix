@@ -5,8 +5,10 @@ import {
   IconOnlyButton,
   PrimaryButton,
   SecondaryButton,
+  TextButton,
 } from "../styled/Buttons.styled";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/authContext";
 
 export function LoggedOutNavbarUtitilies() {
   const navigate = useNavigate();
@@ -30,11 +32,13 @@ export function LoggedOutNavbarUtitilies() {
 }
 
 export function LoggedInNavbarUtitilies() {
+  const { logout } = useAuth();
   return (
     <NavbarUtilitiesContainer gap="2rem">
       <IconOnlyButton size="1.5rem">
         <FontAwesomeIcon icon={faBell} />
       </IconOnlyButton>
+      <SecondaryButton onClick={() => logout()}>Logout</SecondaryButton>
     </NavbarUtilitiesContainer>
   );
 }
