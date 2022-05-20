@@ -4,8 +4,10 @@ import { useRef, useState } from "react";
 import ButtonSpinner from "../../components/buttonSpinner/ButtonSpinner";
 import { To, useLocation, useNavigate } from "react-router-dom";
 import {
+  InputButtonContainer,
   LoginBoxContainer,
   PasswordInputContainer,
+  RememberLoginContainer,
 } from "../../components/styled/LoginPageComponents.styled";
 import {
   IconOnlyButton,
@@ -22,7 +24,7 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const emailInputRef = useRef<HTMLInputElement | null>(null);
   const passwordInputRef = useRef<HTMLInputElement | null>(null);
-  const { setUserData } = useAuth();
+  const { setUserData, setToRemember } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -41,53 +43,66 @@ export default function LoginPage() {
   return (
     <MainForAuthPages>
       <LoginBoxContainer>
-        <div className="--verticle-flex --has-gap">
-          <InputWithBackground
-            ref={emailInputRef}
-            type="email"
-            placeholder="Email"
-          />
-          <PasswordInputContainer>
+        <InputButtonContainer>
+          <div className="--verticle-flex --has-gap">
             <InputWithBackground
-              ref={passwordInputRef}
-              type={`${showPassword ? "text" : "password"}`}
-              placeholder="Password"
+              ref={emailInputRef}
+              type="email"
+              placeholder="Email"
             />
-            <IconOnlyButton
-              onMouseDown={() => setShowPassword(true)}
-              onMouseUp={() => setShowPassword(false)}
+            <PasswordInputContainer>
+              <InputWithBackground
+                ref={passwordInputRef}
+                type={`${showPassword ? "text" : "password"}`}
+                placeholder="Password"
+              />
+              <IconOnlyButton
+                onMouseDown={() => setShowPassword(true)}
+                onMouseUp={() => setShowPassword(false)}
+              >
+                <FontAwesomeIcon icon={faEye} />
+              </IconOnlyButton>
+            </PasswordInputContainer>
+            <RememberLoginContainer>
+              <input
+                type="checkbox"
+                id="remember-login"
+                name="remember-login"
+                onChange={(e) => setToRemember(e.target.checked)}
+              />
+              <label htmlFor="remember-login">Remember me</label>
+            </RememberLoginContainer>
+          </div>
+          <div className="--verticle-flex --has-gap">
+            <PrimaryButton
+              onClick={() =>
+                handleLogin(() => {
+                  login(
+                    emailInputRef.current?.value!,
+                    passwordInputRef.current?.value!,
+                    setIsLoading,
+                    (result) => {
+                      setUserData({
+                        firstName: result.firstName,
+                        token: result.token,
+                      });
+                      navigate(-1 as To, { replace: true });
+                    }
+                  );
+                })
+              }
+              disabled={isLoading}
             >
-              <FontAwesomeIcon icon={faEye} />
-            </IconOnlyButton>
-          </PasswordInputContainer>
-          <PrimaryButton
-            onClick={() =>
-              handleLogin(() => {
-                login(
-                  emailInputRef.current?.value!,
-                  passwordInputRef.current?.value!,
-                  setIsLoading,
-                  (result) => {
-                    setUserData({
-                      firstName: result.firstName,
-                      token: result.token,
-                    });
-                    navigate(-1 as To, { replace: true });
-                  }
-                );
-              })
-            }
-            disabled={isLoading}
-          >
-            {isLoading ? <ButtonSpinner color="#fff" /> : "Login"}
-          </PrimaryButton>
-          <SecondaryButton
-            disabled={isLoading}
-            onClick={() => navigate("/signup")}
-          >
-            Create an account
-          </SecondaryButton>
-        </div>
+              {isLoading ? <ButtonSpinner color="#fff" /> : "Login"}
+            </PrimaryButton>
+            <SecondaryButton
+              disabled={isLoading}
+              onClick={() => navigate("/signup")}
+            >
+              Create an account
+            </SecondaryButton>
+          </div>
+        </InputButtonContainer>
       </LoginBoxContainer>
     </MainForAuthPages>
   );

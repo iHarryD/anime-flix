@@ -10,26 +10,32 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [userData, setUserData] = useState(defaultValues);
+  const [toRemember, setToRemember] = useState(false);
 
   useEffect(() => {
+    const toSaveIn = toRemember ? localStorage : sessionStorage;
     if (userData.token !== null || userData.firstName !== null) {
-      localStorage.setItem("firstName", userData.firstName);
-      localStorage.setItem("token", userData.token);
+      toSaveIn.setItem("firstName", userData.firstName);
+      toSaveIn.setItem("token", userData.token);
       axios.defaults.headers.common["authorization"] = userData.token;
     } else {
       localStorage.removeItem("firstName");
       localStorage.removeItem("token");
+      sessionStorage.removeItem("firstName");
+      sessionStorage.removeItem("token");
       axios.defaults.headers.common["authorization"] = false;
     }
   }, [userData]);
 
   function logout(callback = null) {
-    userData(defaultValues);
+    setUserData({ firstName: null, token: null });
     if (callback) callback();
   }
 
   return (
-    <AuthContext.Provider value={{ userData, setUserData, logout }}>
+    <AuthContext.Provider
+      value={{ userData, setUserData, setToRemember, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

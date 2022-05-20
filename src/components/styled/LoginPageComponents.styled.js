@@ -18,3 +18,15 @@ export const PasswordInputContainer = styled.div`
     right: var(--INPUT-PADDING-X);
   }
 `;
+
+export const InputButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
+
+export const RememberLoginContainer = styled.div`
+  align-items: center;
+  display: flex;
+  gap: 10px;
+`;
