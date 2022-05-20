@@ -6,12 +6,25 @@ import {
   PrimaryButton,
   SecondaryButton,
 } from "../styled/Buttons.styled";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function LoggedOutNavbarUtitilies() {
+  const navigate = useNavigate();
+  const location = useLocation();
   return (
     <NavbarUtilitiesContainer gap="1rem">
       <SecondaryButton>Get Started</SecondaryButton>
-      <PrimaryButton>Login</PrimaryButton>
+      <PrimaryButton
+        onClick={() =>
+          navigate("/login", {
+            state: {
+              comingFrom: location.pathname,
+            },
+          })
+        }
+      >
+        Login
+      </PrimaryButton>
     </NavbarUtilitiesContainer>
   );
 }

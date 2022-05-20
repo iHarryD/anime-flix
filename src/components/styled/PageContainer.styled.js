@@ -10,3 +10,10 @@ export const PageSection = styled.section`
   flex-basis: 100%;
   padding: 0 1rem;
 `;
+
+export const MainForAuthPages = styled.main`
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+`;

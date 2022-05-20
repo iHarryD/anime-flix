@@ -1,0 +1,7 @@
+.login-box-container .--secondary-btn {
+  color: var(--SECONDARY-ACCENT-CLR-LIGHT);
+}
+
+.login-box-container .input:focus {
+  border-color: var(--SECONDARY-ACCENT-CLR-DARK);
+}
