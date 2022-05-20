@@ -4,9 +4,11 @@ import { VerticleVideoCard } from "../../components/videoCards/VideoCards";
 
 import { useEffect, useState } from "react";
 import baseAxiosInstance from "../../services/baseAxiosInstance";
+import useFilter from "../../hooks/useFilter";
 
 export default function ExplorePage() {
-  const [allVideos, setAllVideos] = useState<any[]>([]);
+  const [allVideos, setAllVideos] = useState<[]>([]);
+  const { list, filterDispatcher } = useFilter(allVideos);
 
   useEffect(() => {
     (async () => {
@@ -24,16 +26,18 @@ export default function ExplorePage() {
   return (
     <PageContainerMain>
       <ExploreVideosContainer>
-        {allVideos.length > 0 &&
-          allVideos.map(({ url, title, _id, uploadedOn }: videoProp, index) => (
-            <VerticleVideoCard
-              key={index}
-              url={url}
-              title={title}
-              videoID={_id}
-              uploadDate={uploadedOn}
-            />
-          ))}
+        {list.current.length > 0 &&
+          list.current.map(
+            ({ url, title, _id, uploadedOn }: videoProp, index) => (
+              <VerticleVideoCard
+                key={index}
+                url={url}
+                title={title}
+                videoID={_id}
+                uploadDate={uploadedOn}
+              />
+            )
+          )}
       </ExploreVideosContainer>
     </PageContainerMain>
   );
