@@ -5,7 +5,8 @@ export async function login(
   email: string,
   password: string,
   loadingState: React.SetStateAction<any>,
-  successCallback?: (result: any) => void
+  successCallback?: (result: any) => void,
+  failureCallback?: (err: object) => void
 ) {
   try {
     loadingState(true);
@@ -16,8 +17,11 @@ export async function login(
     if (result.status === 200 && successCallback) {
       successCallback(result.data);
     }
-  } catch (err) {
-    console.error(err);
+  } catch (err: unknown) {
+    if (failureCallback) {
+      failureCallback(err as object);
+    }
+    console.log(err);
   } finally {
     loadingState(false);
   }
@@ -26,7 +30,8 @@ export async function login(
 export async function signup(
   userData: any,
   loadingState: React.SetStateAction<any>,
-  successCallback?: (result: any) => void
+  successCallback?: (result: any) => void,
+  failureCallback?: (result: any) => void
 ) {
   try {
     loadingState(true);
@@ -40,8 +45,11 @@ export async function signup(
     if (result.status === 200 && successCallback) {
       successCallback(result);
     }
-  } catch (err) {
-    console.error(err);
+  } catch (err: unknown) {
+    if (failureCallback) {
+      failureCallback(err as object);
+    }
+    console.log(err);
   } finally {
     loadingState(false);
   }

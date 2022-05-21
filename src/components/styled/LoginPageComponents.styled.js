@@ -19,7 +19,7 @@ export const PasswordInputContainer = styled.div`
   }
 `;
 
-export const InputButtonContainer = styled.div`
+export const PairContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;

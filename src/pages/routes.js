@@ -10,17 +10,22 @@ export default function AllRoutes() {
   return (
     <Routes>
       <Route path="/" element={<ExplorePage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignupPage />} />
       <Route
-        path="/history"
+        path="/login"
         element={
-          <PrivateRoute>
+          <PrivateRoute isAuthenticated={!userData.token} redirectTo="/">
+            <LoginPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/signup"
+        element={
+          <PrivateRoute isAuthenticated={!userData.token} redirectTo="/">
             <SignupPage />
           </PrivateRoute>
         }
       />
-      <Route path="/watch-later" element={<PrivateRoute />} />
     </Routes>
   );
 }

@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 import ButtonSpinner from "../../components/buttonSpinner/ButtonSpinner";
 import { To, useLocation, useNavigate } from "react-router-dom";
 import {
-  InputButtonContainer,
   LoginBoxContainer,
   PasswordInputContainer,
   RememberLoginContainer,
@@ -13,38 +12,57 @@ import {
   IconOnlyButton,
   PrimaryButton,
   SecondaryButton,
+  TextButton,
 } from "../../components/styled/Buttons.styled";
 import { MainForAuthPages } from "../../components/styled/PageContainer.styled";
 import { InputWithBackground } from "../../components/styled/Input.styled";
 import { login } from "../../services/authServices";
 import { useAuth } from "../../contexts/authContext";
+import {
+  AuthWarningText,
+  VerticleFlexWithGap,
+} from "../../components/styled/Generic.styled";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [authWarning, setAuthWarning] = useState<string | null>(null);
   const emailInputRef = useRef<HTMLInputElement | null>(null);
   const passwordInputRef = useRef<HTMLInputElement | null>(null);
   const { setUserData, setToRemember } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
+  const testLoginCredentials = {
+    email: "test",
+    password: "123456",
+  };
+
   function handleLogin(next: () => void): void {
+    setAuthWarning(null);
     if (emailInputRef.current?.value.replaceAll(" ", "").length === 0) {
-      console.log("Email prob");
+      setAuthWarning("Email cannot be empty.");
     } else if (
       passwordInputRef.current?.value.replaceAll(" ", "").length === 0
     ) {
-      console.log("Password prob");
+      setAuthWarning("Password cannot be empty.");
     } else {
       next();
     }
   }
 
+  function testLogin() {
+    if (emailInputRef.current === null || passwordInputRef.current === null)
+      return;
+    emailInputRef.current.value = testLoginCredentials.email;
+    passwordInputRef.current.value = testLoginCredentials.password;
+  }
+
   return (
     <MainForAuthPages>
       <LoginBoxContainer>
-        <InputButtonContainer>
-          <div className="--verticle-flex --has-gap">
+        <VerticleFlexWithGap>
+          <VerticleFlexWithGap gap="0.7rem">
             <InputWithBackground
               ref={emailInputRef}
               type="email"
@@ -72,8 +90,12 @@ export default function LoginPage() {
               />
               <label htmlFor="remember-login">Remember me</label>
             </RememberLoginContainer>
-          </div>
-          <div className="--verticle-flex --has-gap">
+          </VerticleFlexWithGap>
+          <VerticleFlexWithGap gap="0.7rem">
+            {authWarning && <AuthWarningText>{authWarning}</AuthWarningText>}
+            <TextButton onClick={() => testLogin()}>
+              Use testing credentials.
+            </TextButton>
             <PrimaryButton
               onClick={() =>
                 handleLogin(() => {
@@ -87,6 +109,11 @@ export default function LoginPage() {
                         token: result.token,
                       });
                       navigate(-1 as To, { replace: true });
+                    },
+                    (err) => {
+                      const errorMessage =
+                        err.response.data.message || "Error encountered!";
+                      setAuthWarning(errorMessage);
                     }
                   );
                 })
@@ -101,8 +128,8 @@ export default function LoginPage() {
             >
               Create an account
             </SecondaryButton>
-          </div>
-        </InputButtonContainer>
+          </VerticleFlexWithGap>
+        </VerticleFlexWithGap>
       </LoginBoxContainer>
     </MainForAuthPages>
   );

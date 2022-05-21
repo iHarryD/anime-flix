@@ -5,6 +5,7 @@ import {
   PrimaryButton,
   TextButton,
 } from "../../components/styled/Buttons.styled";
+import { AuthWarningText } from "../../components/styled/Generic.styled";
 import {
   DOBInput,
   InputWithBackground,
@@ -19,6 +20,7 @@ import { signup } from "../../services/authServices";
 
 export default function SignupPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [authWarning, setAuthWarning] = useState<string | null>(null);
   const firstNameInputRef = useRef<HTMLInputElement | null>(null);
   const lastNameInputRef = useRef<HTMLInputElement | null>(null);
   const emailInputRef = useRef<HTMLInputElement | null>(null);
@@ -29,6 +31,7 @@ export default function SignupPage() {
   const location = useLocation();
 
   function handleSignup(next: () => void): void {
+    setAuthWarning(null);
     if (
       !firstNameInputRef.current?.value.replaceAll(" ", "").length ||
       !lastNameInputRef.current?.value.replaceAll(" ", "").length ||
@@ -37,18 +40,17 @@ export default function SignupPage() {
       !confirmPasswordInputRef.current?.value.replaceAll(" ", "").length ||
       !dobInputRef.current?.value.replaceAll(" ", "").length
     ) {
-      console.log("Fill everything");
+      setAuthWarning("All fields are mandatory.");
     } else if (passwordInputRef.current?.value.length! < 6) {
-      console.log("Password must be at least 6 characters long");
+      setAuthWarning("Password must be at least 6 characters long");
     } else if (
       passwordInputRef.current?.value !== confirmPasswordInputRef.current?.value
     ) {
-      console.log("Passwords do not match");
+      setAuthWarning("Passwords do not match");
     } else {
       next();
     }
   }
-
   return (
     <MainForAuthPages>
       <SignupBoxContainer>
@@ -90,6 +92,7 @@ export default function SignupPage() {
             />
           </StyledLabelInputContainer>
         </ColumnForPair>
+        {authWarning && <AuthWarningText>{authWarning}</AuthWarningText>}
         <PrimaryButton
           disabled={isLoading}
           onClick={() =>
@@ -110,6 +113,11 @@ export default function SignupPage() {
                       comingFrom: location.pathname,
                     },
                   });
+                },
+                (err) => {
+                  const errorMessage =
+                    err.response.data.message || "Error encountered!";
+                  setAuthWarning(errorMessage);
                 }
               )
             )
