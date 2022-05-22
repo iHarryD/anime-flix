@@ -8,20 +8,14 @@ import {
   VideoUploadDate,
 } from "../styled/Cards.styled";
 import { Link } from "react-router-dom";
-
-interface videoProps {
-  url: string;
-  title: string;
-  videoID: string;
-  uploadDate: Date;
-}
+import { videoCardInterface } from "../../interfaces/video.interface";
 
 export function VerticleVideoCard({
   url,
   title,
-  videoID,
-  uploadDate,
-}: videoProps) {
+  _id,
+  uploadedOn,
+}: videoCardInterface) {
   return (
     <VerticleCardContainer>
       <VideoPreviewContainer>
@@ -37,11 +31,11 @@ export function VerticleVideoCard({
         </VideoPreviewOverlay>
       </VideoPreviewContainer>
       <VideoCardTextContainer>
-        <Link to={`/watch/${videoID}`}>
+        <Link to={`/watch/${_id}`}>
           <VideoHeading title={title}>{title}</VideoHeading>
         </Link>
         <VideoUploadDate>
-          {new Date(uploadDate).toLocaleDateString()}
+          {new Date(uploadedOn).toLocaleDateString()}
         </VideoUploadDate>
       </VideoCardTextContainer>
     </VerticleCardContainer>

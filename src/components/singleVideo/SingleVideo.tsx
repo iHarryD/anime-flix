@@ -2,19 +2,7 @@ import VideoUtilityBar from "../videoUtilityBar/VideoUtilityBar";
 import { StyledSingleVideoContainer } from "../styled/SingleVideoComponents.styled";
 import VideoDescription from "../videoDescription/VideoDescription";
 import { VideoHeading } from "../styled/Cards.styled";
-
-interface singleVideoProps {
-  url: string;
-  title: string;
-  likes: number;
-  dislikes: number;
-  views: number;
-  uploadDate: Date;
-  playlists: object[];
-  bookmarkStatus: boolean;
-  channel: string;
-  description?: string;
-}
+import { singleVideoProps } from "../../interfaces/singleVideo.interface";
 
 export default function SingleVideo({
   url,

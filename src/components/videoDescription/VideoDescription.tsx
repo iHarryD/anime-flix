@@ -10,13 +10,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { verticallyExpandingVariant } from "../../variants/expandingVariant";
-
-interface descriptionProps {
-  views: number;
-  channel: string;
-  uploadDate: Date;
-  description?: string;
-}
+import { descriptionProps } from "../../interfaces/videoDescription.interface";
 
 export default function VideoDescription({
   views,

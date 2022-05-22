@@ -1,9 +1,6 @@
 import { StyledPageHeading } from "../styled/PageHeading.styled";
+import { pageHeaderProps } from "../../interfaces/pageHeader.interface";
 
-interface pageHeadingProps {
-  children: React.ReactNode;
-}
-
-export default function PageHeading({ children }: pageHeadingProps) {
+export default function PageHeading({ children }: pageHeaderProps) {
   return <StyledPageHeading>{children}</StyledPageHeading>;
 }
