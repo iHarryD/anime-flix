@@ -3,6 +3,7 @@ import ReactPlayer from "react-player/youtube";
 import { motion } from "framer-motion";
 
 export const VerticleCardContainer = styled.div`
+  cursor: default;
   font-size: 0.85rem;
   padding: 1rem;
   min-width: 18rem;
@@ -56,8 +57,7 @@ export const VideoDuration = styled.span`
   border-radius: 5px;
 `;
 
-export const VideoHeading = styled.p`
-  font-size: 1rem;
+export const VideoHeading = styled.h3`
   overflow-x: clip;
   text-overflow: ellipsis;
   white-space: nowrap;

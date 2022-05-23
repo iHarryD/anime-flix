@@ -18,17 +18,19 @@ export default function ExplorePage() {
   interface videoProp {
     url: string;
     title: string;
+    _id: string;
     uploadedOn: Date;
   }
   return (
     <PageContainerMain>
       <ExploreVideosContainer>
         {allVideos.length > 0 &&
-          allVideos.map(({ url, title, uploadedOn }: videoProp, index) => (
+          allVideos.map(({ url, title, _id, uploadedOn }: videoProp, index) => (
             <VerticleVideoCard
               key={index}
               url={url}
               title={title}
+              videoID={_id}
               uploadDate={uploadedOn}
             />
           ))}

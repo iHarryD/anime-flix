@@ -17,7 +17,7 @@
 }
 
 .--has-padding {
-  padding: var(--HAS-PADDING-VALUE);
+  padding: var(--HAS-PADDING-VALUE, 1rem);
 }
 
 .--has-hover-overlay {
