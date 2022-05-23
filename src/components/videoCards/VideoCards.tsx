@@ -7,14 +7,21 @@ import {
   VideoPreviewOverlay,
   VideoUploadDate,
 } from "../styled/Cards.styled";
+import { Link } from "react-router-dom";
 
 interface videoProps {
   url: string;
   title: string;
+  videoID: string;
   uploadDate: Date;
 }
 
-export function VerticleVideoCard({ url, title, uploadDate }: videoProps) {
+export function VerticleVideoCard({
+  url,
+  title,
+  videoID,
+  uploadDate,
+}: videoProps) {
   return (
     <VerticleCardContainer>
       <VideoPreviewContainer>
@@ -30,7 +37,9 @@ export function VerticleVideoCard({ url, title, uploadDate }: videoProps) {
         </VideoPreviewOverlay>
       </VideoPreviewContainer>
       <VideoCardTextContainer>
-        <VideoHeading title={title}>{title}</VideoHeading>
+        <Link to={`/watch/${videoID}`}>
+          <VideoHeading title={title}>{title}</VideoHeading>
+        </Link>
         <VideoUploadDate>
           {new Date(uploadDate).toLocaleDateString()}
         </VideoUploadDate>

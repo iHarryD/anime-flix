@@ -33,4 +33,12 @@ export const StyledLabelInputContainer = styled.div`
 
 export const DOBInput = styled(InputWithBackground)`
   height: 100%;
+`
+
+export const WhiteInput = styled.input`
+  background: #fff;
+  border-radius: var(--BORDER-RADIUS);
+  color: #000;
+  padding: calc(var(--INPUT-PADDING-Y) - var(--INPUT-BORDER-WIDTH))
+    calc(var(--INPUT-PADDING-X) - var(--INPUT-BORDER-WIDTH));
 `;
