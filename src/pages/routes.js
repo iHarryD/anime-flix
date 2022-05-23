@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "../components/privateRoute/PrivateRoute";
 import { useAuth } from "../contexts/authContext";
 import ExplorePage from "./explorePage/ExplorePage";
+import PlaylistPage from "./playlistPage/PlaylistPage";
 import LoginPage from "./loginPage/LoginPage";
 import SignupPage from "./signupPage/SignupPage";
 import SingleVideoPage from "./singleVideoPage/SingleVideoPage";
@@ -11,6 +12,7 @@ export default function AllRoutes() {
   return (
     <Routes>
       <Route path="/" element={<ExplorePage />} />
+      <Route path="/playlist" element={<PlaylistPage />} />
       <Route
         path="/login"
         element={

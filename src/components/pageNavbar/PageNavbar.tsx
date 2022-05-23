@@ -7,28 +7,39 @@ import {
   faGear,
 } from "@fortawesome/free-solid-svg-icons";
 import { PageNavItems, StyledPageNavbar } from "../styled/PageNavbar.styled";
+import { Link } from "react-router-dom";
 
 export default function PageNavbar() {
   return (
     <StyledPageNavbar>
       <div>
-        <PageNavItems title="Explore">
-          <FontAwesomeIcon icon={faCompass} />
-        </PageNavItems>
-        <PageNavItems title="Playlists">
-          <FontAwesomeIcon icon={faList} />
-        </PageNavItems>
-        <PageNavItems title="History">
-          <FontAwesomeIcon icon={faClockRotateLeft} />
-        </PageNavItems>
-        <PageNavItems title="Watch Later">
-          <FontAwesomeIcon icon={faBookmark} />
-        </PageNavItems>
+        <Link to="/explore">
+          <PageNavItems title="Explore">
+            <FontAwesomeIcon icon={faCompass} />
+          </PageNavItems>
+        </Link>
+        <Link to="/playlist">
+          <PageNavItems title="Playlists">
+            <FontAwesomeIcon icon={faList} />
+          </PageNavItems>
+        </Link>
+        <Link to="/history">
+          <PageNavItems title="History">
+            <FontAwesomeIcon icon={faClockRotateLeft} />
+          </PageNavItems>
+        </Link>
+        <Link to="/watch-later">
+          <PageNavItems title="Watch Later">
+            <FontAwesomeIcon icon={faBookmark} />
+          </PageNavItems>
+        </Link>
       </div>
       <div>
-        <PageNavItems title="Setting">
-          <FontAwesomeIcon icon={faGear} />
-        </PageNavItems>
+        <Link to="/setting">
+          <PageNavItems title="Setting">
+            <FontAwesomeIcon icon={faGear} />
+          </PageNavItems>
+        </Link>
       </div>
     </StyledPageNavbar>
   );

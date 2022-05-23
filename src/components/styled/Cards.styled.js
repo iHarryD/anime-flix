@@ -75,3 +75,25 @@ export const StyledVideoProgressBar = styled(motion.div)`
   transition: all 50ms;
   width: ${({ progress }) => `${progress ? progress + "%" : "0"}`};
 `;
+
+export const PlaylistCardContainer = styled(VerticleCardContainer)`
+  background: var(--ACCENT-CLR);
+  border-radius: 10px;
+`;
+
+export const PlaylistCardPreview = styled.div`
+  box-shadow: 5px 5px #767676, 10px 10px #fff;
+  background: #000;
+  border-radius: 10px;
+  height: 10rem;
+  position: relative;
+  left: -5px;
+  top: -5px;
+`;
+
+export const PlaylistCardDetailsContainer = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+`;
