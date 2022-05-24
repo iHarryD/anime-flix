@@ -1,16 +1,23 @@
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PageContainerMain from "../../components/pageContainer/PageContainer";
 import PageHeading from "../../components/pageHeading/PageHeading";
-import { TextButton } from "../../components/styled/Buttons.styled";
-import { HistoryVideosContainer } from "../../components/styled/HistoryPageComponents.styled";
+import { IconOnlyButton } from "../../components/styled/Buttons.styled";
+import {
+  HistoryHeadingButtonContainer,
+  HistoryVideosContainer,
+} from "../../components/styled/HistoryPageComponents.styled";
 
 export default function HistoryPage() {
   return (
     <PageContainerMain>
       <PageHeading>
-        <div>
+        <HistoryHeadingButtonContainer>
           <h3>History</h3>
-          <TextButton>Empty history</TextButton>
-        </div>
+          <IconOnlyButton title="Clear history">
+            <FontAwesomeIcon icon={faTrash} />
+          </IconOnlyButton>
+        </HistoryHeadingButtonContainer>
       </PageHeading>
       <HistoryVideosContainer></HistoryVideosContainer>
     </PageContainerMain>

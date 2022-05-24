@@ -2,7 +2,7 @@ import {
   initialState,
   filterActions,
   filterActionTypes,
-} from "../tsUtilities/filterTypes";
+} from "../interfaces/filter.interface";
 
 export default function filterReducer(
   state: initialState,
@@ -10,6 +10,12 @@ export default function filterReducer(
 ) {
   const { type, payload } = action;
   switch (type) {
+    case filterActionTypes.POPULATE_LIST:
+      if (!payload?.list) break;
+      return {
+        initial: [...payload?.list],
+        current: [...payload?.list],
+      };
     case filterActionTypes.QUERY_SEARCH:
       return {
         ...state,
@@ -17,13 +23,13 @@ export default function filterReducer(
           new RegExp(payload?.query || "", "gi").test(item?.title)
         ),
       };
-    case filterActionTypes.FILTER_BY_CATEGORY:
-      return {
-        ...state,
-        current: state.current.filter((item) =>
-          item?.categories.includes(payload?.category)
-        ),
-      };
+    // case filterActionTypes.FILTER_BY_CATEGORY:
+    //   return {
+    //     ...state,
+    //     current: state.current.filter((item) =>
+    //       item?.categories.includes(payload?.category)
+    //     ),
+    //   };
     case filterActionTypes.RESET:
       return { ...state, current: state.initial };
     default:

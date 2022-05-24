@@ -10,7 +10,7 @@ import {
 export function LoggedOutNavbarUtitilies() {
   return (
     <NavbarUtilitiesContainer gap="1rem">
-      <SecondaryButton>Get Started</SecondaryButton>
+      <SecondaryButton>Sign up</SecondaryButton>
       <PrimaryButton>Login</PrimaryButton>
     </NavbarUtilitiesContainer>
   );

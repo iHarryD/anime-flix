@@ -1,20 +1,11 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { video } from "../interfaces/video.interface";
-import baseAxiosInstance from "../services/baseAxiosInstance";
+import React, { createContext, useContext, useState } from "react";
+import { videoCardInterface } from "../interfaces/video.interface";
+import { videoContextInterface } from "../interfaces/videoContext.interface";
 
-const VideosContext = createContext<videoContextInterface | null>(null);
+const VideosContext = createContext<videoContextInterface>(null!);
 
 export function VideosProvider({ children }: { children: React.ReactNode }) {
-  const [allVideos, setAllVideos] = useState<
-    { title: string; url: string; _id: string; data: string }[]
-  >([]);
-
-  useEffect(() => {
-    (async () => {
-      const res = await baseAxiosInstance().get("/video/fetch-all");
-      setAllVideos(res.data);
-    })();
-  }, []);
+  const [allVideos, setAllVideos] = useState<videoCardInterface[]>([]);
 
   return (
     <VideosContext.Provider value={{ allVideos, setAllVideos }}>

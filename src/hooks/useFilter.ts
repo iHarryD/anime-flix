@@ -1,14 +1,15 @@
-import { Reducer, useReducer } from "react";
-import filterReducer from "../reducers/filterReducer";
-import { initialState, filterActions } from "../tsUtilities/filterTypes";
+export {};
 
-export default function useFilter(initialList: any[]) {
-  const [list, filterDispatcher] = useReducer<
-    Reducer<initialState, filterActions>
-  >(filterReducer, {
-    initial: initialList,
-    current: initialList,
-  });
+// import { Reducer, useReducer } from "react";
+// import filterReducer from "../reducers/filterReducer";
+// import { initialState, filterActions } from "../interfaces/filter.interface";
 
-  return { list, filterDispatcher };
-}
+// export default function useFilter() {
+//   const [list, filterDispatcher] = useReducer<
+//     Reducer<initialState, filterActions>
+//   >(filterReducer, {
+//     initial: [],
+//     current: [],
+//   });
+//   return { list, filterDispatcher };
+// }
