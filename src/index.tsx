@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import { VideosProvider } from "./contexts/VideosContext";
 import { AuthProvider } from "./contexts/authContext";
 
 const root = ReactDOM.createRoot(
@@ -10,11 +11,13 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <AuthProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <VideosProvider>
+          <App />
+        </VideosProvider>
+      </AuthProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

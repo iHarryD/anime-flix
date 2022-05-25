@@ -5,7 +5,6 @@ import {
   IconOnlyButton,
   PrimaryButton,
   SecondaryButton,
-  TextButton,
 } from "../styled/Buttons.styled";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/authContext";
@@ -15,7 +14,7 @@ export function LoggedOutNavbarUtitilies() {
   const location = useLocation();
   return (
     <NavbarUtilitiesContainer gap="1rem">
-      <SecondaryButton>Get Started</SecondaryButton>
+      <SecondaryButton>Sign up</SecondaryButton>
       <PrimaryButton
         onClick={() =>
           navigate("/login", {

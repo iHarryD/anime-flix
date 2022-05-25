@@ -4,12 +4,9 @@ import {
   PageSection,
   StyledPageContainerMain,
 } from "../styled/PageContainer.styled";
+import { containerProps } from "../../interfaces/pageContainer.interface";
 
-interface ContainerProps {
-  children: React.ReactNode;
-}
-
-export default function PageContainerMain({ children }: ContainerProps) {
+export default function PageContainerMain({ children }: containerProps) {
   return (
     <StyledPageContainerMain>
       <PageNavbar />

@@ -17,13 +17,7 @@ import {
   CenteredFlexJustifyBetween,
   VideoUtilityButton,
 } from "../styled/SingleVideoComponents.styled";
-
-interface utilityBarProps {
-  likes: number;
-  dislikes: number;
-  bookmarkStatus: boolean;
-  playlists: object[];
-}
+import { utilityBarProps } from "../../interfaces/utilityBar.interface";
 
 export default function VideoUtilityBar({
   likes,
