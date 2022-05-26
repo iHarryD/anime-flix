@@ -4,6 +4,12 @@ import { motion } from "framer-motion";
 export const StyledFooter = styled.footer`
   background: var(--ACCENT-CLR);
   padding: var(--SECTION-PADDING-X);
+  color: var(--ACCENT-FONT-CLR);
+  padding: 1rem;
+  postition: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
 `;
 
 export const FooterUpperSection = styled.div`
@@ -24,15 +30,16 @@ export const FooterSection = styled.section`
 
 export const FooterSectionHeading = styled.p`
   font-size: 1.1em;
+  margin-bottom: 5px;
 `;
 
 export const FooterSectionsLinks = styled(motion.li)`
   font-size: 0.9em;
-  opacity: 0.9;
+  opacity: 0.95;
 `;
 
 export const FooterCopyrightContainer = styled.div`
-  border-top: 1px solid #fff;
+  border-top: 1px solid currentColor;
   margin-top: 1rem;
   padding-top: 5px;
   text-align: center;
