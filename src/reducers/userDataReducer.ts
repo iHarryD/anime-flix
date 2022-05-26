@@ -8,72 +8,72 @@ export default function userDataReducer(
   state: userDataInterface,
   action: userDataActions
 ) {
-  const { type, payload } = action;
-  switch (type) {
+  switch (action.type) {
     case userDataActionTypes.CREATE_PLAYLIST:
-      if (payload?.playlistName) break;
       return {
         ...state,
         playlists: [
           ...state.playlists,
-          { name: payload?.playlistName, videos: [] },
+          { name: action.payload.playlistName, videos: [] },
         ],
       };
     case userDataActionTypes.DELETE_PLAYLIST:
-      if (payload?.playlistName) break;
       return {
         ...state,
         playlists: state.playlists.filter(
-          (playlist) => playlist.name !== payload?.playlistName
+          (playlist) => playlist.name !== action.payload.playlistName
         ),
       };
     case userDataActionTypes.ADD_TO_PLAYLIST:
-      if (payload?.playlistName && payload?.videoID) break;
       return {
         ...state,
         playlists: [...state.playlists].map((playlist) => {
-          if (playlist.name === payload?.playlistName) {
-            if (payload.videoID) {
-              playlist.videos.push(payload.videoID);
+          if (playlist.name === action.payload.playlistName) {
+            if (action.payload.videoID) {
+              playlist.videos.push(action.payload.videoID);
             }
           }
           return playlist;
         }),
       };
     case userDataActionTypes.REMOVE_FROM_PLAYLIST:
-      if (payload?.playlistName && payload?.videoID) break;
       return {
         ...state,
         playlists: [...state.playlists].map((playlist) => {
-          if (playlist.name === payload?.playlistName) {
-            if (payload.videoID) {
-              playlist.videos.slice(playlist.videos.indexOf(payload.videoID));
+          if (playlist.name === action.payload.playlistName) {
+            if (action.payload.videoID) {
+              playlist.videos.slice(
+                playlist.videos.indexOf(action.payload.videoID)
+              );
             }
           }
           return playlist;
         }),
       };
     case userDataActionTypes.ADD_TO_WATCHLATER:
-      if (!payload?.videoID) break;
       return {
         ...state,
-        watchLater: [...state.watchLater, payload?.videoID],
+        watchLater: [...state.watchLater, action.payload.videoID],
       };
     case userDataActionTypes.REMOVE_FROM_WATCHLATER:
-      if (payload?.videoID) break;
       return {
         ...state,
-        watchLater: state.watchLater.filter((id) => id !== payload?.videoID),
+        watchLater: state.watchLater.filter(
+          (id) => id !== action.payload.videoID
+        ),
+      };
+    case userDataActionTypes.CLEAR_WATCHLATER:
+      return {
+        ...state,
+        watchLater: [],
       };
     case userDataActionTypes.POPULATE_PLAYLIST:
-      if (!payload?.updatedPlaylist) break;
       return {
         ...state,
-        playlists: [...payload?.updatedPlaylist],
+        playlists: [...action.payload.updatedPlaylist],
       };
     case userDataActionTypes.POPULATE_WATCHLATER:
-      if (!payload?.updatedWatchLater) break;
-      return { ...state, watchLater: [...payload?.updatedWatchLater] };
+      return { ...state, watchLater: [...action.payload.updatedWatchLater] };
     default:
       return state;
   }
