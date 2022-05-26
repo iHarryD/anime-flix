@@ -17,55 +17,17 @@ import {
   LandingPageContainer,
 } from "../../components/styled/LandingPage.styled";
 import VideoBackground from "../../components/videoBackground/VideoBackground";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import poster from "../../assets/landing-page-bg-poster.jpg";
 import backgroundVideo from "../../assets/landing-page-bg-video.mp4";
+import { Link } from "react-router-dom";
+import {
+  textVariant,
+  footerVairant,
+  footerButtonVairant,
+} from "../../variants/landingPageVariants";
 
 export default function LandingPage() {
-  const textAnimationDelay: number = 0.5;
-  const textAnimationDuration: number = 1;
-
-  const textVariant: Variants = {
-    initial: {
-      x: "-100vw",
-      opacity: 0,
-    },
-    animate: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        delay: textAnimationDelay,
-        duration: textAnimationDuration,
-      },
-    },
-  };
-
-  const footerVairant: Variants = {
-    initial: {
-      opacity: 0,
-    },
-    animate: {
-      opacity: 1,
-      transition: {
-        delay: textAnimationDelay + textAnimationDuration,
-        when: "beforeChildren",
-        staggerChildren: 0.3,
-      },
-    },
-  };
-
-  const footerButtonVairant: Variants = {
-    initial: {
-      opacity: 0,
-    },
-    animate: {
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
-
   return (
     <LandingPageContainer>
       <VideoBackground
@@ -94,14 +56,16 @@ export default function LandingPage() {
             excepturi tempora voluptas libero voluptatem labore. Iste!
           </motion.p>
         </LandingPageTextContainer>
-        <PrimaryButton
-          as={motion.button}
-          variants={textVariant}
-          initial="initial"
-          animate="animate"
-        >
-          Hop In
-        </PrimaryButton>
+        <Link to="/explore">
+          <PrimaryButton
+            as={motion.button}
+            variants={textVariant}
+            initial="initial"
+            animate="animate"
+          >
+            Explore
+          </PrimaryButton>
+        </Link>
       </LandingPageForeground>
       <LandingPageFooter
         variants={footerVairant}

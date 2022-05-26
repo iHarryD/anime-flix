@@ -1,12 +1,15 @@
 import React from "react";
 import baseAxiosInstance from "./baseAxiosInstance";
+import { AxiosResponse } from "axios";
 
 export async function login(
   email: string,
   password: string,
   loadingState: React.SetStateAction<any>,
-  successCallback?: (result: any) => void,
-  failureCallback?: (err: object) => void
+  successCallback?: (
+    result: AxiosResponse<{ firstName: string; token: string }>
+  ) => void,
+  failureCallback?: (err: unknown) => void
 ) {
   try {
     loadingState(true);
@@ -19,7 +22,7 @@ export async function login(
     }
   } catch (err: unknown) {
     if (failureCallback) {
-      failureCallback(err as object);
+      failureCallback(err);
     }
     console.log(err);
   } finally {
@@ -30,8 +33,8 @@ export async function login(
 export async function signup(
   userData: any,
   loadingState: React.SetStateAction<any>,
-  successCallback?: (result: any) => void,
-  failureCallback?: (result: any) => void
+  successCallback?: (result: AxiosResponse) => void,
+  failureCallback?: (err: unknown) => void
 ) {
   try {
     loadingState(true);
@@ -47,7 +50,7 @@ export async function signup(
     }
   } catch (err: unknown) {
     if (failureCallback) {
-      failureCallback(err as object);
+      failureCallback(err);
     }
     console.log(err);
   } finally {

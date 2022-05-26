@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { VideosProvider } from "./contexts/VideosContext";
 import { AuthProvider } from "./contexts/authContext";
+import { GlobalStyles } from "./components/styled/Global.styled";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -14,6 +15,7 @@ root.render(
     <BrowserRouter>
       <AuthProvider>
         <VideosProvider>
+          <GlobalStyles />
           <App />
         </VideosProvider>
       </AuthProvider>

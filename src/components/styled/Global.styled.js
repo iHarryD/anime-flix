@@ -1,10 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
-export const GlobalStyle = createGlobalStyle`
-
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-
-/* BASICS */
+export const GlobalStyles = createGlobalStyle`
+  /* BASICS */
     *,
     *::after,
     *::before {
@@ -41,7 +38,7 @@ export const GlobalStyle = createGlobalStyle`
     max-width: 100%;
     }
 
-    /* TYPOGRAPHY */
+  /* TYPOGRAPHY */
 
     body {
         color: var(--PRIMARY-FONT-CLR);
@@ -49,51 +46,51 @@ export const GlobalStyle = createGlobalStyle`
         font-weight: 400;
       }
 
-    /* VARIABLES */
+  /* VARIABLES */
 
     :root {
-    --ACCENT-CLR: #166565;
-    --ACCENT-FONT-CLR: var(--LIGHT-FONT-CLR);
-    --DARK-FONT-CLR: #2d2d2d;
-    --HOVER-OVERLAY-CLR: #0a0a0a3b;
-    --ICON-BTN-BACKGROUND-CLR: #000000bd;
-    --LIGHT-FONT-CLR: #fff;
-    --INPUT-BORDER-CLR: #1f1e1a;
-    --PRIMARY-BACKGROUND-CLR: #2d2d2d;
-    --PRIMARY-BTN-BACKGROUND-CLR: var(--ACCENT-CLR);
-    --PRIMARY-BTN-FONT-CLR: var(--ACCENT-FONT-CLR);
-    --PRIMARY-FONT-CLR: var(--LIGHT-FONT-CLR);
-    --SECONDARY-ACCENT-CLR: #1e1e1e;
-    --SECONDARY-BTN-BACKGROUND-CLR: #0000;
-    --SECONDARY-BTN-HOVER-CLR: #0000;
+      --ACCENT-CLR: #166565;
+      --ACCENT-FONT-CLR: var(--LIGHT-FONT-CLR);
+      --DARK-FONT-CLR: #2d2d2d;
+      --HOVER-OVERLAY-CLR: #0a0a0a3b;
+      --ICON-BTN-BACKGROUND-CLR: #000000bd;
+      --LIGHT-FONT-CLR: #fff;
+      --INPUT-BORDER-CLR: #1f1e1a;
+      --PRIMARY-BACKGROUND-CLR: #2d2d2d;
+      --PRIMARY-BTN-BACKGROUND-CLR: var(--ACCENT-CLR);
+      --PRIMARY-BTN-FONT-CLR: var(--ACCENT-FONT-CLR);
+      --PRIMARY-FONT-CLR: var(--LIGHT-FONT-CLR);
+      --SECONDARY-ACCENT-CLR: #1e1e1e;
+      --SECONDARY-BTN-BACKGROUND-CLR: #0000;
+      --SECONDARY-BTN-HOVER-CLR: #0000;
     }
 
 
     :root {
-    --BORDER-RADIUS: 10px 0;
-    --BTN-BORDER-WIDTH: 2px;
-    --BTN-BORDER-RADIUS: 0px;
-    --INPUT-BORDER-RADIUS: 0px;
-    --INPUT-BORDER-WIDTH: 0px;
+      --BORDER-RADIUS: 10px 0;
+      --BTN-BORDER-WIDTH: 2px;
+      --BTN-BORDER-RADIUS: 0px;
+      --INPUT-BORDER-RADIUS: 0px;
+      --INPUT-BORDER-WIDTH: 0px;
     }
 
 
     :root {
-    --BTN-PADDING-Y: 0.6em;
-    --BTN-PADDING-X: 1.3em;
-    --HAS-GAP-VALUE: 1em;
-    --SECTION-PADDING-X: 1rem;
-    --ICON-BTN-PADDING: 0.6em;
-    --INPUT-PADDING-Y: var(--BTN-PADDING-Y);
-    --INPUT-PADDING-X: var(--BTN-PADDING-X);
+      --BTN-PADDING-Y: 0.6em;
+      --BTN-PADDING-X: 1.3em;
+      --HAS-GAP-VALUE: 1em;
+      --SECTION-PADDING-X: 1rem;
+      --ICON-BTN-PADDING: 0.6em;
+      --INPUT-PADDING-Y: var(--BTN-PADDING-Y);
+      --INPUT-PADDING-X: var(--BTN-PADDING-X);
     }
 
 
     :root {
-    --TRANSITION-DURATION: 150ms;
+      --TRANSITION-DURATION: 150ms;
     }
 
-    /* ANIMATIONS */
+  /* ANIMATIONS */
 
     @keyframes skeletonAnimation {
         0% {

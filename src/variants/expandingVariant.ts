@@ -1,4 +1,6 @@
-export const verticallyExpandingVariant = {
+import { Variants } from "framer-motion";
+
+export const verticallyExpandingVariant: Variants = {
   initial: { height: 0, opacity: 0, transformOrigin: "top" },
   animate: {
     height: "fit-content",

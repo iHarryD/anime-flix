@@ -69,8 +69,9 @@ export default function SinglePlaylistPage() {
         ].map((video) => (
           <VerticleVideoCard
             title={video.title}
-            uploadDate={video.uploadDate}
+            uploadedOn={video.uploadDate}
             url={video.url}
+            _id="1"
           />
         ))}
       </PlaylistVideosContainer>
