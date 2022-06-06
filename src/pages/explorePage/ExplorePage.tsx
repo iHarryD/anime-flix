@@ -12,6 +12,7 @@ export default function ExplorePage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    if (allVideos.length > 0) return;
     (async () => {
       try {
         setIsLoading(true);
@@ -29,14 +30,13 @@ export default function ExplorePage() {
     <PageContainerMain>
       <ExploreVideosContainer>
         {isLoading
-          ? Array.from(Array(10)).map((item) => <VideoCardLoadingSkeleton />)
+          ? Array.from(Array(10)).map((item, index) => (
+              <VideoCardLoadingSkeleton key={index} />
+            ))
           : allVideos.map(
-              (
-                { url, title, _id, uploadedOn }: videoCardInterface,
-                index: number
-              ) => (
+              ({ url, title, _id, uploadedOn }: videoCardInterface) => (
                 <VerticleVideoCard
-                  key={index}
+                  key={_id}
                   url={url}
                   title={title}
                   _id={_id}

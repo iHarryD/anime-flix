@@ -1,8 +1,14 @@
 import {
+  PlaylistCardPreviewSkeleton,
+  SinglePlaylistDetailsSkeleton,
   StyledCardVideoPreviewSkeleton,
-  StyledTextSkeleton,
+  StyledPlaylistCardSkeleton,
+  SmallTextSkeleton,
   StyledVideoCardSkeleton,
   VideoCardTextContainerSkeleton,
+  LargeTextSkeleton,
+  NormalTextSkeleton,
+  SinglePlaylistNameText,
 } from "../styled/Skeletons.styled";
 
 export function VideoCardLoadingSkeleton() {
@@ -10,9 +16,27 @@ export function VideoCardLoadingSkeleton() {
     <StyledVideoCardSkeleton>
       <StyledCardVideoPreviewSkeleton />
       <VideoCardTextContainerSkeleton>
-        <StyledTextSkeleton />
-        <StyledTextSkeleton />
+        <NormalTextSkeleton />
+        <SmallTextSkeleton />
       </VideoCardTextContainerSkeleton>
     </StyledVideoCardSkeleton>
+  );
+}
+
+export function PlaylistCardLoadingSkeleton() {
+  return (
+    <StyledPlaylistCardSkeleton>
+      <PlaylistCardPreviewSkeleton />
+      <NormalTextSkeleton />
+    </StyledPlaylistCardSkeleton>
+  );
+}
+
+export function SinglePlaylistSkeleton() {
+  return (
+    <SinglePlaylistDetailsSkeleton>
+      <SinglePlaylistNameText />
+      <NormalTextSkeleton />
+    </SinglePlaylistDetailsSkeleton>
   );
 }

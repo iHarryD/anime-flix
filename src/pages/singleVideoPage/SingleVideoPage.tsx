@@ -6,8 +6,9 @@ import SingleVideo from "../../components/singleVideo/SingleVideo";
 import baseAxiosInstance from "../../services/baseAxiosInstance";
 
 export default function SingleVideoPage() {
-  const { videoID } = useParams();
+  const { videoID } = useParams() as { videoID: string };
   const [videoData, setVideoData] = useState<any>(null);
+  const [addingToPlaylist, setIsAddingToPlaylist] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
@@ -20,7 +21,12 @@ export default function SingleVideoPage() {
 
   return videoData ? (
     <PageContainerMain>
-      {/* <PlaylistModal /> */}
+      {addingToPlaylist && (
+        <PlaylistModal
+          videoID={videoID}
+          closePlaylistModal={() => setIsAddingToPlaylist(false)}
+        />
+      )}
       <SingleVideo
         url={videoData.url}
         title={videoData.title}
@@ -28,9 +34,10 @@ export default function SingleVideoPage() {
         likes={videoData.likes}
         dislikes={videoData.dislikes}
         views={videoData.views}
-        playlists={[]}
         bookmarkStatus={false}
-        uploadDate={videoData.uploadedOn}
+        uploadedOn={videoData.uploadedOn}
+        playlistButtonHandler={() => setIsAddingToPlaylist(true)}
+        bookmarkButtonHandler={() => {}}
         channel="Channel"
       />
     </PageContainerMain>

@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ButtonSpinner from "../../components/buttonSpinner/ButtonSpinner";
@@ -115,9 +116,7 @@ export default function SignupPage() {
                   });
                 },
                 (err) => {
-                  const errorMessage =
-                    err.response.data.message || "Error encountered!";
-                  setAuthWarning(errorMessage);
+                  setAuthWarning(err.message || "Something went wrong.");
                 }
               )
             )

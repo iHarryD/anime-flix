@@ -2,6 +2,6 @@ import axios from "axios";
 
 export default function baseAxiosInstance() {
   return axios.create({
-    baseURL: "https://b-anime-flix.vercel.app/api",
+    baseURL: "http://127.0.0.1:3001/api",
   });
 }

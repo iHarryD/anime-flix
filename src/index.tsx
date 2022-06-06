@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { VideosProvider } from "./contexts/VideosContext";
 import { AuthProvider } from "./contexts/authContext";
 import { GlobalStyles } from "./components/styled/Global.styled";
+import { UserDataProvider } from "./contexts/UserDataContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,8 +16,10 @@ root.render(
     <BrowserRouter>
       <AuthProvider>
         <VideosProvider>
-          <GlobalStyles />
-          <App />
+          <UserDataProvider>
+            <GlobalStyles />
+            <App />
+          </UserDataProvider>
         </VideosProvider>
       </AuthProvider>
     </BrowserRouter>

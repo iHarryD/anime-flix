@@ -23,7 +23,8 @@ export default function VideoUtilityBar({
   likes,
   dislikes,
   bookmarkStatus,
-  playlists,
+  playlistButtonHandler,
+  bookmarkButtonHandler,
 }: utilityBarProps) {
   const utilityButtonVariant = {
     whileHover: {
@@ -99,6 +100,7 @@ export default function VideoUtilityBar({
           variants={utilityButtonVariant}
           whileHover="whileHover"
           whileTap="whileTap"
+          onClick={() => playlistButtonHandler()}
         >
           <FontAwesomeIcon icon={faList} />
         </VideoUtilityButton>

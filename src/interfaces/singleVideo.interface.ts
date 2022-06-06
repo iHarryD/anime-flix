@@ -4,9 +4,10 @@ export interface singleVideoProps {
   likes: number;
   dislikes: number;
   views: number;
-  uploadDate: Date;
-  playlists: object[];
+  uploadedOn: Date;
   bookmarkStatus: boolean;
   channel: string;
   description?: string;
+  playlistButtonHandler: () => void;
+  bookmarkButtonHandler: () => void;
 }

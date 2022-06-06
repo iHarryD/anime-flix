@@ -22,6 +22,7 @@ import {
   AuthWarningText,
   VerticleFlexWithGap,
 } from "../../components/styled/Generic.styled";
+import axios from "axios";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -31,7 +32,7 @@ export default function LoginPage() {
   const passwordInputRef = useRef<HTMLInputElement | null>(null);
   const { setUserData, setToRemember } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
+  const { state } = useLocation() as { state: { comingFrom: string } };
 
   const testLoginCredentials = {
     email: "test",
@@ -99,21 +100,31 @@ export default function LoginPage() {
             <PrimaryButton
               onClick={() =>
                 handleLogin(() => {
+                  if (
+                    emailInputRef.current === null ||
+                    passwordInputRef.current === null
+                  )
+                    return;
                   login(
-                    emailInputRef.current?.value!,
-                    passwordInputRef.current?.value!,
+                    emailInputRef.current.value,
+                    passwordInputRef.current.value,
                     setIsLoading,
                     (result) => {
+                      console.log(result);
                       setUserData({
-                        firstName: result.firstName,
-                        token: result.token,
+                        firstName: result.data.firstName,
+                        token: result.data.token,
                       });
-                      navigate(-1 as To, { replace: true });
+                      const redirectTo =
+                        state.comingFrom === "/signup" ? "/explore" : -1;
+                      navigate(redirectTo as To, { replace: true });
                     },
                     (err) => {
-                      const errorMessage =
-                        err.response.data.message || "Error encountered!";
-                      setAuthWarning(errorMessage);
+                      if (axios.isAxiosError(err)) {
+                        setAuthWarning(err.response?.data.message);
+                      } else {
+                        setAuthWarning(err.message);
+                      }
                     }
                   );
                 })

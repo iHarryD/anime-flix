@@ -10,11 +10,12 @@ export default function SingleVideo({
   likes,
   dislikes,
   views,
-  uploadDate,
-  playlists,
+  uploadedOn,
   bookmarkStatus,
   channel,
   description,
+  playlistButtonHandler,
+  bookmarkButtonHandler,
 }: singleVideoProps) {
   return (
     <StyledSingleVideoContainer>
@@ -25,11 +26,12 @@ export default function SingleVideo({
           likes={likes}
           dislikes={dislikes}
           bookmarkStatus={bookmarkStatus}
-          playlists={playlists}
+          playlistButtonHandler={playlistButtonHandler}
+          bookmarkButtonHandler={bookmarkButtonHandler}
         />
         <VideoDescription
           views={views}
-          uploadDate={uploadDate}
+          uploadDate={uploadedOn}
           channel={channel}
           description={description}
         />

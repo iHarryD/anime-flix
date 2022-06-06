@@ -6,7 +6,6 @@ export interface userDataInterface {
 }
 
 export enum userDataActionTypes {
-  CREATE_PLAYLIST = "CREATE_PLAYLIST",
   DELETE_PLAYLIST = "DELETE_PLAYLIST",
   POPULATE_PLAYLIST = "POPULATE_PLAYLIST",
   REMOVE_FROM_PLAYLIST = "REMOVE_FROM_PLAYLIST",
@@ -17,12 +16,10 @@ export enum userDataActionTypes {
   CLEAR_WATCHLATER = "CLEAR_WATCHLATER",
 }
 
-interface SolePlaylistActions {
-  type:
-    | userDataActionTypes.CREATE_PLAYLIST
-    | userDataActionTypes.DELETE_PLAYLIST;
+interface DeletePlaylistAction {
+  type: userDataActionTypes.DELETE_PLAYLIST;
   payload: {
-    playlistName: string;
+    playlistID: string;
   };
 }
 
@@ -31,7 +28,7 @@ interface PlaylistVideoActions {
     | userDataActionTypes.ADD_TO_PLAYLIST
     | userDataActionTypes.REMOVE_FROM_PLAYLIST;
   payload: {
-    playlistName: string;
+    playlistID: string;
     videoID: string;
   };
 }
@@ -64,7 +61,7 @@ interface UpdateWatchLatertAction {
 }
 
 export type userDataActions =
-  | SolePlaylistActions
+  | DeletePlaylistAction
   | PlaylistVideoActions
   | SoleWatchLaterActions
   | WatchLaterVideoActions

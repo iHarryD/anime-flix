@@ -18,7 +18,7 @@ export default function PageNavbar() {
             <FontAwesomeIcon icon={faCompass} />
           </PageNavItems>
         </Link>
-        <Link to="/playlist">
+        <Link to="/playlists">
           <PageNavItems title="Playlists">
             <FontAwesomeIcon icon={faList} />
           </PageNavItems>
