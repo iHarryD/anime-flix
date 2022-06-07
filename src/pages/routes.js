@@ -13,7 +13,7 @@ import Page404 from "./page404/Page404";
 import SinglePlaylistPage from "./singlePlaylistPage/SinglePlaylistPage";
 
 export default function AllRoutes() {
-  const { userData } = useAuth();
+  const { userCredentials } = useAuth();
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
@@ -40,7 +40,7 @@ export default function AllRoutes() {
       <Route
         path="/login"
         element={
-          <PrivateRoute isAuthenticated={!userData.token} redirectTo="/">
+          <PrivateRoute isAuthenticated={!userCredentials.token} redirectTo="/">
             <LoginPage />
           </PrivateRoute>
         }
@@ -48,7 +48,7 @@ export default function AllRoutes() {
       <Route
         path="/signup"
         element={
-          <PrivateRoute isAuthenticated={!userData.token} redirectTo="/">
+          <PrivateRoute isAuthenticated={!userCredentials.token} redirectTo="/">
             <SignupPage />
           </PrivateRoute>
         }

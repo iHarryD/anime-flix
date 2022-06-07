@@ -4,6 +4,6 @@ export interface utilityBarProps {
   dislikeCount: number;
   likeStatus: boolean;
   dislikeStatus: boolean;
-  bookmarkStatus: boolean;
+  watchLaterStatus: boolean;
   playlistButtonHandler: () => void;
 }

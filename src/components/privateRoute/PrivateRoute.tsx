@@ -13,9 +13,11 @@ export default function PrivateRoute({
   redirectTo,
 }: privateRouteProps) {
   const location = useLocation();
-  const { userData } = useAuth();
+  const { userCredentials } = useAuth();
 
-  return (isAuthenticated !== undefined ? isAuthenticated : userData.token) ? (
+  return (
+    isAuthenticated !== undefined ? isAuthenticated : userCredentials.token
+  ) ? (
     children
   ) : (
     <Navigate

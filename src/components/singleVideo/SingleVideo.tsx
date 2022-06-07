@@ -14,7 +14,7 @@ export default function SingleVideo({
   videoID,
   viewCount,
   uploadedOn,
-  bookmarkStatus,
+  watchLaterStatus,
   channel,
   description,
   playlistButtonHandler,
@@ -30,7 +30,7 @@ export default function SingleVideo({
           dislikeCount={dislikeCount}
           likeStatus={likeStatus}
           dislikeStatus={dislikeStatus}
-          bookmarkStatus={bookmarkStatus}
+          watchLaterStatus={watchLaterStatus}
           playlistButtonHandler={playlistButtonHandler}
         />
         <VideoDescription

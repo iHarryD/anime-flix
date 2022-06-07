@@ -8,13 +8,13 @@ import { NavbarSearchBar } from "../searchBars/SearchBars";
 import { StyledNavbar } from "../styled/Navbar.styled";
 
 export default function Header() {
-  const { userData } = useAuth();
+  const { userCredentials } = useAuth();
   return (
     <header>
       <StyledNavbar>
         <Logo />
         <NavbarSearchBar />
-        {userData.firstName && userData.token ? (
+        {userCredentials.firstName && userCredentials.token ? (
           <LoggedInNavbarUtitilies />
         ) : (
           <LoggedOutNavbarUtitilies />

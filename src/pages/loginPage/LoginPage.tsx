@@ -30,7 +30,7 @@ export default function LoginPage() {
   const [authWarning, setAuthWarning] = useState<string | null>(null);
   const emailInputRef = useRef<HTMLInputElement | null>(null);
   const passwordInputRef = useRef<HTMLInputElement | null>(null);
-  const { setUserData, setToRemember } = useAuth();
+  const { setUserCredentials, setToRemember } = useAuth();
   const navigate = useNavigate();
   const { state } = useLocation() as { state: { comingFrom: string } };
 
@@ -111,7 +111,7 @@ export default function LoginPage() {
                     setIsLoading,
                     (result) => {
                       console.log(result);
-                      setUserData({
+                      setUserCredentials({
                         firstName: result.data.firstName,
                         token: result.data.token,
                         _id: result.data._id,

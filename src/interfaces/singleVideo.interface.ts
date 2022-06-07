@@ -8,7 +8,7 @@ export interface singleVideoProps {
   dislikeStatus: boolean;
   viewCount: number;
   uploadedOn: Date;
-  bookmarkStatus: boolean;
+  watchLaterStatus: boolean;
   channel: string;
   description?: string;
   playlistButtonHandler: () => void;

@@ -5,11 +5,13 @@ import PageContainerMain from "../../components/pageContainer/PageContainer";
 import PlaylistModal from "../../components/playlistModal/PlaylistModal";
 import SingleVideo from "../../components/singleVideo/SingleVideo";
 import baseAxiosInstance from "../../services/baseAxiosInstance";
+import { useUserData } from "../../contexts/UserDataContext";
 
 export default function SingleVideoPage() {
-  const { userData } = useAuth();
+  const { userCredentials } = useAuth();
   const { videoID } = useParams() as { videoID: string };
   const [videoData, setVideoData] = useState<any>(null);
+  const { userData } = useUserData();
   const [addingToPlaylist, setIsAddingToPlaylist] = useState<boolean>(false);
 
   useEffect(() => {
@@ -37,13 +39,17 @@ export default function SingleVideoPage() {
         likeCount={videoData.likes.length}
         dislikeCount={videoData.dislikes.length}
         likeStatus={
-          !!videoData.likes.find((userID: string) => userID === userData._id)
+          !!videoData.likes.find(
+            (userID: string) => userID === userCredentials._id
+          )
         }
         dislikeStatus={
-          !!videoData.dislikes.find((userID: string) => userID === userData._id)
+          !!videoData.dislikes.find(
+            (userID: string) => userID === userCredentials._id
+          )
         }
         viewCount={videoData.views.length}
-        bookmarkStatus={false}
+        watchLaterStatus={userData.watchLater.includes(videoID)}
         uploadedOn={videoData.uploadedOn}
         playlistButtonHandler={() => setIsAddingToPlaylist(true)}
         channel="Channel"

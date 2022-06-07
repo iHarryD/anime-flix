@@ -22,11 +22,14 @@ export async function getWatchLater(
 }
 
 export async function addToWatchLater(
+  videoID: string,
   successCallback?: (result: any) => void,
   failureCallback?: (err: object) => void
 ) {
   try {
-    const result = await baseAxiosInstance().get("/watch-later/add");
+    const result = await baseAxiosInstance().patch(
+      `/watch-later/add?videoID=${videoID}`
+    );
     if (result.status === 200 && successCallback) {
       successCallback(result.data);
     }
@@ -39,11 +42,14 @@ export async function addToWatchLater(
 }
 
 export async function removeFromWatchLater(
+  videoID: string,
   successCallback?: (result: any) => void,
   failureCallback?: (err: object) => void
 ) {
   try {
-    const result = await baseAxiosInstance().get("/watch-later/remove");
+    const result = await baseAxiosInstance().patch(
+      `/watch-later/remove?videoID=${videoID}`
+    );
     if (result.status === 200 && successCallback) {
       successCallback(result.data);
     }

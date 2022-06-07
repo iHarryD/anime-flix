@@ -6,9 +6,9 @@ export async function likeVideo(
   failureCallback?: (err: object) => void
 ) {
   try {
-    const result = await baseAxiosInstance().patch("/video/like", {
-      videoID,
-    });
+    const result = await baseAxiosInstance().patch(
+      `/video/like?videoID=${videoID}`
+    );
     if (result.status === 200 && successCallback) {
       successCallback(result.data);
     }
@@ -26,9 +26,9 @@ export async function dislikeVideo(
   failureCallback?: (err: object) => void
 ) {
   try {
-    const result = await baseAxiosInstance().patch("/video/dislike", {
-      videoID,
-    });
+    const result = await baseAxiosInstance().patch(
+      `/video/dislike?videoID=${videoID}`
+    );
     if (result.status === 200 && successCallback) {
       successCallback(result.data);
     }
@@ -46,9 +46,9 @@ export async function removeLike(
   failureCallback?: (err: object) => void
 ) {
   try {
-    const result = await baseAxiosInstance().patch("/video/remove-like", {
-      videoID,
-    });
+    const result = await baseAxiosInstance().patch(
+      `/video/remove-like?videoID=${videoID}`
+    );
     if (result.status === 200 && successCallback) {
       successCallback(result.data);
     }
@@ -66,9 +66,9 @@ export async function removeDislike(
   failureCallback?: (err: object) => void
 ) {
   try {
-    const result = await baseAxiosInstance().patch("/video/remove-dislike", {
-      videoID,
-    });
+    const result = await baseAxiosInstance().patch(
+      `/video/remove-dislike?videoID=${videoID}`
+    );
     if (result.status === 200 && successCallback) {
       successCallback(result.data);
     }

@@ -24,6 +24,10 @@ import {
   removeDislike,
   removeLike,
 } from "../../services/videoServices";
+import {
+  addToWatchLater,
+  removeFromWatchLater,
+} from "../../services/watchLaterServices";
 
 export default function VideoUtilityBar({
   videoID,
@@ -31,7 +35,7 @@ export default function VideoUtilityBar({
   dislikeCount,
   likeStatus,
   dislikeStatus,
-  bookmarkStatus,
+  watchLaterStatus,
   playlistButtonHandler,
 }: utilityBarProps) {
   const utilityButtonVariant = {
@@ -59,9 +63,13 @@ export default function VideoUtilityBar({
     likeVideo(videoID);
   }
 
-  function handleAddToWatchLater(videoID: string) {}
+  function handleAddToWatchLater(videoID: string) {
+    addToWatchLater(videoID);
+  }
 
-  function handleRemoveFromWatchLater(videoID: string) {}
+  function handleRemoveFromWatchLater(videoID: string) {
+    removeFromWatchLater(videoID);
+  }
 
   return (
     <CenteredFlexJustifyBetween>
@@ -112,7 +120,7 @@ export default function VideoUtilityBar({
         </ButtonWithTextContainer>
       </ButtonPairContainer>
       <ButtonPairContainer>
-        {bookmarkStatus ? (
+        {watchLaterStatus ? (
           <VideoUtilityButton
             variants={utilityButtonVariant}
             whileHover="whileHover"
