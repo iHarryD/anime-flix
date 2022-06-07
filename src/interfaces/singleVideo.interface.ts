@@ -6,7 +6,7 @@ export interface singleVideoProps {
   dislikeCount: number;
   likeStatus: boolean;
   dislikeStatus: boolean;
-  views: number;
+  viewCount: number;
   uploadedOn: Date;
   bookmarkStatus: boolean;
   channel: string;

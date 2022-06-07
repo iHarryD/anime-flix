@@ -13,7 +13,7 @@ import { verticallyExpandingVariant } from "../../variants/expandingVariant";
 import { descriptionProps } from "../../interfaces/videoDescription.interface";
 
 export default function VideoDescription({
-  views,
+  viewCount,
   channel,
   uploadDate,
   description,
@@ -25,7 +25,7 @@ export default function VideoDescription({
       <CenteredFlexJustifyBetween>
         <div>
           <ViewUploadDateContainer>
-            <span>{views} views</span>
+            <span>{viewCount} views</span>
             <BulletContainer>
               <FontAwesomeIcon icon={faCircle} />
             </BulletContainer>

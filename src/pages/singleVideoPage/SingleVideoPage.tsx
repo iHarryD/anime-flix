@@ -42,7 +42,7 @@ export default function SingleVideoPage() {
         dislikeStatus={
           !!videoData.dislikes.find((userID: string) => userID === userData._id)
         }
-        views={videoData.views}
+        viewCount={videoData.views.length}
         bookmarkStatus={false}
         uploadedOn={videoData.uploadedOn}
         playlistButtonHandler={() => setIsAddingToPlaylist(true)}
