@@ -18,13 +18,19 @@ import {
   VideoUtilityButton,
 } from "../styled/SingleVideoComponents.styled";
 import { utilityBarProps } from "../../interfaces/utilityBar.interface";
+import {
+  dislikeVideo,
+  likeVideo,
+  removeDislike,
+  removeLike,
+} from "../../services/videoServices";
 
 export default function VideoUtilityBar({
+  videoID,
   likes,
   dislikes,
   bookmarkStatus,
   playlistButtonHandler,
-  bookmarkButtonHandler,
 }: utilityBarProps) {
   const utilityButtonVariant = {
     whileHover: {
@@ -34,6 +40,27 @@ export default function VideoUtilityBar({
       scale: 0.9,
     },
   };
+
+  function handleRemoveLikeVideo(videoID: string) {
+    removeLike(videoID);
+  }
+
+  function handleDislikeVideo(videoID: string) {
+    dislikeVideo(videoID);
+  }
+
+  function handleRemoveDislikeVideo(videoID: string) {
+    removeDislike(videoID);
+  }
+
+  function handleLikeVideo(videoID: string) {
+    likeVideo(videoID);
+  }
+
+  function handleAddToWatchLater(videoID: string) {}
+
+  function handleRemoveFromWatchLater(videoID: string) {}
+
   return (
     <CenteredFlexJustifyBetween>
       <ButtonPairContainer>
@@ -43,6 +70,7 @@ export default function VideoUtilityBar({
               variants={utilityButtonVariant}
               whileHover="whileHover"
               whileTap="whileTap"
+              onClick={() => handleRemoveLikeVideo(videoID)}
             >
               <FontAwesomeIcon icon={faSThumbsUp} />
             </VideoUtilityButton>
@@ -51,6 +79,7 @@ export default function VideoUtilityBar({
               variants={utilityButtonVariant}
               whileHover="whileHover"
               whileTap="whileTap"
+              onClick={() => handleLikeVideo(videoID)}
             >
               <FontAwesomeIcon icon={faRThumbsUp} />
             </VideoUtilityButton>
@@ -63,6 +92,7 @@ export default function VideoUtilityBar({
               variants={utilityButtonVariant}
               whileHover="whileHover"
               whileTap="whileTap"
+              onClick={() => handleRemoveDislikeVideo(videoID)}
             >
               <FontAwesomeIcon icon={faSThumbsDown} />
             </VideoUtilityButton>
@@ -71,6 +101,7 @@ export default function VideoUtilityBar({
               variants={utilityButtonVariant}
               whileHover="whileHover"
               whileTap="whileTap"
+              onClick={() => handleDislikeVideo(videoID)}
             >
               <FontAwesomeIcon icon={faRThumbsDown} />
             </VideoUtilityButton>
@@ -84,6 +115,7 @@ export default function VideoUtilityBar({
             variants={utilityButtonVariant}
             whileHover="whileHover"
             whileTap="whileTap"
+            onClick={() => handleRemoveFromWatchLater(videoID)}
           >
             <FontAwesomeIcon icon={faSBookmark} />
           </VideoUtilityButton>
@@ -92,6 +124,7 @@ export default function VideoUtilityBar({
             variants={utilityButtonVariant}
             whileHover="whileHover"
             whileTap="whileTap"
+            onClick={() => handleAddToWatchLater(videoID)}
           >
             <FontAwesomeIcon icon={faRBookmark} />
           </VideoUtilityButton>

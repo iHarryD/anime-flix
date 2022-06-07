@@ -9,13 +9,13 @@ export default function SingleVideo({
   title,
   likes,
   dislikes,
+  videoID,
   views,
   uploadedOn,
   bookmarkStatus,
   channel,
   description,
   playlistButtonHandler,
-  bookmarkButtonHandler,
 }: singleVideoProps) {
   return (
     <StyledSingleVideoContainer>
@@ -23,11 +23,11 @@ export default function SingleVideo({
       <div className="--verticle-flex --has-gap --has-padding">
         <VideoHeading>{title}</VideoHeading>
         <VideoUtilityBar
+          videoID={videoID}
           likes={likes}
           dislikes={dislikes}
           bookmarkStatus={bookmarkStatus}
           playlistButtonHandler={playlistButtonHandler}
-          bookmarkButtonHandler={bookmarkButtonHandler}
         />
         <VideoDescription
           views={views}

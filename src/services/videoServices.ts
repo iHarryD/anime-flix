@@ -1,32 +1,14 @@
 import baseAxiosInstance from "./baseAxiosInstance";
 
-export async function getWatchLater(
-  loadingState: React.SetStateAction<any>,
+export async function likeVideo(
+  videoID: string,
   successCallback?: (result: any) => void,
   failureCallback?: (err: object) => void
 ) {
   try {
-    loadingState(true);
-    const result = await baseAxiosInstance().get("/watch-later/fetch");
-    if (result.status === 200 && successCallback) {
-      successCallback(result.data);
-    }
-  } catch (err: unknown) {
-    if (failureCallback) {
-      failureCallback(err as object);
-    }
-    console.log(err);
-  } finally {
-    loadingState(false);
-  }
-}
-
-export async function addToWatchLater(
-  successCallback?: (result: any) => void,
-  failureCallback?: (err: object) => void
-) {
-  try {
-    const result = await baseAxiosInstance().get("/watch-later/add");
+    const result = await baseAxiosInstance().patch("/video/like", {
+      videoID,
+    });
     if (result.status === 200 && successCallback) {
       successCallback(result.data);
     }
@@ -38,12 +20,55 @@ export async function addToWatchLater(
   }
 }
 
-export async function removeFromWatchLater(
+export async function dislikeVideo(
+  videoID: string,
   successCallback?: (result: any) => void,
   failureCallback?: (err: object) => void
 ) {
   try {
-    const result = await baseAxiosInstance().get("/watch-later/remove");
+    const result = await baseAxiosInstance().patch("/video/dislike", {
+      videoID,
+    });
+    if (result.status === 200 && successCallback) {
+      successCallback(result.data);
+    }
+  } catch (err: unknown) {
+    if (failureCallback) {
+      failureCallback(err as object);
+    }
+    console.log(err);
+  }
+}
+
+export async function removeLike(
+  videoID: string,
+  successCallback?: (result: any) => void,
+  failureCallback?: (err: object) => void
+) {
+  try {
+    const result = await baseAxiosInstance().patch("/video/remove-like", {
+      videoID,
+    });
+    if (result.status === 200 && successCallback) {
+      successCallback(result.data);
+    }
+  } catch (err: unknown) {
+    if (failureCallback) {
+      failureCallback(err as object);
+    }
+    console.log(err);
+  }
+}
+
+export async function removeDislike(
+  videoID: string,
+  successCallback?: (result: any) => void,
+  failureCallback?: (err: object) => void
+) {
+  try {
+    const result = await baseAxiosInstance().patch("/video/remove-dislike", {
+      videoID,
+    });
     if (result.status === 200 && successCallback) {
       successCallback(result.data);
     }

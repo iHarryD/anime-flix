@@ -1,4 +1,5 @@
 export interface singleVideoProps {
+  videoID: string;
   url: string;
   title: string;
   likes: number;
@@ -9,5 +10,4 @@ export interface singleVideoProps {
   channel: string;
   description?: string;
   playlistButtonHandler: () => void;
-  bookmarkButtonHandler: () => void;
 }

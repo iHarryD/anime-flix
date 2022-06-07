@@ -28,6 +28,7 @@ export default function SingleVideoPage() {
         />
       )}
       <SingleVideo
+        videoID={videoID}
         url={videoData.url}
         title={videoData.title}
         description={videoData.description}
@@ -37,7 +38,6 @@ export default function SingleVideoPage() {
         bookmarkStatus={false}
         uploadedOn={videoData.uploadedOn}
         playlistButtonHandler={() => setIsAddingToPlaylist(true)}
-        bookmarkButtonHandler={() => {}}
         channel="Channel"
       />
     </PageContainerMain>
