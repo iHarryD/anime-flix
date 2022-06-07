@@ -27,8 +27,10 @@ import {
 
 export default function VideoUtilityBar({
   videoID,
-  likes,
-  dislikes,
+  likeCount,
+  dislikeCount,
+  likeStatus,
+  dislikeStatus,
   bookmarkStatus,
   playlistButtonHandler,
 }: utilityBarProps) {
@@ -65,7 +67,7 @@ export default function VideoUtilityBar({
     <CenteredFlexJustifyBetween>
       <ButtonPairContainer>
         <ButtonWithTextContainer>
-          {false ? (
+          {likeStatus ? (
             <VideoUtilityButton
               variants={utilityButtonVariant}
               whileHover="whileHover"
@@ -84,10 +86,10 @@ export default function VideoUtilityBar({
               <FontAwesomeIcon icon={faRThumbsUp} />
             </VideoUtilityButton>
           )}
-          <span>{likes} likes</span>
+          <span>{likeCount} likes</span>
         </ButtonWithTextContainer>
         <ButtonWithTextContainer>
-          {false ? (
+          {dislikeStatus ? (
             <VideoUtilityButton
               variants={utilityButtonVariant}
               whileHover="whileHover"
@@ -106,7 +108,7 @@ export default function VideoUtilityBar({
               <FontAwesomeIcon icon={faRThumbsDown} />
             </VideoUtilityButton>
           )}
-          <span>{dislikes} dislikes</span>
+          <span>{dislikeCount} dislikes</span>
         </ButtonWithTextContainer>
       </ButtonPairContainer>
       <ButtonPairContainer>

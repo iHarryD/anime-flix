@@ -1,7 +1,9 @@
 export interface utilityBarProps {
   videoID: string;
-  likes: number;
-  dislikes: number;
+  likeCount: number;
+  dislikeCount: number;
+  likeStatus: boolean;
+  dislikeStatus: boolean;
   bookmarkStatus: boolean;
   playlistButtonHandler: () => void;
 }

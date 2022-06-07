@@ -2,8 +2,10 @@ export interface singleVideoProps {
   videoID: string;
   url: string;
   title: string;
-  likes: number;
-  dislikes: number;
+  likeCount: number;
+  dislikeCount: number;
+  likeStatus: boolean;
+  dislikeStatus: boolean;
   views: number;
   uploadedOn: Date;
   bookmarkStatus: boolean;

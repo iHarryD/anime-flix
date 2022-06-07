@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const defaultValues = {
   firstName: localStorage.getItem("firstName") || null,
+  _id: localStorage.getItem("_id") || null,
   token: localStorage.getItem("token") || null,
 };
 
@@ -16,13 +17,16 @@ export function AuthProvider({ children }) {
     const toSaveIn = toRemember ? localStorage : sessionStorage;
     if (userData.token !== null || userData.firstName !== null) {
       toSaveIn.setItem("firstName", userData.firstName);
+      toSaveIn.setItem("_id", userData._id);
       toSaveIn.setItem("token", userData.token);
       axios.defaults.headers.common["authorization"] = userData.token;
     } else {
       localStorage.removeItem("firstName");
       localStorage.removeItem("token");
+      localStorage.removeItem("_id");
       sessionStorage.removeItem("firstName");
       sessionStorage.removeItem("token");
+      sessionStorage.removeItem("_id");
       axios.defaults.headers.common["authorization"] = false;
     }
   }, [userData]);

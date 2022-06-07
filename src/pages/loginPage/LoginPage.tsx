@@ -114,6 +114,7 @@ export default function LoginPage() {
                       setUserData({
                         firstName: result.data.firstName,
                         token: result.data.token,
+                        _id: result.data._id,
                       });
                       const redirectTo =
                         state.comingFrom === "/signup" ? "/explore" : -1;

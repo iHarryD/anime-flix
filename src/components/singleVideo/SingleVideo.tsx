@@ -7,8 +7,10 @@ import { singleVideoProps } from "../../interfaces/singleVideo.interface";
 export default function SingleVideo({
   url,
   title,
-  likes,
-  dislikes,
+  likeCount,
+  dislikeCount,
+  likeStatus,
+  dislikeStatus,
   videoID,
   views,
   uploadedOn,
@@ -24,8 +26,10 @@ export default function SingleVideo({
         <VideoHeading>{title}</VideoHeading>
         <VideoUtilityBar
           videoID={videoID}
-          likes={likes}
-          dislikes={dislikes}
+          likeCount={likeCount}
+          dislikeCount={dislikeCount}
+          likeStatus={likeStatus}
+          dislikeStatus={dislikeStatus}
           bookmarkStatus={bookmarkStatus}
           playlistButtonHandler={playlistButtonHandler}
         />
