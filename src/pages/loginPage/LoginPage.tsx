@@ -132,7 +132,7 @@ export default function LoginPage() {
               }
               disabled={isLoading}
             >
-              {isLoading ? <ButtonSpinner color="#fff" /> : "Login"}
+              {isLoading ? <ButtonSpinner colorHex="#fff" /> : "Login"}
             </PrimaryButton>
             <SecondaryButton
               disabled={isLoading}

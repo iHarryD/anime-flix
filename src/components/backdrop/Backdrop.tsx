@@ -19,6 +19,6 @@ export default function Backdrop({
     >
       {children}
     </StyledBackdrop>,
-    document.getElementById("portal")!
+    document.getElementById("portal") as HTMLElement
   );
 }

@@ -6,7 +6,6 @@ import {
   SmallTextSkeleton,
   StyledVideoCardSkeleton,
   VideoCardTextContainerSkeleton,
-  LargeTextSkeleton,
   NormalTextSkeleton,
   SinglePlaylistNameText,
 } from "../styled/Skeletons.styled";

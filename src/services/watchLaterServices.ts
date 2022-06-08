@@ -1,23 +1,19 @@
+import { Dispatch, SetStateAction } from "react";
 import baseAxiosInstance from "./baseAxiosInstance";
 
 export async function getWatchLater(
-  loadingState: React.SetStateAction<any>,
+  loadingState?: Dispatch<SetStateAction<boolean>>,
   successCallback?: (result: any) => void,
   failureCallback?: (err: object) => void
 ) {
   try {
-    loadingState(true);
+    if (loadingState) loadingState(true);
     const result = await baseAxiosInstance().get("/watch-later/fetch");
-    if (result.status === 200 && successCallback) {
-      successCallback(result.data);
-    }
+    if (result.status === 200 && successCallback) successCallback(result);
   } catch (err: unknown) {
-    if (failureCallback) {
-      failureCallback(err as object);
-    }
-    console.log(err);
+    if (failureCallback) failureCallback(err as object);
   } finally {
-    loadingState(false);
+    if (loadingState) loadingState(false);
   }
 }
 
@@ -30,14 +26,9 @@ export async function addToWatchLater(
     const result = await baseAxiosInstance().patch(
       `/watch-later/add?videoID=${videoID}`
     );
-    if (result.status === 200 && successCallback) {
-      successCallback(result.data);
-    }
+    if (result.status === 200 && successCallback) successCallback(result.data);
   } catch (err: unknown) {
-    if (failureCallback) {
-      failureCallback(err as object);
-    }
-    console.log(err);
+    if (failureCallback) failureCallback(err as object);
   }
 }
 
@@ -50,13 +41,8 @@ export async function removeFromWatchLater(
     const result = await baseAxiosInstance().patch(
       `/watch-later/remove?videoID=${videoID}`
     );
-    if (result.status === 200 && successCallback) {
-      successCallback(result.data);
-    }
+    if (result.status === 200 && successCallback) successCallback(result.data);
   } catch (err: unknown) {
-    if (failureCallback) {
-      failureCallback(err as object);
-    }
-    console.log(err);
+    if (failureCallback) failureCallback(err as object);
   }
 }

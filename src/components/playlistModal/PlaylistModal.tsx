@@ -1,5 +1,4 @@
 import {
-  faAdd,
   faCircleCheck as faSCircleCheck,
   faClose,
 } from "@fortawesome/free-solid-svg-icons";
@@ -8,11 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AnimatePresence } from "framer-motion";
 import { verticallyExpandingVariant } from "../../variants/expandingVariant";
 import Modal from "../modal/Modal";
-import {
-  IconOnlyButton,
-  SecondaryButton,
-  TextButton,
-} from "../styled/Buttons.styled";
+import { IconOnlyButton } from "../styled/Buttons.styled";
 import {
   NewPlaylistButton,
   NewPlaylistInput,
@@ -51,8 +46,8 @@ export default function PlaylistModal({
     if (playlistNameInputRef.current === null) return;
     if (!playlistNameInputRef.current.value.replaceAll(" ", "")) return;
     createNewPlaylist(
-      setIsCreatingNewPlaylist,
       playlistNameInputRef.current.value,
+      setIsCreatingNewPlaylist,
       (result) => {
         userDataDispatcher({
           type: userDataActionTypes.POPULATE_PLAYLIST,
@@ -142,7 +137,7 @@ export default function PlaylistModal({
               </AnimatePresence>
               <NewPlaylistButton onClick={() => handleCreatePlaylist()}>
                 {isCreatingNewPlaylist ? (
-                  <ButtonSpinner color="#fff" />
+                  <ButtonSpinner colorHex="#fff" />
                 ) : (
                   "Create"
                 )}

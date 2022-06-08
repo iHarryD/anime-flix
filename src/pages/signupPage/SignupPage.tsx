@@ -122,7 +122,7 @@ export default function SignupPage() {
             )
           }
         >
-          {isLoading ? <ButtonSpinner color="#fff" /> : "Signup"}
+          {isLoading ? <ButtonSpinner colorHex="#fff" /> : "Signup"}
         </PrimaryButton>
         <TextButton
           onClick={() =>

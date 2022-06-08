@@ -31,7 +31,7 @@ export default function SinglePlaylistPage() {
   const { userDataDispatcher } = useUserData();
 
   useEffect(() => {
-    getPlaylistVideos(setIsLoading, playlistID, (result) =>
+    getPlaylistVideos(playlistID, setIsLoading, (result) =>
       setPlaylistDetails({ name: result.data.name, videos: result.data.videos })
     );
   }, []);

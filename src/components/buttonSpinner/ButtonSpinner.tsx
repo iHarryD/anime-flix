@@ -1,4 +1,6 @@
-export default function ButtonSpinner({ color }) {
+import { buttonSpinnerProps } from "../../interfaces/buttonSpinner.interface";
+
+export default function ButtonSpinner({ colorHex }: buttonSpinnerProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -14,7 +16,7 @@ export default function ButtonSpinner({ color }) {
         cx="84"
         cy="50"
         r="10"
-        fill={color}
+        fill={colorHex}
         data-darkreader-inline-fill=""
       >
         <animate
@@ -33,7 +35,7 @@ export default function ButtonSpinner({ color }) {
           dur="2.272727272727273s"
           calcMode="discrete"
           keyTimes="0;0.25;0.5;0.75;1"
-          values={`${color};${color};${color};${color};${color}`}
+          values={`${colorHex};${colorHex};${colorHex};${colorHex};${colorHex}`}
           begin="0s"
         ></animate>
       </circle>
@@ -41,7 +43,7 @@ export default function ButtonSpinner({ color }) {
         cx="16"
         cy="50"
         r="10"
-        fill={color}
+        fill={colorHex}
         data-darkreader-inline-fill=""
       >
         <animate
@@ -69,7 +71,7 @@ export default function ButtonSpinner({ color }) {
         cx="50"
         cy="50"
         r="10"
-        fill={color}
+        fill={colorHex}
         data-darkreader-inline-fill=""
       >
         <animate
@@ -97,7 +99,7 @@ export default function ButtonSpinner({ color }) {
         cx="84"
         cy="50"
         r="10"
-        fill={color}
+        fill={colorHex}
         data-darkreader-inline-fill=""
       >
         <animate
@@ -125,7 +127,7 @@ export default function ButtonSpinner({ color }) {
         cx="16"
         cy="50"
         r="10"
-        fill={color}
+        fill={colorHex}
         data-darkreader-inline-fill=""
       >
         <animate

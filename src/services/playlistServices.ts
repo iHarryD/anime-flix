@@ -1,71 +1,59 @@
 import { AxiosError, AxiosResponse } from "axios";
-import React from "react";
+import { Dispatch, SetStateAction } from "react";
 import baseAxiosInstance from "./baseAxiosInstance";
 
 export async function getPlaylists(
-  loadingState: React.SetStateAction<any>,
+  loadingState?: Dispatch<SetStateAction<boolean>>,
   successCallback?: (result: any) => void,
   failureCallback?: (err: any) => void
 ) {
   try {
-    loadingState(true);
+    if (loadingState) loadingState(true);
     const result = await baseAxiosInstance().get("/playlist/fetch-all");
-    if (successCallback) {
-      successCallback(result);
-    }
+    if (successCallback) successCallback(result);
   } catch (err) {
-    if (failureCallback) {
-      failureCallback(err);
-    }
-    console.log(err);
+    if (failureCallback) failureCallback(err);
   } finally {
-    loadingState(false);
+    if (loadingState) loadingState(false);
   }
 }
 
 export async function getPlaylistVideos(
-  loadingState: React.SetStateAction<any>,
   playlistID: string,
+  loadingState?: Dispatch<SetStateAction<boolean>>,
   successCallback?: (result: AxiosResponse) => void,
   failureCallback?: (err: AxiosError | Error) => void
 ) {
   try {
-    loadingState(true);
+    if (loadingState) loadingState(true);
     const result = await baseAxiosInstance().get(
       `/playlist/fetch-one?playlistID=${playlistID}`
     );
-    if (successCallback) {
-      successCallback(result);
-    }
+    if (successCallback) successCallback(result);
   } catch (err: any) {
-    if (failureCallback) {
-      failureCallback(err);
-    }
+    if (failureCallback) failureCallback(err);
   } finally {
-    loadingState(false);
+    if (loadingState) loadingState(false);
   }
 }
 
 export async function createNewPlaylist(
-  loadingState: React.SetStateAction<any>,
   playlistName: string,
+  loadingState?: Dispatch<SetStateAction<boolean>>,
   successCallback?: (result: any) => void,
   failureCallback?: (err: any) => void
 ) {
   try {
-    loadingState(true);
+    if (loadingState) loadingState(true);
+
     const result = await baseAxiosInstance().patch("/playlist/create", {
       playlistName,
     });
-    if (successCallback) {
-      successCallback(result);
-    }
+    if (successCallback) successCallback(result);
   } catch (err) {
-    if (failureCallback) {
-      failureCallback(err);
-    }
+    if (failureCallback) failureCallback(err);
   } finally {
-    loadingState(false);
+    if (loadingState) loadingState(false);
   }
 }
 
@@ -78,13 +66,9 @@ export async function deletePlaylist(
     const result = await baseAxiosInstance().patch("/playlist/delete", {
       playlistID,
     });
-    if (successCallback) {
-      successCallback(result);
-    }
+    if (successCallback) successCallback(result);
   } catch (err) {
-    if (failureCallback) {
-      failureCallback(err);
-    }
+    if (failureCallback) failureCallback(err);
   }
 }
 
@@ -99,14 +83,9 @@ export async function addToPlaylist(
       playlistID,
       videoID,
     });
-    if (successCallback) {
-      successCallback(result);
-    }
+    if (successCallback) successCallback(result);
   } catch (err) {
-    if (failureCallback) {
-      failureCallback(err);
-    }
-    console.log(err);
+    if (failureCallback) failureCallback(err);
   }
 }
 
@@ -121,13 +100,8 @@ export async function removeFromPlaylist(
       playlistID,
       videoID,
     });
-    if (successCallback) {
-      successCallback(result);
-    }
+    if (successCallback) successCallback(result);
   } catch (err) {
-    if (failureCallback) {
-      failureCallback(err);
-    }
-    console.log(err);
+    if (failureCallback) failureCallback(err);
   }
 }

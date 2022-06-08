@@ -15,6 +15,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const toSaveIn = toRemember ? localStorage : sessionStorage;
+
     if (userCredentials.token !== null || userCredentials.firstName !== null) {
       toSaveIn.setItem("firstName", userCredentials.firstName);
       toSaveIn.setItem("_id", userCredentials._id);

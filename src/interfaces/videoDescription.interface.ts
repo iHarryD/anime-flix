@@ -1,5 +1,5 @@
 export interface descriptionProps {
-  viewCount: number;
+  views: string[];
   channel: string;
   uploadDate: Date;
   description?: string;

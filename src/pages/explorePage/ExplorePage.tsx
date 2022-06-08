@@ -5,7 +5,7 @@ import { useVideos } from "../../contexts/VideosContext";
 import { videoCardInterface } from "../../interfaces/video.interface";
 import { VideoCardLoadingSkeleton } from "../../components/skeletonLoaders/SkeletonLoader";
 import { useEffect, useState } from "react";
-import baseAxiosInstance from "../../services/baseAxiosInstance";
+import { fetchAllVideos } from "../../services/videoServices";
 
 export default function ExplorePage() {
   const { allVideos, setAllVideos } = useVideos();
@@ -13,17 +13,7 @@ export default function ExplorePage() {
 
   useEffect(() => {
     if (allVideos.length > 0) return;
-    (async () => {
-      try {
-        setIsLoading(true);
-        const res = await baseAxiosInstance().get("/video/fetch-all");
-        setAllVideos(res.data);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
+    fetchAllVideos(setIsLoading, (result) => setAllVideos(result.data));
   }, []);
 
   return (

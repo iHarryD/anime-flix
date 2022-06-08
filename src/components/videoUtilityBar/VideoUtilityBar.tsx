@@ -28,126 +28,188 @@ import {
   addToWatchLater,
   removeFromWatchLater,
 } from "../../services/watchLaterServices";
+import { useUserData } from "../../contexts/UserDataContext";
+import { useAuth } from "../../contexts/authContext";
+import { userDataActionTypes } from "../../interfaces/userContext.interface";
+import { singleVideoActionTypes } from "../../interfaces/singleVideoReducer.interface";
+import { useState } from "react";
+import PlaylistModal from "../playlistModal/PlaylistModal";
+import { utilityButtonVariant } from "../../variants/utilityButtonVariant";
 
 export default function VideoUtilityBar({
   videoID,
-  likeCount,
-  dislikeCount,
-  likeStatus,
-  dislikeStatus,
-  watchLaterStatus,
-  playlistButtonHandler,
+  likes,
+  dislikes,
+  singleVideoReducer,
 }: utilityBarProps) {
-  const utilityButtonVariant = {
-    whileHover: {
-      scale: 1.1,
-    },
-    whileTap: {
-      scale: 0.9,
-    },
-  };
+  const { userCredentials } = useAuth();
+  const { userData, userDataDispatcher } = useUserData();
+  const [isPlaylistModalActive, setIsPlaylistModalActive] =
+    useState<boolean>(false);
 
   function handleRemoveLikeVideo(videoID: string) {
-    removeLike(videoID);
+    singleVideoReducer({
+      type: singleVideoActionTypes.REMOVE_LIKE,
+      payload: { userID: userCredentials._id },
+    });
+    removeLike(videoID, undefined, (err) =>
+      singleVideoReducer({
+        type: singleVideoActionTypes.LIKE,
+        payload: { userID: userCredentials._id },
+      })
+    );
   }
 
   function handleDislikeVideo(videoID: string) {
-    dislikeVideo(videoID);
+    singleVideoReducer({
+      type: singleVideoActionTypes.DISLIKE,
+      payload: { userID: userCredentials._id },
+    });
+    dislikeVideo(videoID, undefined, (err) =>
+      singleVideoReducer({
+        type: singleVideoActionTypes.REMOVE_DISLIKE,
+        payload: { userID: userCredentials._id },
+      })
+    );
   }
 
   function handleRemoveDislikeVideo(videoID: string) {
-    removeDislike(videoID);
+    singleVideoReducer({
+      type: singleVideoActionTypes.REMOVE_DISLIKE,
+      payload: { userID: userCredentials._id },
+    });
+    removeDislike(videoID, undefined, (err) =>
+      singleVideoReducer({
+        type: singleVideoActionTypes.DISLIKE,
+        payload: { userID: userCredentials._id },
+      })
+    );
   }
 
   function handleLikeVideo(videoID: string) {
-    likeVideo(videoID);
+    singleVideoReducer({
+      type: singleVideoActionTypes.LIKE,
+      payload: { userID: userCredentials._id },
+    });
+    likeVideo(videoID, undefined, (err) =>
+      singleVideoReducer({
+        type: singleVideoActionTypes.REMOVE_LIKE,
+        payload: { userID: userCredentials._id },
+      })
+    );
   }
 
   function handleAddToWatchLater(videoID: string) {
-    addToWatchLater(videoID);
+    userDataDispatcher({
+      type: userDataActionTypes.ADD_TO_WATCHLATER,
+      payload: { videoID },
+    });
+    addToWatchLater(videoID, undefined, (err) =>
+      userDataDispatcher({
+        type: userDataActionTypes.REMOVE_FROM_WATCHLATER,
+        payload: { videoID },
+      })
+    );
   }
 
   function handleRemoveFromWatchLater(videoID: string) {
-    removeFromWatchLater(videoID);
+    userDataDispatcher({
+      type: userDataActionTypes.REMOVE_FROM_WATCHLATER,
+      payload: { videoID },
+    });
+    removeFromWatchLater(videoID, undefined, (err) =>
+      userDataDispatcher({
+        type: userDataActionTypes.ADD_TO_WATCHLATER,
+        payload: { videoID },
+      })
+    );
   }
 
   return (
-    <CenteredFlexJustifyBetween>
-      <ButtonPairContainer>
-        <ButtonWithTextContainer>
-          {likeStatus ? (
+    <>
+      {isPlaylistModalActive && (
+        <PlaylistModal
+          videoID={videoID}
+          closePlaylistModal={() => setIsPlaylistModalActive(false)}
+        />
+      )}
+      <CenteredFlexJustifyBetween>
+        <ButtonPairContainer>
+          <ButtonWithTextContainer>
+            {likes.includes(userCredentials._id) ? (
+              <VideoUtilityButton
+                variants={utilityButtonVariant}
+                whileHover="whileHover"
+                whileTap="whileTap"
+                onClick={() => handleRemoveLikeVideo(videoID)}
+              >
+                <FontAwesomeIcon icon={faSThumbsUp} />
+              </VideoUtilityButton>
+            ) : (
+              <VideoUtilityButton
+                variants={utilityButtonVariant}
+                whileHover="whileHover"
+                whileTap="whileTap"
+                onClick={() => handleLikeVideo(videoID)}
+              >
+                <FontAwesomeIcon icon={faRThumbsUp} />
+              </VideoUtilityButton>
+            )}
+            <span>{likes.length} likes</span>
+          </ButtonWithTextContainer>
+          <ButtonWithTextContainer>
+            {dislikes.includes(userCredentials._id) ? (
+              <VideoUtilityButton
+                variants={utilityButtonVariant}
+                whileHover="whileHover"
+                whileTap="whileTap"
+                onClick={() => handleRemoveDislikeVideo(videoID)}
+              >
+                <FontAwesomeIcon icon={faSThumbsDown} />
+              </VideoUtilityButton>
+            ) : (
+              <VideoUtilityButton
+                variants={utilityButtonVariant}
+                whileHover="whileHover"
+                whileTap="whileTap"
+                onClick={() => handleDislikeVideo(videoID)}
+              >
+                <FontAwesomeIcon icon={faRThumbsDown} />
+              </VideoUtilityButton>
+            )}
+            <span>{dislikes.length} dislikes</span>
+          </ButtonWithTextContainer>
+        </ButtonPairContainer>
+        <ButtonPairContainer>
+          {userData.watchLater.includes(videoID) ? (
             <VideoUtilityButton
               variants={utilityButtonVariant}
               whileHover="whileHover"
               whileTap="whileTap"
-              onClick={() => handleRemoveLikeVideo(videoID)}
+              onClick={() => handleRemoveFromWatchLater(videoID)}
             >
-              <FontAwesomeIcon icon={faSThumbsUp} />
+              <FontAwesomeIcon icon={faSBookmark} />
             </VideoUtilityButton>
           ) : (
             <VideoUtilityButton
               variants={utilityButtonVariant}
               whileHover="whileHover"
               whileTap="whileTap"
-              onClick={() => handleLikeVideo(videoID)}
+              onClick={() => handleAddToWatchLater(videoID)}
             >
-              <FontAwesomeIcon icon={faRThumbsUp} />
+              <FontAwesomeIcon icon={faRBookmark} />
             </VideoUtilityButton>
           )}
-          <span>{likeCount} likes</span>
-        </ButtonWithTextContainer>
-        <ButtonWithTextContainer>
-          {dislikeStatus ? (
-            <VideoUtilityButton
-              variants={utilityButtonVariant}
-              whileHover="whileHover"
-              whileTap="whileTap"
-              onClick={() => handleRemoveDislikeVideo(videoID)}
-            >
-              <FontAwesomeIcon icon={faSThumbsDown} />
-            </VideoUtilityButton>
-          ) : (
-            <VideoUtilityButton
-              variants={utilityButtonVariant}
-              whileHover="whileHover"
-              whileTap="whileTap"
-              onClick={() => handleDislikeVideo(videoID)}
-            >
-              <FontAwesomeIcon icon={faRThumbsDown} />
-            </VideoUtilityButton>
-          )}
-          <span>{dislikeCount} dislikes</span>
-        </ButtonWithTextContainer>
-      </ButtonPairContainer>
-      <ButtonPairContainer>
-        {watchLaterStatus ? (
           <VideoUtilityButton
             variants={utilityButtonVariant}
             whileHover="whileHover"
             whileTap="whileTap"
-            onClick={() => handleRemoveFromWatchLater(videoID)}
+            onClick={() => setIsPlaylistModalActive(true)}
           >
-            <FontAwesomeIcon icon={faSBookmark} />
+            <FontAwesomeIcon icon={faList} />
           </VideoUtilityButton>
-        ) : (
-          <VideoUtilityButton
-            variants={utilityButtonVariant}
-            whileHover="whileHover"
-            whileTap="whileTap"
-            onClick={() => handleAddToWatchLater(videoID)}
-          >
-            <FontAwesomeIcon icon={faRBookmark} />
-          </VideoUtilityButton>
-        )}
-        <VideoUtilityButton
-          variants={utilityButtonVariant}
-          whileHover="whileHover"
-          whileTap="whileTap"
-          onClick={() => playlistButtonHandler()}
-        >
-          <FontAwesomeIcon icon={faList} />
-        </VideoUtilityButton>
-      </ButtonPairContainer>
-    </CenteredFlexJustifyBetween>
+        </ButtonPairContainer>
+      </CenteredFlexJustifyBetween>
+    </>
   );
 }

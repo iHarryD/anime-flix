@@ -1,15 +1,11 @@
-export interface singleVideoProps {
+export interface singleVideoDataInterface {
   videoID: string;
   url: string;
   title: string;
-  likeCount: number;
-  dislikeCount: number;
-  likeStatus: boolean;
-  dislikeStatus: boolean;
-  viewCount: number;
+  likes: string[];
+  dislikes: string[];
+  views: string[];
   uploadedOn: Date;
-  watchLaterStatus: boolean;
   channel: string;
   description?: string;
-  playlistButtonHandler: () => void;
 }

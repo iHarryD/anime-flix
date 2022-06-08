@@ -1,4 +1,3 @@
-import React from "react";
 import PageNavbar from "../pageNavbar/PageNavbar";
 import {
   PageSection,

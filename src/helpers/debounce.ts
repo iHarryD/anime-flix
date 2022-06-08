@@ -1,4 +1,4 @@
-export default function useDebounce(
+export default function debounce(
   callback: () => void,
   delayInMilliSeconds: number
 ) {
