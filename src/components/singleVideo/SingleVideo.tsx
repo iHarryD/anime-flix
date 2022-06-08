@@ -4,12 +4,13 @@ import { StyledSingleVideoContainer, VideoHeading } from "../../styled";
 import { singleVideoReducer } from "../../reducers";
 import { singleVideoActionTypes, userDataActionTypes } from "../../interfaces";
 import { getPlaylists, getWatchLater, fetchVideo } from "../../services";
-import { useUserData } from "../../contexts";
+import { useUserData, useAuth } from "../../contexts";
 
 export function SingleVideo({ videoID }: { videoID: string }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userData, userDataDispatcher } = useUserData();
   const [videoData, videoDataDispatch] = useReducer(singleVideoReducer, null!);
+  const { userCredentials } = useAuth();
 
   useEffect(() => {
     fetchVideo(videoID, setIsLoading, (result) =>
@@ -30,20 +31,23 @@ export function SingleVideo({ videoID }: { videoID: string }) {
   }, [videoID]);
 
   useEffect(() => {
-    if (userData.playlists.length) return;
-    getPlaylists(undefined, (result) =>
-      userDataDispatcher({
-        type: userDataActionTypes.POPULATE_PLAYLIST,
-        payload: { updatedPlaylist: result.data },
-      })
-    );
-    if (userData.watchLater.length) return;
-    getWatchLater(undefined, (result) =>
-      userDataDispatcher({
-        type: userDataActionTypes.POPULATE_WATCHLATER,
-        payload: { updatedWatchLater: result.data },
-      })
-    );
+    if (userCredentials._id === null) return;
+    if (userData.playlists.length === 0) {
+      getPlaylists(undefined, (result) =>
+        userDataDispatcher({
+          type: userDataActionTypes.POPULATE_PLAYLIST,
+          payload: { updatedPlaylist: result.data },
+        })
+      );
+    }
+    if (userData.watchLater.length === 0) {
+      getWatchLater(undefined, (result) =>
+        userDataDispatcher({
+          type: userDataActionTypes.POPULATE_WATCHLATER,
+          payload: { updatedWatchLater: result.data },
+        })
+      );
+    }
   }, []);
 
   return isLoading || !videoData ? (
