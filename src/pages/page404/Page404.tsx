@@ -1,11 +1,11 @@
-import { Player as LottiePlayer } from "@lottiefiles/react-lottie-player";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Player as LottiePlayer } from "@lottiefiles/react-lottie-player";
 import {
   NotFoundAnimationContainer,
   RedirectionTextContainer,
   RedirectLink,
-} from "../../components/styled/Page404Components.styled";
+} from "../../styled";
 
 export default function Page404() {
   const [redirectIn, setRedirectIn] = useState<number>(5);

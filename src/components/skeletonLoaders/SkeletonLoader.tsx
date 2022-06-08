@@ -8,7 +8,7 @@ import {
   VideoCardTextContainerSkeleton,
   NormalTextSkeleton,
   SinglePlaylistNameText,
-} from "../styled/Skeletons.styled";
+} from "../../styled";
 
 export function VideoCardLoadingSkeleton() {
   return (

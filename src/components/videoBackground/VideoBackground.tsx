@@ -1,11 +1,10 @@
-import React from "react";
-import { backgroundVideoProps } from "../../interfaces/backgroundVideo.interface";
+import { backgroundVideoProps } from "../../interfaces";
 import {
   StyledVideoForBackground,
   BackgroundVideoContainer,
-} from "../styled/VideoForBackground.styled";
+} from "../../styled";
 
-export default function VideoBackground({
+export function VideoBackground({
   loop,
   width,
   height,

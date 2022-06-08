@@ -5,30 +5,27 @@ import {
 import { faCircleCheck as faRCircleCheck } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AnimatePresence } from "framer-motion";
-import { verticallyExpandingVariant } from "../../variants/expandingVariant";
-import Modal from "../modal/Modal";
-import { IconOnlyButton } from "../styled/Buttons.styled";
+import { verticallyExpandingVariant } from "../../variants";
 import {
   NewPlaylistButton,
   NewPlaylistInput,
   PlaylistModalContainer,
   PlaylistModalHeadingButtonContainer,
   PlaylistModalListItem,
-} from "../styled/PlaylistModalComponents.styled";
+  IconOnlyButton,
+} from "../../styled";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import Backdrop from "../backdrop/Backdrop";
-import { playlistModalProps } from "../../interfaces/playlistModal.interface";
+import { Backdrop, ButtonSpinner, Modal } from "../../components";
+import { playlistModalProps, userDataActionTypes } from "../../interfaces";
 import {
   addToPlaylist,
   createNewPlaylist,
   removeFromPlaylist,
-} from "../../services/playlistServices";
-import { useUserData } from "../../contexts/UserDataContext";
-import { userDataActionTypes } from "../../interfaces/userContext.interface";
-import ButtonSpinner from "../buttonSpinner/ButtonSpinner";
+} from "../../services";
+import { useUserData } from "../../contexts";
 
-export default function PlaylistModal({
+export function PlaylistModal({
   videoID,
   closePlaylistModal,
 }: playlistModalProps) {

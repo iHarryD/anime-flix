@@ -1,12 +1,11 @@
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import PageContainerMain from "../../components/pageContainer/PageContainer";
-import PageHeading from "../../components/pageHeading/PageHeading";
-import { IconOnlyButton } from "../../components/styled/Buttons.styled";
+import { PageContainerMain, PageHeading } from "../../components";
 import {
   HistoryHeadingButtonContainer,
   HistoryVideosContainer,
-} from "../../components/styled/HistoryPageComponents.styled";
+  IconOnlyButton,
+} from "../../styled";
 
 export default function HistoryPage() {
   return (

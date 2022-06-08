@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { Dispatch, SetStateAction } from "react";
-import baseAxiosInstance from "./baseAxiosInstance";
+import { baseAxiosInstance } from "./baseAxiosInstance";
 
 export async function fetchAllVideos(
   loadingState?: Dispatch<SetStateAction<boolean>>,

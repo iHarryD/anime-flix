@@ -3,10 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import { VideosProvider } from "./contexts/VideosContext";
-import { AuthProvider } from "./contexts/authContext";
-import { GlobalStyles } from "./components/styled/Global.styled";
-import { UserDataProvider } from "./contexts/UserDataContext";
+import { GlobalStyles } from "./styled";
+import { AuthProvider, VideosProvider, UserDataProvider } from "./contexts";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

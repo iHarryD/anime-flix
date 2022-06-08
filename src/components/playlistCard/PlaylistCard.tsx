@@ -4,10 +4,10 @@ import {
   PlaylistCardPreview,
   PlaylistCardDetailsContainer,
   VideoHeading,
-} from "../styled/Cards.styled";
-import { playlistInterface } from "../../interfaces/playlist.interface";
+} from "../../styled";
+import { playlistInterface } from "../../interfaces";
 
-export default function PlaylistCard({ name, videos, _id }: playlistInterface) {
+export function PlaylistCard({ name, videos, _id }: playlistInterface) {
   return (
     <PlaylistCardContainer>
       <Link to={_id}>

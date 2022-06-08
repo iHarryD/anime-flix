@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import PrivateRoute from "../components/privateRoute/PrivateRoute";
-import { useAuth } from "../contexts/authContext";
+import { PrivateRoute } from "../components";
+import { useAuth } from "../contexts";
 import ExplorePage from "./explorePage/ExplorePage";
 import HistoryPage from "./historyPage/HistoryPage";
 import WatchLaterPage from "./watchLaterPage/WatchLaterPage";

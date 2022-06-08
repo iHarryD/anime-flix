@@ -1,8 +1,8 @@
-import { singleVideoDataInterface } from "../interfaces/singleVideo.interface";
 import {
   singleVideoActions,
   singleVideoActionTypes,
-} from "../interfaces/singleVideoReducer.interface";
+  singleVideoDataInterface,
+} from "../interfaces";
 
 export function singleVideoReducer(
   state: singleVideoDataInterface,

@@ -2,7 +2,7 @@ import {
   userDataActions,
   userDataActionTypes,
   userDataInterface,
-} from "../interfaces/userContext.interface";
+} from "../interfaces";
 
 export default function userDataReducer(
   state: userDataInterface,

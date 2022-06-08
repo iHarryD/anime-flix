@@ -1,6 +1,6 @@
-import { StyledPageHeading } from "../styled/PageHeading.styled";
-import { pageHeaderProps } from "../../interfaces/pageHeader.interface";
+import { StyledPageHeading } from "../../styled";
+import { pageHeaderProps } from "../../interfaces";
 
-export default function PageHeading({ children }: pageHeaderProps) {
+export function PageHeading({ children }: pageHeaderProps) {
   return <StyledPageHeading>{children}</StyledPageHeading>;
 }

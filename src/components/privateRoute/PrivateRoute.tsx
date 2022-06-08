@@ -1,8 +1,8 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { useAuth } from "../../contexts/authContext";
-import { privateRouteProps } from "../../interfaces/privateRoute.interface";
+import { useAuth } from "../../contexts";
+import { privateRouteProps } from "../../interfaces";
 
-export default function PrivateRoute({
+export function PrivateRoute({
   children,
   isAuthenticated,
   redirectTo,

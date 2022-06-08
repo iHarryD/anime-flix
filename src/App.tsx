@@ -1,6 +1,5 @@
 import { useLocation } from "react-router-dom";
-import Footer from "./components/footer/Footer";
-import Header from "./components/header/Header";
+import { Header, Footer } from "./components";
 import "./css/utilities.css";
 
 import AllRoutes from "./pages/routes";

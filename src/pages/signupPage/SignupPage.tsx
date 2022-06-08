@@ -1,23 +1,18 @@
-import { AxiosError } from "axios";
 import { useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import ButtonSpinner from "../../components/buttonSpinner/ButtonSpinner";
+import { ButtonSpinner } from "../../components";
 import {
   PrimaryButton,
   TextButton,
-} from "../../components/styled/Buttons.styled";
-import { AuthWarningText } from "../../components/styled/Generic.styled";
-import {
+  AuthWarningText,
   DOBInput,
   InputWithBackground,
   StyledLabelInputContainer,
-} from "../../components/styled/Input.styled";
-import { MainForAuthPages } from "../../components/styled/PageContainer.styled";
-import {
+  MainForAuthPages,
   ColumnForPair,
   SignupBoxContainer,
-} from "../../components/styled/SignupPageComponents.styled";
-import { signup } from "../../services/authServices";
+} from "../../styled";
+import { signup } from "../../services";
 
 export default function SignupPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);

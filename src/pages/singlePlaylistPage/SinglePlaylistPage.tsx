@@ -1,25 +1,22 @@
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import PageContainerMain from "../../components/pageContainer/PageContainer";
-import PageHeading from "../../components/pageHeading/PageHeading";
-import { SinglePlaylistSkeleton } from "../../components/skeletonLoaders/SkeletonLoader";
-import { IconOnlyButton } from "../../components/styled/Buttons.styled";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  PageContainerMain,
+  SinglePlaylistSkeleton,
+  VerticleVideoCard,
+} from "../../components";
+import {
+  IconOnlyButton,
   PlaylistItemTrashContainer,
   PlaylistVideosContainer,
   SinglePlaylistDetailsContainer,
   SinglePlaylistNameContainer,
-} from "../../components/styled/SinglePlaylistPageComponents.styled";
-import { VerticleVideoCard } from "../../components/videoCards/VideoCards";
-import { useUserData } from "../../contexts/UserDataContext";
-import { userDataActionTypes } from "../../interfaces/userContext.interface";
-import { videoCardInterface } from "../../interfaces/video.interface";
-import {
-  deletePlaylist,
-  getPlaylistVideos,
-} from "../../services/playlistServices";
+} from "../../styled";
+import { useUserData } from "../../contexts";
+import { userDataActionTypes, videoCardInterface } from "../../interfaces";
+import { deletePlaylist, getPlaylistVideos } from "../../services";
 
 export default function SinglePlaylistPage() {
   const { playlistID } = useParams() as { playlistID: string };

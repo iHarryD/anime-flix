@@ -1,6 +1,6 @@
-import { StyledModal } from "../styled/Modal.styled";
-import { modalProps } from "../../interfaces/modal.interface";
+import { StyledModal } from "../../styled";
+import { modalProps } from "../../interfaces";
 
-export default function Modal({ children }: modalProps) {
+export function Modal({ children }: modalProps) {
   return <StyledModal>{children}</StyledModal>;
 }

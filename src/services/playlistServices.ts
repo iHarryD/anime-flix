@@ -1,6 +1,6 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { Dispatch, SetStateAction } from "react";
-import baseAxiosInstance from "./baseAxiosInstance";
+import { baseAxiosInstance } from "./baseAxiosInstance";
 
 export async function getPlaylists(
   loadingState?: Dispatch<SetStateAction<boolean>>,

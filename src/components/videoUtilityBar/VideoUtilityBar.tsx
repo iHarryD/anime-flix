@@ -1,10 +1,10 @@
+import { useState } from "react";
 import {
   faBookmark as faSBookmark,
   faThumbsDown as faSThumbsDown,
   faThumbsUp as faSThumbsUp,
   faList,
 } from "@fortawesome/free-solid-svg-icons";
-
 import {
   faBookmark as faRBookmark,
   faThumbsDown as faRThumbsDown,
@@ -16,27 +16,25 @@ import {
   ButtonPairContainer,
   CenteredFlexJustifyBetween,
   VideoUtilityButton,
-} from "../styled/SingleVideoComponents.styled";
-import { utilityBarProps } from "../../interfaces/utilityBar.interface";
+} from "../../styled";
+import {
+  utilityBarProps,
+  userDataActionTypes,
+  singleVideoActionTypes,
+} from "../../interfaces";
 import {
   dislikeVideo,
   likeVideo,
   removeDislike,
   removeLike,
-} from "../../services/videoServices";
-import {
   addToWatchLater,
   removeFromWatchLater,
-} from "../../services/watchLaterServices";
-import { useUserData } from "../../contexts/UserDataContext";
-import { useAuth } from "../../contexts/authContext";
-import { userDataActionTypes } from "../../interfaces/userContext.interface";
-import { singleVideoActionTypes } from "../../interfaces/singleVideoReducer.interface";
-import { useState } from "react";
-import PlaylistModal from "../playlistModal/PlaylistModal";
-import { utilityButtonVariant } from "../../variants/utilityButtonVariant";
+} from "../../services";
+import { useUserData, useAuth } from "../../contexts";
+import { PlaylistModal } from "../../components";
+import { utilityButtonVariant } from "../../variants";
 
-export default function VideoUtilityBar({
+export function VideoUtilityBar({
   videoID,
   likes,
   dislikes,

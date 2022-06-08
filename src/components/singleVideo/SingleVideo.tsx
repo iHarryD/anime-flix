@@ -1,17 +1,12 @@
-import VideoUtilityBar from "../videoUtilityBar/VideoUtilityBar";
-import { StyledSingleVideoContainer } from "../styled/SingleVideoComponents.styled";
-import VideoDescription from "../videoDescription/VideoDescription";
-import { VideoHeading } from "../styled/Cards.styled";
 import { useEffect, useReducer, useState } from "react";
-import { singleVideoReducer } from "../../reducers/singleVideoReducer";
-import { singleVideoActionTypes } from "../../interfaces/singleVideoReducer.interface";
-import { getPlaylists } from "../../services/playlistServices";
-import { userDataActionTypes } from "../../interfaces/userContext.interface";
-import { getWatchLater } from "../../services/watchLaterServices";
-import { useUserData } from "../../contexts/UserDataContext";
-import { fetchVideo } from "../../services/videoServices";
+import { VideoUtilityBar, VideoDescription } from "../../components";
+import { StyledSingleVideoContainer, VideoHeading } from "../../styled";
+import { singleVideoReducer } from "../../reducers";
+import { singleVideoActionTypes, userDataActionTypes } from "../../interfaces";
+import { getPlaylists, getWatchLater, fetchVideo } from "../../services";
+import { useUserData } from "../../contexts";
 
-export default function SingleVideo({ videoID }: { videoID: string }) {
+export function SingleVideo({ videoID }: { videoID: string }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userData, userDataDispatcher } = useUserData();
   const [videoData, videoDataDispatch] = useReducer(singleVideoReducer, null!);

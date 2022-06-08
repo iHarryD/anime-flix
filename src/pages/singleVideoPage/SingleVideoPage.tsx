@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
-import PageContainerMain from "../../components/pageContainer/PageContainer";
-import SingleVideo from "../../components/singleVideo/SingleVideo";
+import { PageContainerMain, SingleVideo } from "../../components";
 
 export default function SingleVideoPage() {
   const { videoID } = useParams() as { videoID: string };

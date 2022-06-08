@@ -1,5 +1,5 @@
 import React from "react";
-import baseAxiosInstance from "./baseAxiosInstance";
+import { baseAxiosInstance } from "./baseAxiosInstance";
 import { AxiosError, AxiosResponse } from "axios";
 
 export async function login(

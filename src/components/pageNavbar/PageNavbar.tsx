@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCompass,
@@ -6,10 +7,9 @@ import {
   faClockRotateLeft,
   faGear,
 } from "@fortawesome/free-solid-svg-icons";
-import { PageNavItems, StyledPageNavbar } from "../styled/PageNavbar.styled";
-import { Link } from "react-router-dom";
+import { PageNavItems, StyledPageNavbar } from "../../styled";
 
-export default function PageNavbar() {
+export function PageNavbar() {
   return (
     <StyledPageNavbar>
       <div>

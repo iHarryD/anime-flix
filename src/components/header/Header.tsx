@@ -1,13 +1,13 @@
-import { useAuth } from "../../contexts/authContext";
-import Logo from "../logo/Logo";
+import { useAuth } from "../../contexts";
 import {
   LoggedInNavbarUtitilies,
   LoggedOutNavbarUtitilies,
-} from "../navbarUtilities/NavbarUtilities";
-import { NavbarSearchBar } from "../searchBars/SearchBars";
-import { StyledNavbar } from "../styled/Navbar.styled";
+  Logo,
+  NavbarSearchBar,
+} from "../../components";
+import { StyledNavbar } from "../../styled";
 
-export default function Header() {
+export function Header() {
   const { userCredentials } = useAuth();
   return (
     <header>

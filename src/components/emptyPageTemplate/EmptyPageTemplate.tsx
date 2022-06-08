@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom";
-import { PrimaryButton } from "../styled/Buttons.styled";
-import {
-  EmptyPageContainer,
-  EmptyPageText,
-} from "../styled/EmptyPageComponents";
+import { EmptyPageContainer, EmptyPageText, PrimaryButton } from "../../styled";
 
-export default function EmptyPageTemplate() {
+export function EmptyPageTemplate() {
   return (
     <EmptyPageContainer>
       <EmptyPageText>There is nothing in here.</EmptyPageText>

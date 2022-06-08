@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
-import EmptyPageTemplate from "../../components/emptyPageTemplate/EmptyPageTemplate";
-import PageContainerMain from "../../components/pageContainer/PageContainer";
-import PageHeading from "../../components/pageHeading/PageHeading";
-import { VideoCardLoadingSkeleton } from "../../components/skeletonLoaders/SkeletonLoader";
-import { HistoryVideosContainer } from "../../components/styled/HistoryPageComponents.styled";
-import { VerticleVideoCard } from "../../components/videoCards/VideoCards";
-import { useUserData } from "../../contexts/UserDataContext";
-import { userDataActionTypes } from "../../interfaces/userContext.interface";
-import { videoCardInterface } from "../../interfaces/video.interface";
 import {
-  getWatchLater,
-  getWatchLaterVideos,
-} from "../../services/watchLaterServices";
+  EmptyPageTemplate,
+  PageContainerMain,
+  PageHeading,
+  VerticleVideoCard,
+  VideoCardLoadingSkeleton,
+} from "../../components";
+import { HistoryVideosContainer } from "../../styled";
+import { useUserData } from "../../contexts";
+import { userDataActionTypes, videoCardInterface } from "../../interfaces";
+import { getWatchLater, getWatchLaterVideos } from "../../services";
 
 export default function HistoryPage() {
   const { userData, userDataDispatcher } = useUserData();

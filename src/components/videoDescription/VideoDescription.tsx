@@ -1,18 +1,18 @@
+import { useState } from "react";
 import { faChevronDown, faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   BulletContainer,
   CenteredFlexJustifyBetween,
   DescriptionTextButton,
   DescriptionTextContainer,
   ViewUploadDateContainer,
-} from "../styled/SingleVideoComponents.styled";
-import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
-import { verticallyExpandingVariant } from "../../variants/expandingVariant";
-import { descriptionProps } from "../../interfaces/videoDescription.interface";
+} from "../../styled";
+import { verticallyExpandingVariant } from "../../variants";
+import { descriptionProps } from "../../interfaces";
 
-export default function VideoDescription({
+export function VideoDescription({
   views,
   channel,
   uploadDate,

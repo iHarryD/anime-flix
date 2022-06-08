@@ -1,4 +1,4 @@
-import baseAxiosInstance from "./baseAxiosInstance";
+import { baseAxiosInstance } from "./baseAxiosInstance";
 
 export async function getHistory(
   token: string,

@@ -1,11 +1,13 @@
-import PageContainerMain from "../../components/pageContainer/PageContainer";
-import { ExploreVideosContainer } from "../../components/styled/ExplorePage.styled";
-import { VerticleVideoCard } from "../../components/videoCards/VideoCards";
-import { useVideos } from "../../contexts/VideosContext";
-import { videoCardInterface } from "../../interfaces/video.interface";
-import { VideoCardLoadingSkeleton } from "../../components/skeletonLoaders/SkeletonLoader";
 import { useEffect, useState } from "react";
-import { fetchAllVideos } from "../../services/videoServices";
+import {
+  PageContainerMain,
+  VerticleVideoCard,
+  VideoCardLoadingSkeleton,
+} from "../../components";
+import { ExploreVideosContainer } from "../../styled";
+import { useVideos } from "../../contexts";
+import { videoCardInterface } from "../../interfaces";
+import { fetchAllVideos } from "../../services";
 
 export default function ExplorePage() {
   const { allVideos, setAllVideos } = useVideos();

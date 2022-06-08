@@ -1,6 +1,6 @@
-import { buttonSpinnerProps } from "../../interfaces/buttonSpinner.interface";
+import { buttonSpinnerProps } from "../../interfaces";
 
-export default function ButtonSpinner({ colorHex }: buttonSpinnerProps) {
+export function ButtonSpinner({ colorHex }: buttonSpinnerProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

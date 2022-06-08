@@ -1,28 +1,23 @@
+import { useRef, useState } from "react";
+import axios from "axios";
+import { To, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
-import { useRef, useState } from "react";
-import ButtonSpinner from "../../components/buttonSpinner/ButtonSpinner";
-import { To, useLocation, useNavigate } from "react-router-dom";
-import {
-  LoginBoxContainer,
-  PasswordInputContainer,
-  RememberLoginContainer,
-} from "../../components/styled/LoginPageComponents.styled";
+import { ButtonSpinner } from "../../components";
 import {
   IconOnlyButton,
   PrimaryButton,
   SecondaryButton,
   TextButton,
-} from "../../components/styled/Buttons.styled";
-import { MainForAuthPages } from "../../components/styled/PageContainer.styled";
-import { InputWithBackground } from "../../components/styled/Input.styled";
-import { login } from "../../services/authServices";
-import { useAuth } from "../../contexts/authContext";
-import {
-  AuthWarningText,
-  VerticleFlexWithGap,
-} from "../../components/styled/Generic.styled";
-import axios from "axios";
+  LoginBoxContainer,
+  PasswordInputContainer,
+  RememberLoginContainer,
+  MainForAuthPages,
+  InputWithBackground,
+} from "../../styled";
+import { login } from "../../services";
+import { useAuth } from "../../contexts";
+import { AuthWarningText, VerticleFlexWithGap } from "../../styled";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState<boolean>(false);

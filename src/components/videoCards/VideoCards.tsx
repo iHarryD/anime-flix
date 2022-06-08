@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import {
   VerticleCardContainer,
   VideoCardTextContainer,
@@ -6,9 +7,8 @@ import {
   VideoPreviewContainer,
   VideoPreviewOverlay,
   VideoUploadDate,
-} from "../styled/Cards.styled";
-import { Link } from "react-router-dom";
-import { videoCardInterface } from "../../interfaces/video.interface";
+} from "../../styled";
+import { videoCardInterface } from "../../interfaces";
 
 export function VerticleVideoCard({
   url,

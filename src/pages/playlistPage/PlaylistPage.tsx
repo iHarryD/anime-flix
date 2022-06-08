@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import EmptyPageTemplate from "../../components/emptyPageTemplate/EmptyPageTemplate";
-import PageContainerMain from "../../components/pageContainer/PageContainer";
-import PlaylistCard from "../../components/playlistCard/PlaylistCard";
-import { PlaylistCardLoadingSkeleton } from "../../components/skeletonLoaders/SkeletonLoader";
-import { ExploreVideosContainer } from "../../components/styled/ExplorePage.styled";
-import { useUserData } from "../../contexts/UserDataContext";
-import { userDataActionTypes } from "../../interfaces/userContext.interface";
-import { getPlaylists } from "../../services/playlistServices";
+import {
+  EmptyPageTemplate,
+  PageContainerMain,
+  PlaylistCard,
+  PlaylistCardLoadingSkeleton,
+} from "../../components";
+import { ExploreVideosContainer } from "../../styled";
+import { useUserData } from "../../contexts";
+import { userDataActionTypes } from "../../interfaces";
+import { getPlaylists } from "../../services";
 
 export default function PlaylistPage() {
   const { userData, userDataDispatcher } = useUserData();

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import backgroundImage from "../../assets/logo.svg";
+import backgroundImage from "../assets/landing-page-bg-poster.jpg";
 
 export const LandingPageContainer = styled.div`
   background: url(${backgroundImage});
