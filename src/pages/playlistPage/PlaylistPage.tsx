@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import EmptyPageTemplate from "../../components/emptyPageTemplate/EmptyPageTemplate";
 import PageContainerMain from "../../components/pageContainer/PageContainer";
 import PlaylistCard from "../../components/playlistCard/PlaylistCard";
 import { PlaylistCardLoadingSkeleton } from "../../components/skeletonLoaders/SkeletonLoader";
@@ -23,21 +24,23 @@ export default function PlaylistPage() {
 
   function toRender() {
     if (isLoading) {
-      return Array.from(Array(10)).map((item, index) => (
-        <PlaylistCardLoadingSkeleton key={index} />
-      ));
+      return (
+        <ExploreVideosContainer>
+          {Array.from(Array(10)).map((item, index) => (
+            <PlaylistCardLoadingSkeleton key={index} />
+          ))}
+        </ExploreVideosContainer>
+      );
     } else if (userData.playlists.length === 0) {
-      return "You have no playlists.";
+      return <EmptyPageTemplate />;
     } else {
       return userData.playlists.map(({ name, videos, _id }) => (
-        <PlaylistCard key={_id} name={name} videos={videos} _id={_id} />
+        <ExploreVideosContainer>
+          <PlaylistCard key={_id} name={name} videos={videos} _id={_id} />
+        </ExploreVideosContainer>
       ));
     }
   }
 
-  return (
-    <PageContainerMain>
-      <ExploreVideosContainer>{toRender()}</ExploreVideosContainer>
-    </PageContainerMain>
-  );
+  return <PageContainerMain>{toRender()}</PageContainerMain>;
 }
