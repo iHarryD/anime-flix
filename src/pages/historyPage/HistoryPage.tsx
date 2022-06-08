@@ -13,7 +13,7 @@ export default function HistoryPage() {
     <PageContainerMain>
       <PageHeading>
         <HistoryHeadingButtonContainer>
-          <h3>History</h3>
+          History
           <IconOnlyButton title="Clear history">
             <FontAwesomeIcon icon={faTrash} />
           </IconOnlyButton>

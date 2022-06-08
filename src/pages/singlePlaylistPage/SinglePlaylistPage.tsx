@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import PageContainerMain from "../../components/pageContainer/PageContainer";
+import PageHeading from "../../components/pageHeading/PageHeading";
 import { SinglePlaylistSkeleton } from "../../components/skeletonLoaders/SkeletonLoader";
 import { IconOnlyButton } from "../../components/styled/Buttons.styled";
 import {
@@ -52,7 +53,7 @@ export default function SinglePlaylistPage() {
         <>
           <SinglePlaylistDetailsContainer>
             <SinglePlaylistNameContainer>
-              <h2>{playlistDetails && playlistDetails.name}</h2>
+              <h2>{playlistDetails.name}</h2>
               <IconOnlyButton title="Edit playlist name">
                 <FontAwesomeIcon icon={faEdit} />
               </IconOnlyButton>
