@@ -20,6 +20,7 @@ import { AuthWarningText, VerticleFlexWithGap } from "../../styled";
 import { toast, ToastContainer } from "react-toastify";
 import { toastEmitterConfig } from "../../data/toastEmitterConfig";
 import { getErrorMessage } from "../../helpers/getErrorMessage";
+import { emailRegExp } from "../../regExp/emailRegExp";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -45,6 +46,8 @@ export default function LoginPage() {
       passwordInputRef.current?.value.replaceAll(" ", "").length === 0
     ) {
       setAuthWarning("Password cannot be empty.");
+    } else if (!emailRegExp.test(emailInputRef.current.value)) {
+      setAuthWarning("Enter a valid email address.");
     } else if (passwordInputRef.current?.value.length < 6) {
       setAuthWarning("Password must be at least 6 characters.");
     } else {
