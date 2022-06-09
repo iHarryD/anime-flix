@@ -33,6 +33,10 @@ import {
 import { useUserData, useAuth } from "../../contexts";
 import { PlaylistModal } from "../../components";
 import { utilityButtonVariant } from "../../variants";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toastEmitterConfig } from "../../data/toastEmitterConfig";
+import { getErrorMessage } from "../../helpers/getErrorMessage";
 
 export function VideoUtilityBar({
   videoID,
@@ -50,12 +54,13 @@ export function VideoUtilityBar({
       type: singleVideoActionTypes.REMOVE_LIKE,
       payload: { userID: userCredentials._id },
     });
-    removeLike(videoID, undefined, (err) =>
+    removeLike(videoID, undefined, (err) => {
       singleVideoReducer({
         type: singleVideoActionTypes.LIKE,
         payload: { userID: userCredentials._id },
-      })
-    );
+      });
+      toast.error(getErrorMessage(err), toastEmitterConfig);
+    });
   }
 
   function handleDislikeVideo(videoID: string) {
@@ -63,12 +68,13 @@ export function VideoUtilityBar({
       type: singleVideoActionTypes.DISLIKE,
       payload: { userID: userCredentials._id },
     });
-    dislikeVideo(videoID, undefined, (err) =>
+    dislikeVideo(videoID, undefined, (err) => {
       singleVideoReducer({
         type: singleVideoActionTypes.REMOVE_DISLIKE,
         payload: { userID: userCredentials._id },
-      })
-    );
+      });
+      toast.error(getErrorMessage(err), toastEmitterConfig);
+    });
   }
 
   function handleRemoveDislikeVideo(videoID: string) {
@@ -76,12 +82,13 @@ export function VideoUtilityBar({
       type: singleVideoActionTypes.REMOVE_DISLIKE,
       payload: { userID: userCredentials._id },
     });
-    removeDislike(videoID, undefined, (err) =>
+    removeDislike(videoID, undefined, (err) => {
       singleVideoReducer({
         type: singleVideoActionTypes.DISLIKE,
         payload: { userID: userCredentials._id },
-      })
-    );
+      });
+      toast.error(getErrorMessage(err), toastEmitterConfig);
+    });
   }
 
   function handleLikeVideo(videoID: string) {
@@ -89,12 +96,13 @@ export function VideoUtilityBar({
       type: singleVideoActionTypes.LIKE,
       payload: { userID: userCredentials._id },
     });
-    likeVideo(videoID, undefined, (err) =>
+    likeVideo(videoID, undefined, (err) => {
       singleVideoReducer({
         type: singleVideoActionTypes.REMOVE_LIKE,
         payload: { userID: userCredentials._id },
-      })
-    );
+      });
+      toast.error(getErrorMessage(err), toastEmitterConfig);
+    });
   }
 
   function handleAddToWatchLater(videoID: string) {
@@ -102,12 +110,13 @@ export function VideoUtilityBar({
       type: userDataActionTypes.ADD_TO_WATCHLATER,
       payload: { videoID },
     });
-    addToWatchLater(videoID, undefined, (err) =>
+    addToWatchLater(videoID, undefined, (err) => {
       userDataDispatcher({
         type: userDataActionTypes.REMOVE_FROM_WATCHLATER,
         payload: { videoID },
-      })
-    );
+      });
+      toast.error(getErrorMessage(err), toastEmitterConfig);
+    });
   }
 
   function handleRemoveFromWatchLater(videoID: string) {
@@ -115,16 +124,18 @@ export function VideoUtilityBar({
       type: userDataActionTypes.REMOVE_FROM_WATCHLATER,
       payload: { videoID },
     });
-    removeFromWatchLater(videoID, undefined, (err) =>
+    removeFromWatchLater(videoID, undefined, (err) => {
       userDataDispatcher({
         type: userDataActionTypes.ADD_TO_WATCHLATER,
         payload: { videoID },
-      })
-    );
+      });
+      toast.error(getErrorMessage(err), toastEmitterConfig);
+    });
   }
 
   return (
     <>
+      <ToastContainer />
       {isPlaylistModalActive && (
         <PlaylistModal
           videoID={videoID}

@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import axios from "axios";
 import { To, useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
@@ -18,6 +17,9 @@ import {
 import { login } from "../../services";
 import { useAuth } from "../../contexts";
 import { AuthWarningText, VerticleFlexWithGap } from "../../styled";
+import { toast, ToastContainer } from "react-toastify";
+import { toastEmitterConfig } from "../../data/toastEmitterConfig";
+import { getErrorMessage } from "../../helpers/getErrorMessage";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -34,7 +36,8 @@ export default function LoginPage() {
     password: "123456",
   };
 
-  function handleLogin(next: () => void): void {
+  function handleLogin(): void {
+    if (!emailInputRef.current || !passwordInputRef.current) return;
     setAuthWarning(null);
     if (emailInputRef.current?.value.replaceAll(" ", "").length === 0) {
       setAuthWarning("Email cannot be empty.");
@@ -42,102 +45,88 @@ export default function LoginPage() {
       passwordInputRef.current?.value.replaceAll(" ", "").length === 0
     ) {
       setAuthWarning("Password cannot be empty.");
+    } else if (passwordInputRef.current?.value.length < 6) {
+      setAuthWarning("Password must be at least 6 characters.");
     } else {
-      next();
+      login(
+        emailInputRef.current.value,
+        passwordInputRef.current.value,
+        setIsLoading,
+        (result) => {
+          setUserCredentials({
+            firstName: result.data.firstName,
+            token: result.data.token,
+            _id: result.data._id,
+          });
+          const redirectTo = state.comingFrom === "/signup" ? "/explore" : -1;
+          navigate(redirectTo as To, { replace: true });
+        },
+        (err) => {
+          toast.error(getErrorMessage(err), toastEmitterConfig);
+        }
+      );
     }
   }
 
   function testLogin() {
-    if (emailInputRef.current === null || passwordInputRef.current === null)
-      return;
+    if (!emailInputRef.current || !passwordInputRef.current) return;
     emailInputRef.current.value = testLoginCredentials.email;
     passwordInputRef.current.value = testLoginCredentials.password;
   }
 
   return (
-    <MainForAuthPages>
-      <LoginBoxContainer>
-        <VerticleFlexWithGap>
-          <VerticleFlexWithGap gap="0.7rem">
-            <InputWithBackground
-              ref={emailInputRef}
-              type="email"
-              placeholder="Email"
-            />
-            <PasswordInputContainer>
+    <>
+      <ToastContainer />
+      <MainForAuthPages>
+        <LoginBoxContainer>
+          <VerticleFlexWithGap>
+            <VerticleFlexWithGap gap="0.7rem">
               <InputWithBackground
-                ref={passwordInputRef}
-                type={`${showPassword ? "text" : "password"}`}
-                placeholder="Password"
+                ref={emailInputRef}
+                type="email"
+                placeholder="Email"
               />
-              <IconOnlyButton
-                onMouseDown={() => setShowPassword(true)}
-                onMouseUp={() => setShowPassword(false)}
+              <PasswordInputContainer>
+                <InputWithBackground
+                  ref={passwordInputRef}
+                  type={`${showPassword ? "text" : "password"}`}
+                  placeholder="Password"
+                />
+                <IconOnlyButton
+                  onMouseDown={() => setShowPassword(true)}
+                  onMouseUp={() => setShowPassword(false)}
+                >
+                  <FontAwesomeIcon icon={faEye} />
+                </IconOnlyButton>
+              </PasswordInputContainer>
+              <RememberLoginContainer>
+                <input
+                  type="checkbox"
+                  id="remember-login"
+                  name="remember-login"
+                  onChange={(e) => setToRemember(e.target.checked)}
+                />
+                <label htmlFor="remember-login">Remember me</label>
+              </RememberLoginContainer>
+            </VerticleFlexWithGap>
+            <VerticleFlexWithGap gap="0.7rem">
+              {authWarning && <AuthWarningText>{authWarning}</AuthWarningText>}
+              <TextButton onClick={() => testLogin()}>
+                Use testing credentials.
+              </TextButton>
+              <PrimaryButton onClick={() => handleLogin()} disabled={isLoading}>
+                {isLoading ? <ButtonSpinner colorHex="#fff" /> : "Login"}
+              </PrimaryButton>
+              <SecondaryButton
+                disabled={isLoading}
+                onClick={() => navigate("/signup")}
               >
-                <FontAwesomeIcon icon={faEye} />
-              </IconOnlyButton>
-            </PasswordInputContainer>
-            <RememberLoginContainer>
-              <input
-                type="checkbox"
-                id="remember-login"
-                name="remember-login"
-                onChange={(e) => setToRemember(e.target.checked)}
-              />
-              <label htmlFor="remember-login">Remember me</label>
-            </RememberLoginContainer>
+                Create an account
+              </SecondaryButton>
+            </VerticleFlexWithGap>
           </VerticleFlexWithGap>
-          <VerticleFlexWithGap gap="0.7rem">
-            {authWarning && <AuthWarningText>{authWarning}</AuthWarningText>}
-            <TextButton onClick={() => testLogin()}>
-              Use testing credentials.
-            </TextButton>
-            <PrimaryButton
-              onClick={() =>
-                handleLogin(() => {
-                  if (
-                    emailInputRef.current === null ||
-                    passwordInputRef.current === null
-                  )
-                    return;
-                  login(
-                    emailInputRef.current.value,
-                    passwordInputRef.current.value,
-                    setIsLoading,
-                    (result) => {
-                      console.log(result);
-                      setUserCredentials({
-                        firstName: result.data.firstName,
-                        token: result.data.token,
-                        _id: result.data._id,
-                      });
-                      const redirectTo =
-                        state.comingFrom === "/signup" ? "/explore" : -1;
-                      navigate(redirectTo as To, { replace: true });
-                    },
-                    (err) => {
-                      if (axios.isAxiosError(err)) {
-                        setAuthWarning(err.response?.data.message);
-                      } else {
-                        setAuthWarning(err.message);
-                      }
-                    }
-                  );
-                })
-              }
-              disabled={isLoading}
-            >
-              {isLoading ? <ButtonSpinner colorHex="#fff" /> : "Login"}
-            </PrimaryButton>
-            <SecondaryButton
-              disabled={isLoading}
-              onClick={() => navigate("/signup")}
-            >
-              Create an account
-            </SecondaryButton>
-          </VerticleFlexWithGap>
-        </VerticleFlexWithGap>
-      </LoginBoxContainer>
-    </MainForAuthPages>
+        </LoginBoxContainer>
+      </MainForAuthPages>
+    </>
   );
 }

@@ -9,6 +9,9 @@ import { ExploreVideosContainer } from "../../styled";
 import { useUserData } from "../../contexts";
 import { userDataActionTypes } from "../../interfaces";
 import { getPlaylists } from "../../services";
+import { toast, ToastContainer } from "react-toastify";
+import { getErrorMessage } from "../../helpers/getErrorMessage";
+import { toastEmitterConfig } from "../../data/toastEmitterConfig";
 
 export default function PlaylistPage() {
   const { userData, userDataDispatcher } = useUserData();
@@ -16,11 +19,14 @@ export default function PlaylistPage() {
 
   useEffect(() => {
     if (userData.playlists.length) return;
-    getPlaylists(setIsLoading, (result) =>
-      userDataDispatcher({
-        type: userDataActionTypes.POPULATE_PLAYLIST,
-        payload: { updatedPlaylist: result.data },
-      })
+    getPlaylists(
+      setIsLoading,
+      (result) =>
+        userDataDispatcher({
+          type: userDataActionTypes.POPULATE_PLAYLIST,
+          payload: { updatedPlaylist: result.data },
+        }),
+      (err) => toast.error(getErrorMessage(err), toastEmitterConfig)
     );
   }, []);
 
@@ -28,21 +34,26 @@ export default function PlaylistPage() {
     if (isLoading) {
       return (
         <ExploreVideosContainer>
-          {Array.from(Array(10)).map((item, index) => (
-            <PlaylistCardLoadingSkeleton key={index} />
-          ))}
+          <PlaylistCardLoadingSkeleton />
         </ExploreVideosContainer>
       );
     } else if (userData.playlists.length === 0) {
       return <EmptyPageTemplate />;
     } else {
-      return userData.playlists.map(({ name, videos, _id }) => (
+      return (
         <ExploreVideosContainer>
-          <PlaylistCard key={_id} name={name} videos={videos} _id={_id} />
+          {userData.playlists.map(({ name, videos, _id }) => (
+            <PlaylistCard key={_id} name={name} videos={videos} _id={_id} />
+          ))}
         </ExploreVideosContainer>
-      ));
+      );
     }
   }
 
-  return <PageContainerMain>{toRender()}</PageContainerMain>;
+  return (
+    <PageContainerMain>
+      <ToastContainer />
+      {toRender()}
+    </PageContainerMain>
+  );
 }

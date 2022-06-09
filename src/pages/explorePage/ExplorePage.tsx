@@ -8,6 +8,9 @@ import { ExploreVideosContainer } from "../../styled";
 import { useVideos } from "../../contexts";
 import { videoCardInterface } from "../../interfaces";
 import { fetchAllVideos } from "../../services";
+import { toast, ToastContainer } from "react-toastify";
+import { getErrorMessage } from "../../helpers/getErrorMessage";
+import { toastEmitterConfig } from "../../data/toastEmitterConfig";
 
 export default function ExplorePage() {
   const { allVideos, setAllVideos } = useVideos();
@@ -15,28 +18,35 @@ export default function ExplorePage() {
 
   useEffect(() => {
     if (allVideos.length > 0) return;
-    fetchAllVideos(setIsLoading, (result) => setAllVideos(result.data));
+    fetchAllVideos(
+      setIsLoading,
+      (result) => setAllVideos(result.data),
+      (err) => toast.error(getErrorMessage(err), toastEmitterConfig)
+    );
   }, []);
 
   return (
-    <PageContainerMain>
-      <ExploreVideosContainer>
-        {isLoading
-          ? Array.from(Array(10)).map((item, index) => (
-              <VideoCardLoadingSkeleton key={index} />
-            ))
-          : allVideos.map(
-              ({ url, title, _id, uploadedOn }: videoCardInterface) => (
-                <VerticleVideoCard
-                  key={_id}
-                  url={url}
-                  title={title}
-                  _id={_id}
-                  uploadedOn={uploadedOn}
-                />
-              )
-            )}
-      </ExploreVideosContainer>
-    </PageContainerMain>
+    <>
+      <ToastContainer />
+      <PageContainerMain>
+        <ExploreVideosContainer>
+          {isLoading
+            ? Array.from(Array(10)).map((item, index) => (
+                <VideoCardLoadingSkeleton key={index} />
+              ))
+            : allVideos.map(
+                ({ url, title, _id, uploadedOn }: videoCardInterface) => (
+                  <VerticleVideoCard
+                    key={_id}
+                    url={url}
+                    title={title}
+                    _id={_id}
+                    uploadedOn={uploadedOn}
+                  />
+                )
+              )}
+        </ExploreVideosContainer>
+      </PageContainerMain>
+    </>
   );
 }

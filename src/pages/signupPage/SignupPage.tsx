@@ -13,6 +13,9 @@ import {
   SignupBoxContainer,
 } from "../../styled";
 import { signup } from "../../services";
+import { toast, ToastContainer } from "react-toastify";
+import { toastEmitterConfig } from "../../data/toastEmitterConfig";
+import { getErrorMessage } from "../../helpers/getErrorMessage";
 
 export default function SignupPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -26,7 +29,7 @@ export default function SignupPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  function handleSignup(next: () => void): void {
+  function handleSignup(): void {
     setAuthWarning(null);
     if (
       !firstNameInputRef.current?.value.replaceAll(" ", "").length ||
@@ -42,95 +45,95 @@ export default function SignupPage() {
     } else if (
       passwordInputRef.current?.value !== confirmPasswordInputRef.current?.value
     ) {
-      setAuthWarning("Passwords do not match");
+      setAuthWarning("Passwords do not match.");
     } else {
-      next();
+      signup(
+        {
+          firstName: firstNameInputRef.current?.value,
+          lastName: lastNameInputRef.current?.value,
+          email: emailInputRef.current?.value,
+          dob: dobInputRef.current?.value,
+          password: passwordInputRef.current?.value,
+          confirmPassword: confirmPasswordInputRef.current?.value,
+        },
+        setIsLoading,
+        () => {
+          navigate("/login", {
+            state: {
+              comingFrom: location.pathname,
+            },
+          });
+        },
+        (err) => {
+          toast.error(getErrorMessage(err), toastEmitterConfig);
+        }
+      );
     }
   }
   return (
-    <MainForAuthPages>
-      <SignupBoxContainer>
-        <ColumnForPair>
-          <StyledLabelInputContainer>
-            <label htmlFor="first-name">First name</label>
-            <InputWithBackground ref={firstNameInputRef} id="first-name" />
-          </StyledLabelInputContainer>
-          <StyledLabelInputContainer>
-            <label htmlFor="last-name">Last name</label>
-            <InputWithBackground ref={lastNameInputRef} id="last-name" />
-          </StyledLabelInputContainer>
-        </ColumnForPair>
-        <ColumnForPair>
-          <StyledLabelInputContainer>
-            <label htmlFor="email">Email</label>
-            <InputWithBackground ref={emailInputRef} type="email" id="email" />
-          </StyledLabelInputContainer>
-          <StyledLabelInputContainer>
-            <label htmlFor="date-of-birth">Date of birth</label>
-            <DOBInput ref={dobInputRef} type="date" id="date-of-birth" />
-          </StyledLabelInputContainer>
-        </ColumnForPair>
-        <ColumnForPair>
-          <StyledLabelInputContainer>
-            <label htmlFor="password">Password</label>
-            <InputWithBackground
-              ref={passwordInputRef}
-              type="password"
-              id="password"
-            />
-          </StyledLabelInputContainer>
-          <StyledLabelInputContainer>
-            <label htmlFor="confirm-password">Confirm password</label>
-            <InputWithBackground
-              ref={confirmPasswordInputRef}
-              type="password"
-              id="confirm-password"
-            />
-          </StyledLabelInputContainer>
-        </ColumnForPair>
-        {authWarning && <AuthWarningText>{authWarning}</AuthWarningText>}
-        <PrimaryButton
-          disabled={isLoading}
-          onClick={() =>
-            handleSignup(() =>
-              signup(
-                {
-                  firstName: firstNameInputRef.current?.value,
-                  lastName: lastNameInputRef.current?.value,
-                  email: emailInputRef.current?.value,
-                  dob: dobInputRef.current?.value,
-                  password: passwordInputRef.current?.value,
-                  confirmPassword: confirmPasswordInputRef.current?.value,
+    <>
+      <ToastContainer />
+      <MainForAuthPages>
+        <SignupBoxContainer>
+          <ColumnForPair>
+            <StyledLabelInputContainer>
+              <label htmlFor="first-name">First name</label>
+              <InputWithBackground ref={firstNameInputRef} id="first-name" />
+            </StyledLabelInputContainer>
+            <StyledLabelInputContainer>
+              <label htmlFor="last-name">Last name</label>
+              <InputWithBackground ref={lastNameInputRef} id="last-name" />
+            </StyledLabelInputContainer>
+          </ColumnForPair>
+          <ColumnForPair>
+            <StyledLabelInputContainer>
+              <label htmlFor="email">Email</label>
+              <InputWithBackground
+                ref={emailInputRef}
+                type="email"
+                id="email"
+              />
+            </StyledLabelInputContainer>
+            <StyledLabelInputContainer>
+              <label htmlFor="date-of-birth">Date of birth</label>
+              <DOBInput ref={dobInputRef} type="date" id="date-of-birth" />
+            </StyledLabelInputContainer>
+          </ColumnForPair>
+          <ColumnForPair>
+            <StyledLabelInputContainer>
+              <label htmlFor="password">Password</label>
+              <InputWithBackground
+                ref={passwordInputRef}
+                type="password"
+                id="password"
+              />
+            </StyledLabelInputContainer>
+            <StyledLabelInputContainer>
+              <label htmlFor="confirm-password">Confirm password</label>
+              <InputWithBackground
+                ref={confirmPasswordInputRef}
+                type="password"
+                id="confirm-password"
+              />
+            </StyledLabelInputContainer>
+          </ColumnForPair>
+          {authWarning && <AuthWarningText>{authWarning}</AuthWarningText>}
+          <PrimaryButton disabled={isLoading} onClick={() => handleSignup()}>
+            {isLoading ? <ButtonSpinner colorHex="#fff" /> : "Signup"}
+          </PrimaryButton>
+          <TextButton
+            onClick={() =>
+              navigate("/login", {
+                state: {
+                  comingFrom: location.pathname,
                 },
-                setIsLoading,
-                () => {
-                  navigate("/login", {
-                    state: {
-                      comingFrom: location.pathname,
-                    },
-                  });
-                },
-                (err) => {
-                  setAuthWarning(err.message || "Something went wrong.");
-                }
-              )
-            )
-          }
-        >
-          {isLoading ? <ButtonSpinner colorHex="#fff" /> : "Signup"}
-        </PrimaryButton>
-        <TextButton
-          onClick={() =>
-            navigate("/login", {
-              state: {
-                comingFrom: location.pathname,
-              },
-            })
-          }
-        >
-          Already have an account?
-        </TextButton>
-      </SignupBoxContainer>
-    </MainForAuthPages>
+              })
+            }
+          >
+            Already have an account?
+          </TextButton>
+        </SignupBoxContainer>
+      </MainForAuthPages>
+    </>
   );
 }
