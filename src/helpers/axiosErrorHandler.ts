@@ -1,6 +1,12 @@
 import { AxiosError } from "axios";
 
-export function axiosErrorHandler(error: AxiosError) {
+export function axiosErrorHandler(
+  error: AxiosError<{ message: string } | undefined>
+) {
+  const errorMessageFromServer = error.response?.data?.message;
+  if (errorMessageFromServer) {
+    return errorMessageFromServer as string;
+  }
   switch (error.response?.status) {
     case 400:
       return "Data validation failed.";
