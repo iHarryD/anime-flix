@@ -1,3 +1,3 @@
 export interface modalProps {
-  children: React.ReactChild;
+  children: React.ReactNode;
 }

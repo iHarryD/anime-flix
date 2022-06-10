@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { PrimaryButton } from "./Buttons.styled";
+import { PrimaryButton, TextButton } from "./Buttons.styled";
 import { WhiteInput } from "./Input.styled";
 import { CenteredFlexJustifyBetween } from "./SingleVideoComponents.styled";
 
@@ -19,14 +19,33 @@ export const PlaylistModalHeadingButtonContainer = styled(
 `;
 
 export const PlaylistModalListItem = styled.li`
-  padding: 10px 0;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  position: relative;
+  z-index: 0;
 
-  &:last-child {
-    padding-bottom: 0;
+  &::after {
+    background: #000;
+    content: "";
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: opacity 100ms;
+    z-index: -1;
+  }
+
+  &:hover::after {
+    opacity: 0.2;
   }
 `;
 
 export const NewPlaylistInput = styled(WhiteInput)`
+  margin-top: 10px;
   max-width: 100%;
 `;
 

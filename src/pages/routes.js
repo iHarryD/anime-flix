@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import PrivateRoute from "../components/privateRoute/PrivateRoute";
-import { useAuth } from "../contexts/authContext";
+import { PrivateRoute } from "../components";
+import { useAuth } from "../contexts";
 import ExplorePage from "./explorePage/ExplorePage";
 import HistoryPage from "./historyPage/HistoryPage";
 import WatchLaterPage from "./watchLaterPage/WatchLaterPage";
@@ -9,18 +9,38 @@ import LoginPage from "./loginPage/LoginPage";
 import SignupPage from "./signupPage/SignupPage";
 import SingleVideoPage from "./singleVideoPage/SingleVideoPage";
 import LandingPage from "./landingPage/LandingPage";
+import Page404 from "./page404/Page404";
+import SinglePlaylistPage from "./singlePlaylistPage/SinglePlaylistPage";
 
 export default function AllRoutes() {
-  const { userData } = useAuth();
+  const { userCredentials } = useAuth();
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/explore" element={<ExplorePage />} />
-      <Route path="/playlist" element={<PlaylistPage />} />
+      <Route path="/watch/:videoID" element={<SingleVideoPage />} />
+      <Route
+        path="/playlists"
+        element={
+          <PrivateRoute>
+            <PlaylistPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/playlists/:playlistID"
+        element={
+          <PrivateRoute>
+            <SinglePlaylistPage />
+          </PrivateRoute>
+        }
+      />
+      <Route path="/history" element={<HistoryPage />} />
+      <Route path="/watch-later" element={<WatchLaterPage />} />
       <Route
         path="/login"
         element={
-          <PrivateRoute isAuthenticated={!userData.token} redirectTo="/">
+          <PrivateRoute isAuthenticated={!userCredentials.token} redirectTo="/">
             <LoginPage />
           </PrivateRoute>
         }
@@ -28,16 +48,13 @@ export default function AllRoutes() {
       <Route
         path="/signup"
         element={
-          <PrivateRoute isAuthenticated={!userData.token} redirectTo="/">
+          <PrivateRoute isAuthenticated={!userCredentials.token} redirectTo="/">
             <SignupPage />
           </PrivateRoute>
         }
       />
-      <Route path="/explore" element={<ExplorePage />} />
-      <Route path="/watch/:videoID" element={<SingleVideoPage />} />
-      <Route path="/history" element={<HistoryPage />} />
-      <Route path="/watch-later" element={<WatchLaterPage />} />
-      <Route path="*" element={<LandingPage />} />
+
+      <Route path="*" element={<Page404 />} />
     </Routes>
   );
 }

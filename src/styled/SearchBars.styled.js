@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { StyledInput } from "./Input.styled";
 
 export const SearchBarContainer = styled.div`
-  background: #ffffff24;
+  background: var(--INPUT-BACKGROUND-CLR);
   border-radius: var(--BORDER-RADIUS);
   padding: 0 var(--INPUT-PADDING-X);
   position: relative;

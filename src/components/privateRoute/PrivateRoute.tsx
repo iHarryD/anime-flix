@@ -1,21 +1,18 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { useAuth } from "../../contexts/authContext";
+import { useAuth } from "../../contexts";
+import { privateRouteProps } from "../../interfaces";
 
-interface privateRouteProps {
-  children: React.ReactNode;
-  isAuthenticated?: boolean;
-  redirectTo?: string;
-}
-
-export default function PrivateRoute({
+export function PrivateRoute({
   children,
   isAuthenticated,
   redirectTo,
 }: privateRouteProps) {
   const location = useLocation();
-  const { userData } = useAuth();
+  const { userCredentials } = useAuth();
 
-  return (isAuthenticated !== undefined ? isAuthenticated : userData.token) ? (
+  return (
+    isAuthenticated !== undefined ? isAuthenticated : userCredentials.token
+  ) ? (
     children
   ) : (
     <Navigate

@@ -1,31 +1,28 @@
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faInstagram,
   faGithub,
   faDiscord,
 } from "@fortawesome/free-brands-svg-icons";
-
+import { motion } from "framer-motion";
+import poster from "../../assets/landing-page-bg-poster.jpg";
+import backgroundVideo from "../../assets/landing-page-bg-video.mp4";
 import {
   IconOnlyButton,
   PrimaryButton,
-} from "../../components/styled/Buttons.styled";
-import {
   LandingPageForeground,
   LandingPageHeading,
   LandingPageTextContainer,
   LandingPageFooter,
   LandingPageContainer,
-} from "../../components/styled/LandingPage.styled";
-import VideoBackground from "../../components/videoBackground/VideoBackground";
-import { motion } from "framer-motion";
-import poster from "../../assets/landing-page-bg-poster.jpg";
-import backgroundVideo from "../../assets/landing-page-bg-video.mp4";
-import { Link } from "react-router-dom";
+} from "../../styled";
+import { VideoBackground } from "../../components";
 import {
   textVariant,
   footerVairant,
   footerButtonVairant,
-} from "../../variants/landingPageVariants";
+} from "../../variants";
 
 export default function LandingPage() {
   return (

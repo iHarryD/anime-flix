@@ -1,15 +1,20 @@
 import React from "react";
-import baseAxiosInstance from "./baseAxiosInstance";
-import { AxiosResponse } from "axios";
+import { baseAxiosInstance } from "./baseAxiosInstance";
+import { AxiosError, AxiosResponse } from "axios";
 
 export async function login(
   email: string,
   password: string,
   loadingState: React.SetStateAction<any>,
   successCallback?: (
-    result: AxiosResponse<{ firstName: string; token: string }>
+    result: AxiosResponse<{
+      firstName: string;
+      token: string;
+      _id: string;
+      message: string;
+    }>
   ) => void,
-  failureCallback?: (err: unknown) => void
+  failureCallback?: (err: AxiosError<any> | Error) => void
 ) {
   try {
     loadingState(true);
@@ -18,9 +23,9 @@ export async function login(
       password,
     });
     if (result.status === 200 && successCallback) {
-      successCallback(result.data);
+      successCallback(result);
     }
-  } catch (err: unknown) {
+  } catch (err: any) {
     if (failureCallback) {
       failureCallback(err);
     }
@@ -34,7 +39,7 @@ export async function signup(
   userData: any,
   loadingState: React.SetStateAction<any>,
   successCallback?: (result: AxiosResponse) => void,
-  failureCallback?: (err: unknown) => void
+  failureCallback?: (err: AxiosError<any> | Error) => void
 ) {
   try {
     loadingState(true);
@@ -48,7 +53,7 @@ export async function signup(
     if (result.status === 200 && successCallback) {
       successCallback(result);
     }
-  } catch (err: unknown) {
+  } catch (err: any) {
     if (failureCallback) {
       failureCallback(err);
     }

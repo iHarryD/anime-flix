@@ -1,37 +1,73 @@
-import VideoUtilityBar from "../videoUtilityBar/VideoUtilityBar";
-import { StyledSingleVideoContainer } from "../styled/SingleVideoComponents.styled";
-import VideoDescription from "../videoDescription/VideoDescription";
-import { VideoHeading } from "../styled/Cards.styled";
-import { singleVideoProps } from "../../interfaces/singleVideo.interface";
+import { useEffect, useReducer, useState } from "react";
+import { VideoUtilityBar, VideoDescription } from "../../components";
+import { StyledSingleVideoContainer, VideoHeading } from "../../styled";
+import { singleVideoReducer } from "../../reducers";
+import { singleVideoActionTypes, userDataActionTypes } from "../../interfaces";
+import { getPlaylists, getWatchLater, fetchVideo } from "../../services";
+import { useUserData, useAuth } from "../../contexts";
 
-export default function SingleVideo({
-  url,
-  title,
-  likes,
-  dislikes,
-  views,
-  uploadDate,
-  playlists,
-  bookmarkStatus,
-  channel,
-  description,
-}: singleVideoProps) {
-  return (
+export function SingleVideo({ videoID }: { videoID: string }) {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { userData, userDataDispatcher } = useUserData();
+  const [videoData, videoDataDispatch] = useReducer(singleVideoReducer, null!);
+  const { userCredentials } = useAuth();
+
+  useEffect(() => {
+    fetchVideo(videoID, setIsLoading, (result) =>
+      videoDataDispatch({
+        type: singleVideoActionTypes.INITIATE,
+        payload: {
+          title: result.data.title,
+          likes: result.data.likes,
+          dislikes: result.data.dislikes,
+          url: result.data.url,
+          views: result.data.views,
+          videoID,
+          uploadedOn: result.data.uploadedOn,
+          channel: result.data.channel?.name,
+        },
+      })
+    );
+  }, [videoID]);
+
+  useEffect(() => {
+    if (userCredentials._id === null) return;
+    if (userData.playlists.length === 0) {
+      getPlaylists(undefined, (result) =>
+        userDataDispatcher({
+          type: userDataActionTypes.POPULATE_PLAYLIST,
+          payload: { updatedPlaylist: result.data },
+        })
+      );
+    }
+    if (userData.watchLater.length === 0) {
+      getWatchLater(undefined, (result) =>
+        userDataDispatcher({
+          type: userDataActionTypes.POPULATE_WATCHLATER,
+          payload: { updatedWatchLater: result.data },
+        })
+      );
+    }
+  }, []);
+
+  return isLoading || !videoData ? (
+    <h1>Loading...</h1>
+  ) : (
     <StyledSingleVideoContainer>
-      <iframe src={url} title="none"></iframe>
+      <iframe src={videoData.url} title="none"></iframe>
       <div className="--verticle-flex --has-gap --has-padding">
-        <VideoHeading>{title}</VideoHeading>
+        <VideoHeading>{videoData.title}</VideoHeading>
         <VideoUtilityBar
-          likes={likes}
-          dislikes={dislikes}
-          bookmarkStatus={bookmarkStatus}
-          playlists={playlists}
+          videoID={videoID}
+          likes={videoData.likes}
+          dislikes={videoData.dislikes}
+          singleVideoReducer={videoDataDispatch}
         />
         <VideoDescription
-          views={views}
-          uploadDate={uploadDate}
-          channel={channel}
-          description={description}
+          views={videoData.views}
+          uploadDate={videoData.uploadedOn}
+          channel={videoData.channel}
+          description={videoData.description}
         />
       </div>
     </StyledSingleVideoContainer>

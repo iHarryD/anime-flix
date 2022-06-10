@@ -1,8 +1,8 @@
-import { StyledBackdrop } from "../styled/Backdrop.styled";
 import ReactDOM from "react-dom";
-import { backdropProps } from "../../interfaces/backdrop.interface";
+import { StyledBackdrop } from "../../styled";
+import { backdropProps } from "../../interfaces";
 
-export default function Backdrop({
+export function Backdrop({
   backgroundColor,
   children,
   backdropOnClickFunction,
@@ -19,6 +19,6 @@ export default function Backdrop({
     >
       {children}
     </StyledBackdrop>,
-    document.getElementById("portal")!
+    document.getElementById("portal") as HTMLElement
   );
 }

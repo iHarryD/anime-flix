@@ -1,12 +1,11 @@
-export interface singleVideoProps {
+export interface singleVideoDataInterface {
+  videoID: string;
   url: string;
   title: string;
-  likes: number;
-  dislikes: number;
-  views: number;
-  uploadDate: Date;
-  playlists: object[];
-  bookmarkStatus: boolean;
+  likes: string[];
+  dislikes: string[];
+  views: string[];
+  uploadedOn: Date;
   channel: string;
   description?: string;
 }

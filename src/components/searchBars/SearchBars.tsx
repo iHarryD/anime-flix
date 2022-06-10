@@ -1,9 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import {
-  SearchBarContainer,
-  StyledNavbarSearchBar,
-} from "../styled/SearchBars.styled";
+import { SearchBarContainer, StyledNavbarSearchBar } from "../../styled";
 
 export function NavbarSearchBar() {
   return (

@@ -1,20 +1,10 @@
-import React from "react";
+import { backgroundVideoProps } from "../../interfaces";
 import {
   StyledVideoForBackground,
   BackgroundVideoContainer,
-} from "../styled/VideoForBackground.styled";
+} from "../../styled";
 
-interface videoProps {
-  loop: boolean;
-  width?: string;
-  height?: string;
-  autoPlay: boolean;
-  videoSrc: string;
-  videoType: string;
-  videoPoster: string;
-}
-
-export default function VideoBackground({
+export function VideoBackground({
   loop,
   width,
   height,
@@ -22,7 +12,7 @@ export default function VideoBackground({
   videoSrc,
   videoType,
   videoPoster,
-}: videoProps) {
+}: backgroundVideoProps) {
   return (
     <BackgroundVideoContainer width={width} height={height}>
       <StyledVideoForBackground

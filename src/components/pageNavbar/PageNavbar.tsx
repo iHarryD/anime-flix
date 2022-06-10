@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCompass,
@@ -6,40 +7,32 @@ import {
   faClockRotateLeft,
   faGear,
 } from "@fortawesome/free-solid-svg-icons";
-import { PageNavItems, StyledPageNavbar } from "../styled/PageNavbar.styled";
-import { Link } from "react-router-dom";
+import { PageNavItems, StyledPageNavbar } from "../../styled";
 
-export default function PageNavbar() {
+export function PageNavbar() {
   return (
     <StyledPageNavbar>
       <div>
-        <Link to="/explore">
-          <PageNavItems title="Explore">
-            <FontAwesomeIcon icon={faCompass} />
-          </PageNavItems>
-        </Link>
-        <Link to="/playlist">
-          <PageNavItems title="Playlists">
-            <FontAwesomeIcon icon={faList} />
-          </PageNavItems>
-        </Link>
-        <Link to="/history">
-          <PageNavItems title="History">
-            <FontAwesomeIcon icon={faClockRotateLeft} />
-          </PageNavItems>
-        </Link>
-        <Link to="/watch-later">
-          <PageNavItems title="Watch Later">
-            <FontAwesomeIcon icon={faBookmark} />
-          </PageNavItems>
-        </Link>
+        <PageNavItems title="Explore" to="/explore">
+          <FontAwesomeIcon icon={faCompass} />
+        </PageNavItems>
+
+        <PageNavItems title="Playlists" to="/playlists">
+          <FontAwesomeIcon icon={faList} />
+        </PageNavItems>
+
+        <PageNavItems title="History" to="/history">
+          <FontAwesomeIcon icon={faClockRotateLeft} />
+        </PageNavItems>
+
+        <PageNavItems title="Watch Later" to="/watch-later">
+          <FontAwesomeIcon icon={faBookmark} />
+        </PageNavItems>
       </div>
       <div>
-        <Link to="/setting">
-          <PageNavItems title="Setting">
-            <FontAwesomeIcon icon={faGear} />
-          </PageNavItems>
-        </Link>
+        <PageNavItems title="Setting" to="/setting">
+          <FontAwesomeIcon icon={faGear} />
+        </PageNavItems>
       </div>
     </StyledPageNavbar>
   );

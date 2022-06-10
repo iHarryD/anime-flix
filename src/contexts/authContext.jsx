@@ -3,38 +3,43 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const defaultValues = {
   firstName: localStorage.getItem("firstName") || null,
+  _id: localStorage.getItem("_id") || null,
   token: localStorage.getItem("token") || null,
 };
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [userData, setUserData] = useState(defaultValues);
+  const [userCredentials, setUserCredentials] = useState(defaultValues);
   const [toRemember, setToRemember] = useState(false);
 
   useEffect(() => {
     const toSaveIn = toRemember ? localStorage : sessionStorage;
-    if (userData.token !== null || userData.firstName !== null) {
-      toSaveIn.setItem("firstName", userData.firstName);
-      toSaveIn.setItem("token", userData.token);
-      axios.defaults.headers.common["authorization"] = userData.token;
+
+    if (userCredentials.token !== null) {
+      toSaveIn.setItem("firstName", userCredentials.firstName);
+      toSaveIn.setItem("_id", userCredentials._id);
+      toSaveIn.setItem("token", userCredentials.token);
+      axios.defaults.headers.common["authorization"] = userCredentials.token;
     } else {
       localStorage.removeItem("firstName");
       localStorage.removeItem("token");
+      localStorage.removeItem("_id");
       sessionStorage.removeItem("firstName");
       sessionStorage.removeItem("token");
+      sessionStorage.removeItem("_id");
       axios.defaults.headers.common["authorization"] = false;
     }
-  }, [userData]);
+  }, [userCredentials]);
 
   function logout(callback = null) {
-    setUserData({ firstName: null, token: null });
+    setUserCredentials({ firstName: null, token: null, _id: null });
     if (callback) callback();
   }
 
   return (
     <AuthContext.Provider
-      value={{ userData, setUserData, setToRemember, logout }}
+      value={{ userCredentials, setUserCredentials, setToRemember, logout }}
     >
       {children}
     </AuthContext.Provider>

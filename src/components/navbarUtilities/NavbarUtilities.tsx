@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
-import { NavbarUtilitiesContainer } from "../styled/Navbar.styled";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts";
 import {
   IconOnlyButton,
   PrimaryButton,
   SecondaryButton,
-} from "../styled/Buttons.styled";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../../contexts/authContext";
+  NavbarUtilitiesContainer,
+} from "../../styled";
 
 export function LoggedOutNavbarUtitilies() {
   const navigate = useNavigate();

@@ -1,50 +1,52 @@
-import PageContainerMain from "../../components/pageContainer/PageContainer";
-import { ExploreVideosContainer } from "../../components/styled/ExplorePage.styled";
-import { VerticleVideoCard } from "../../components/videoCards/VideoCards";
-import { useVideos } from "../../contexts/VideosContext";
-import { videoCardInterface } from "../../interfaces/video.interface";
-import { VideoCardLoadingSkeleton } from "../../components/skeletonLoaders/SkeletonLoader";
 import { useEffect, useState } from "react";
-import baseAxiosInstance from "../../services/baseAxiosInstance";
+import {
+  PageContainerMain,
+  VerticleVideoCard,
+  VideoCardLoadingSkeleton,
+} from "../../components";
+import { ExploreVideosContainer } from "../../styled";
+import { useVideos } from "../../contexts";
+import { videoCardInterface } from "../../interfaces";
+import { fetchAllVideos } from "../../services";
+import { toast, ToastContainer } from "react-toastify";
+import { getErrorMessage } from "../../helpers/getErrorMessage";
+import { toastEmitterConfig } from "../../data/toastEmitterConfig";
 
 export default function ExplorePage() {
   const { allVideos, setAllVideos } = useVideos();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    (async () => {
-      try {
-        setIsLoading(true);
-        const res = await baseAxiosInstance().get("/video/fetch-all");
-        setAllVideos(res.data);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
+    if (allVideos.length > 0) return;
+    fetchAllVideos(
+      setIsLoading,
+      (result) => setAllVideos(result.data),
+      (err) => toast.error(getErrorMessage(err), toastEmitterConfig)
+    );
   }, []);
 
   return (
-    <PageContainerMain>
-      <ExploreVideosContainer>
-        {isLoading
-          ? Array.from(Array(10)).map((item) => <VideoCardLoadingSkeleton />)
-          : allVideos.map(
-              (
-                { url, title, _id, uploadedOn }: videoCardInterface,
-                index: number
-              ) => (
-                <VerticleVideoCard
-                  key={index}
-                  url={url}
-                  title={title}
-                  _id={_id}
-                  uploadedOn={uploadedOn}
-                />
-              )
-            )}
-      </ExploreVideosContainer>
-    </PageContainerMain>
+    <>
+      <ToastContainer />
+      <PageContainerMain>
+        <ExploreVideosContainer>
+          {isLoading
+            ? Array.from(Array(10)).map((item, index) => (
+                <VideoCardLoadingSkeleton key={index} />
+              ))
+            : allVideos.map(
+                ({ url, title, _id, uploadedOn }: videoCardInterface) => (
+                  <VerticleVideoCard
+                    key={_id}
+                    url={url}
+                    title={title}
+                    _id={_id}
+                    uploadedOn={uploadedOn}
+                  />
+                )
+              )}
+        </ExploreVideosContainer>
+      </PageContainerMain>
+    </>
   );
 }

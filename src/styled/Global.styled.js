@@ -54,8 +54,9 @@ export const GlobalStyles = createGlobalStyle`
       --DARK-FONT-CLR: #2d2d2d;
       --HOVER-OVERLAY-CLR: #0a0a0a3b;
       --ICON-BTN-BACKGROUND-CLR: #000000bd;
-      --LIGHT-FONT-CLR: #fff;
+      --INPUT-BACKGROUND-CLR: #ffffff1a;
       --INPUT-BORDER-CLR: #1f1e1a;
+      --LIGHT-FONT-CLR: #fff;
       --PRIMARY-BACKGROUND-CLR: #2d2d2d;
       --PRIMARY-BTN-BACKGROUND-CLR: var(--ACCENT-CLR);
       --PRIMARY-BTN-FONT-CLR: var(--ACCENT-FONT-CLR);

@@ -2,78 +2,68 @@ import {
   userDataActions,
   userDataActionTypes,
   userDataInterface,
-} from "../interfaces/userContext.interface";
+} from "../interfaces";
 
 export default function userDataReducer(
   state: userDataInterface,
   action: userDataActions
 ) {
-  const { type, payload } = action;
-  switch (type) {
-    case userDataActionTypes.CREATE_PLAYLIST:
-      if (payload?.playlistName) break;
-      return {
-        ...state,
-        playlists: [
-          ...state.playlists,
-          { name: payload?.playlistName, videos: [] },
-        ],
-      };
+  switch (action.type) {
     case userDataActionTypes.DELETE_PLAYLIST:
-      if (payload?.playlistName) break;
       return {
         ...state,
         playlists: state.playlists.filter(
-          (playlist) => playlist.name !== payload?.playlistName
+          (playlist) => playlist._id !== action.payload.playlistID
         ),
       };
     case userDataActionTypes.ADD_TO_PLAYLIST:
-      if (payload?.playlistName && payload?.videoID) break;
       return {
         ...state,
-        playlists: [...state.playlists].map((playlist) => {
-          if (playlist.name === payload?.playlistName) {
-            if (payload.videoID) {
-              playlist.videos.push(payload.videoID);
+        playlists: state.playlists.map((playlist) => {
+          if (playlist._id === action.payload.playlistID) {
+            if (!playlist.videos.includes(action.payload.playlistID)) {
+              playlist.videos.push(action.payload.videoID);
             }
           }
           return playlist;
         }),
       };
     case userDataActionTypes.REMOVE_FROM_PLAYLIST:
-      if (payload?.playlistName && payload?.videoID) break;
       return {
         ...state,
-        playlists: [...state.playlists].map((playlist) => {
-          if (playlist.name === payload?.playlistName) {
-            if (payload.videoID) {
-              playlist.videos.slice(playlist.videos.indexOf(payload.videoID));
-            }
+        playlists: state.playlists.map((playlist) => {
+          if (playlist._id === action.payload.playlistID) {
+            playlist.videos = playlist.videos.filter(
+              (id) => id !== action.payload.videoID
+            );
           }
           return playlist;
         }),
       };
     case userDataActionTypes.ADD_TO_WATCHLATER:
-      if (!payload?.videoID) break;
       return {
         ...state,
-        watchLater: [...state.watchLater, payload?.videoID],
+        watchLater: [...state.watchLater, action.payload.videoID],
       };
     case userDataActionTypes.REMOVE_FROM_WATCHLATER:
-      if (payload?.videoID) break;
       return {
         ...state,
-        watchLater: state.watchLater.filter((id) => id !== payload?.videoID),
+        watchLater: state.watchLater.filter(
+          (id) => id !== action.payload.videoID
+        ),
+      };
+    case userDataActionTypes.CLEAR_WATCHLATER:
+      return {
+        ...state,
+        watchLater: [],
       };
     case userDataActionTypes.POPULATE_PLAYLIST:
-      if (!payload?.updatedPlaylist) break;
       return {
         ...state,
-        playlists: [...payload?.updatedPlaylist],
+        playlists: [...action.payload.updatedPlaylist],
       };
     case userDataActionTypes.POPULATE_WATCHLATER:
-      if (!payload?.updatedWatchLater) break;
-      return { ...state, watchLater: [...payload?.updatedWatchLater] };
+      return { ...state, watchLater: [...action.payload.updatedWatchLater] };
     default:
       return state;
   }

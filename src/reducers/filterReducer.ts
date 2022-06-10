@@ -4,10 +4,7 @@ import {
   filterActionTypes,
 } from "../interfaces/filter.interface";
 
-export default function filterReducer(
-  state: initialState,
-  action: filterActions
-) {
+export function filterReducer(state: initialState, action: filterActions) {
   const { type, payload } = action;
   switch (type) {
     case filterActionTypes.POPULATE_LIST:

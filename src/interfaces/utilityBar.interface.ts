@@ -1,6 +1,9 @@
+import { Dispatch } from "react";
+import { singleVideoActions } from "./singleVideoReducer.interface";
+
 export interface utilityBarProps {
-  likes: number;
-  dislikes: number;
-  bookmarkStatus: boolean;
-  playlists: object[];
+  videoID: string;
+  likes: string[];
+  dislikes: string[];
+  singleVideoReducer: Dispatch<singleVideoActions>;
 }

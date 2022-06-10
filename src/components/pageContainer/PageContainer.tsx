@@ -1,12 +1,8 @@
-import React from "react";
-import PageNavbar from "../pageNavbar/PageNavbar";
-import {
-  PageSection,
-  StyledPageContainerMain,
-} from "../styled/PageContainer.styled";
-import { containerProps } from "../../interfaces/pageContainer.interface";
+import { PageNavbar } from "../../components";
+import { PageSection, StyledPageContainerMain } from "../../styled";
+import { containerProps } from "../../interfaces";
 
-export default function PageContainerMain({ children }: containerProps) {
+export function PageContainerMain({ children }: containerProps) {
   return (
     <StyledPageContainerMain>
       <PageNavbar />

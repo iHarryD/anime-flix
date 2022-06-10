@@ -4,21 +4,17 @@ import {
   PlaylistCardPreview,
   PlaylistCardDetailsContainer,
   VideoHeading,
-} from "../styled/Cards.styled";
+} from "../../styled";
+import { playlistInterface } from "../../interfaces";
 
-interface playlistCardProps {
-  title: string;
-  itemCount: number;
-}
-
-export default function PlaylistCard({ title, itemCount }: playlistCardProps) {
+export function PlaylistCard({ name, videos, _id }: playlistInterface) {
   return (
     <PlaylistCardContainer>
-      <Link to="somehwere">
+      <Link to={_id}>
         <PlaylistCardPreview></PlaylistCardPreview>
         <PlaylistCardDetailsContainer>
-          <VideoHeading>{title}</VideoHeading>
-          <span>{itemCount} items</span>
+          <VideoHeading>{name}</VideoHeading>
+          <span>{videos.length} items</span>
         </PlaylistCardDetailsContainer>
       </Link>
     </PlaylistCardContainer>

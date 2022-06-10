@@ -9,9 +9,9 @@ import {
   FooterSectionsLinks,
   FooterUpperSection,
   StyledFooter,
-} from "../styled/Footer.styled";
+} from "../../styled";
 
-export default function Footer() {
+export function Footer() {
   const linkWhileHover = { x: "10px" };
   return (
     <StyledFooter>
