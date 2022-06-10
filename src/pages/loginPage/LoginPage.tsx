@@ -33,7 +33,7 @@ export default function LoginPage() {
   const { state } = useLocation() as { state: { comingFrom: string } };
 
   const testLoginCredentials = {
-    email: "test",
+    email: "iharry@gmail.com",
     password: "123456",
   };
 
