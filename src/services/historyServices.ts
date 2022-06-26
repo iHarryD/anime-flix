@@ -1,17 +1,36 @@
 import { baseAxiosInstance } from "./baseAxiosInstance";
 
 export async function getHistory(
-  token: string,
-  loadingState: React.SetStateAction<any>,
+  loadingState?: React.SetStateAction<any>,
   successCallback?: (result: any) => void,
   failureCallback?: (err: object) => void
 ) {
   try {
-    loadingState(true);
-    const result = await baseAxiosInstance().get("/history/fetch", {
-      headers: {
-        authorization: token,
-      },
+    if (loadingState) loadingState(true);
+    const result = await baseAxiosInstance().get("/history");
+    if (result.status === 200 && successCallback) {
+      successCallback(result.data);
+    }
+  } catch (err: unknown) {
+    if (failureCallback) {
+      failureCallback(err as object);
+    }
+    console.log(err);
+  } finally {
+    if (loadingState) loadingState(false);
+  }
+}
+
+export async function addToHistory(
+  videoID: string,
+  loadingState?: React.SetStateAction<any>,
+  successCallback?: (result: any) => void,
+  failureCallback?: (err: object) => void
+) {
+  try {
+    if (loadingState) loadingState(true);
+    const result = await baseAxiosInstance().post("/history", {
+      videoID,
     });
     if (result.status === 200 && successCallback) {
       successCallback(result.data);
@@ -22,23 +41,18 @@ export async function getHistory(
     }
     console.log(err);
   } finally {
-    loadingState(false);
+    if (loadingState) loadingState(false);
   }
 }
 
 export async function deleteHistory(
-  token: string,
-  loadingState: React.SetStateAction<any>,
+  loadingState?: React.SetStateAction<any>,
   successCallback?: (result: any) => void,
   failureCallback?: (err: object) => void
 ) {
   try {
-    loadingState(true);
-    const result = await baseAxiosInstance().delete("/history/clear", {
-      headers: {
-        authorization: token,
-      },
-    });
+    if (loadingState) loadingState(true);
+    const result = await baseAxiosInstance().delete("/history");
     if (result.status === 200 && successCallback) {
       successCallback(result.data);
     }
@@ -48,6 +62,6 @@ export async function deleteHistory(
     }
     console.log(err);
   } finally {
-    loadingState(false);
+    if (loadingState) loadingState(false);
   }
 }
