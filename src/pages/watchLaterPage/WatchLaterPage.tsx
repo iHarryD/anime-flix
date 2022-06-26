@@ -24,21 +24,28 @@ export default function HistoryPage() {
   useEffect(() => {
     (async () => {
       if (userData.watchLater.length === 0) {
-        await getWatchLater(
+        getWatchLater(
           setIsLoading,
-          (result) =>
+          (result) => {
             userDataDispatcher({
               type: userDataActionTypes.POPULATE_WATCHLATER,
               payload: { updatedWatchLater: result.data },
-            }),
+            });
+            getWatchLaterVideos(
+              setIsLoading,
+              (result) => setAllWatchLaterVideos(result.data),
+              (err) => toast.error(getErrorMessage(err), toastEmitterConfig)
+            );
+          },
+          (err) => toast.error(getErrorMessage(err), toastEmitterConfig)
+        );
+      } else {
+        getWatchLaterVideos(
+          setIsLoading,
+          (result) => setAllWatchLaterVideos(result.data),
           (err) => toast.error(getErrorMessage(err), toastEmitterConfig)
         );
       }
-      getWatchLaterVideos(
-        setIsLoading,
-        (result) => setAllWatchLaterVideos(result.data),
-        (err) => toast.error(getErrorMessage(err), toastEmitterConfig)
-      );
     })();
   }, []);
 

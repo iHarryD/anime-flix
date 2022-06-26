@@ -9,7 +9,28 @@ export async function getHistory(
     if (loadingState) loadingState(true);
     const result = await baseAxiosInstance().get("/history");
     if (result.status === 200 && successCallback) {
-      successCallback(result.data);
+      successCallback(result);
+    }
+  } catch (err: unknown) {
+    if (failureCallback) {
+      failureCallback(err as object);
+    }
+    console.log(err);
+  } finally {
+    if (loadingState) loadingState(false);
+  }
+}
+
+export async function getAllHistoryVideos(
+  loadingState?: React.SetStateAction<any>,
+  successCallback?: (result: any) => void,
+  failureCallback?: (err: object) => void
+) {
+  try {
+    if (loadingState) loadingState(true);
+    const result = await baseAxiosInstance().get("/history/fetch-videos");
+    if (result.status === 200 && successCallback) {
+      successCallback(result);
     }
   } catch (err: unknown) {
     if (failureCallback) {
@@ -29,11 +50,11 @@ export async function addToHistory(
 ) {
   try {
     if (loadingState) loadingState(true);
-    const result = await baseAxiosInstance().post("/history", {
-      videoID,
-    });
+    const result = await baseAxiosInstance().post(
+      `/history?videoID=${videoID}`
+    );
     if (result.status === 200 && successCallback) {
-      successCallback(result.data);
+      successCallback(result);
     }
   } catch (err: unknown) {
     if (failureCallback) {
@@ -54,7 +75,7 @@ export async function deleteHistory(
     if (loadingState) loadingState(true);
     const result = await baseAxiosInstance().delete("/history");
     if (result.status === 200 && successCallback) {
-      successCallback(result.data);
+      successCallback(result);
     }
   } catch (err: unknown) {
     if (failureCallback) {

@@ -9,7 +9,7 @@ export async function getWatchLater(
 ) {
   try {
     if (loadingState) loadingState(true);
-    const result = await baseAxiosInstance().get("/watch-later/fetch");
+    const result = await baseAxiosInstance().get("/watch-later");
     if (result.status === 200 && successCallback) successCallback(result);
   } catch (err: unknown) {
     if (failureCallback) failureCallback(err);
@@ -40,9 +40,7 @@ export async function addToWatchLater(
   failureCallback?: (err: any) => void
 ) {
   try {
-    const result = await baseAxiosInstance().patch(
-      `/watch-later/add?videoID=${videoID}`
-    );
+    const result = await baseAxiosInstance().post(`/watch-later/${videoID}`);
     if (result.status === 200 && successCallback) successCallback(result.data);
   } catch (err: any) {
     if (failureCallback) failureCallback(err);
@@ -55,9 +53,7 @@ export async function removeFromWatchLater(
   failureCallback?: (err: any) => void
 ) {
   try {
-    const result = await baseAxiosInstance().patch(
-      `/watch-later/remove?videoID=${videoID}`
-    );
+    const result = await baseAxiosInstance().delete(`/watch-later/${videoID}`);
     if (result.status === 200 && successCallback) successCallback(result.data);
   } catch (err: unknown) {
     if (failureCallback) failureCallback(err);

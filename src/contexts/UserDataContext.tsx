@@ -10,6 +10,7 @@ export function UserDataProvider({ children }: { children: React.ReactNode }) {
   const [userData, userDataDispatcher] = useReducer(userDataReducer, {
     playlists: [],
     watchLater: [],
+    history: [],
   });
   return (
     <UserDataContext.Provider value={{ userData, userDataDispatcher }}>

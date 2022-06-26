@@ -9,7 +9,7 @@ export async function getPlaylists(
 ) {
   try {
     if (loadingState) loadingState(true);
-    const result = await baseAxiosInstance().get("/playlist/fetch-all");
+    const result = await baseAxiosInstance().get("/playlists");
     if (successCallback) successCallback(result);
   } catch (err) {
     if (failureCallback) failureCallback(err);
@@ -26,9 +26,7 @@ export async function getPlaylistVideos(
 ) {
   try {
     if (loadingState) loadingState(true);
-    const result = await baseAxiosInstance().get(
-      `/playlist/fetch-one?playlistID=${playlistID}`
-    );
+    const result = await baseAxiosInstance().get(`/playlists/${playlistID}`);
     if (successCallback) successCallback(result);
   } catch (err: any) {
     if (failureCallback) failureCallback(err);
@@ -46,7 +44,7 @@ export async function createNewPlaylist(
   try {
     if (loadingState) loadingState(true);
 
-    const result = await baseAxiosInstance().patch("/playlist/create", {
+    const result = await baseAxiosInstance().post("/playlists", {
       playlistName,
     });
     if (successCallback) successCallback(result);
@@ -63,9 +61,7 @@ export async function deletePlaylist(
   failureCallback?: (err: any) => void
 ) {
   try {
-    const result = await baseAxiosInstance().patch("/playlist/delete", {
-      playlistID,
-    });
+    const result = await baseAxiosInstance().delete(`/playlists/${playlistID}`);
     if (successCallback) successCallback(result);
   } catch (err) {
     if (failureCallback) failureCallback(err);
@@ -79,10 +75,12 @@ export async function addToPlaylist(
   failureCallback?: (err: any) => void
 ) {
   try {
-    const result = await baseAxiosInstance().patch("/playlist/add", {
-      playlistID,
-      videoID,
-    });
+    const result = await baseAxiosInstance().patch(
+      `/playlists/${playlistID}/add`,
+      {
+        videoID,
+      }
+    );
     if (successCallback) successCallback(result);
   } catch (err) {
     if (failureCallback) failureCallback(err);
@@ -96,10 +94,12 @@ export async function removeFromPlaylist(
   failureCallback?: (err: any) => void
 ) {
   try {
-    const result = await baseAxiosInstance().patch("/playlist/remove", {
-      playlistID,
-      videoID,
-    });
+    const result = await baseAxiosInstance().patch(
+      `/playlists/${playlistID}/remove`,
+      {
+        videoID,
+      }
+    );
     if (successCallback) successCallback(result);
   } catch (err) {
     if (failureCallback) failureCallback(err);

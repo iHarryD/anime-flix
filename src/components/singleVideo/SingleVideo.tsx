@@ -3,7 +3,12 @@ import { VideoUtilityBar, VideoDescription } from "../../components";
 import { StyledSingleVideoContainer, VideoHeading } from "../../styled";
 import { singleVideoReducer } from "../../reducers";
 import { singleVideoActionTypes, userDataActionTypes } from "../../interfaces";
-import { getPlaylists, getWatchLater, fetchVideo } from "../../services";
+import {
+  getPlaylists,
+  getWatchLater,
+  fetchVideo,
+  addToHistory,
+} from "../../services";
 import { useUserData, useAuth } from "../../contexts";
 
 export function SingleVideo({ videoID }: { videoID: string }) {
@@ -13,7 +18,7 @@ export function SingleVideo({ videoID }: { videoID: string }) {
   const { userCredentials } = useAuth();
 
   useEffect(() => {
-    fetchVideo(videoID, setIsLoading, (result) =>
+    fetchVideo(videoID, setIsLoading, (result) => {
       videoDataDispatch({
         type: singleVideoActionTypes.INITIATE,
         payload: {
@@ -26,8 +31,9 @@ export function SingleVideo({ videoID }: { videoID: string }) {
           uploadedOn: result.data.uploadedOn,
           channel: result.data.channel?.name,
         },
-      })
-    );
+      });
+      addToHistory(videoID);
+    });
   }, [videoID]);
 
   useEffect(() => {
