@@ -14,7 +14,9 @@ export function LoggedOutNavbarUtitilies() {
   const location = useLocation();
   return (
     <NavbarUtilitiesContainer gap="1rem">
-      <SecondaryButton>Sign up</SecondaryButton>
+      <SecondaryButton onClick={() => navigate("/signup")}>
+        Sign up
+      </SecondaryButton>
       <PrimaryButton
         onClick={() =>
           navigate("/login", {
