@@ -3,6 +3,7 @@ import { playlistInterface } from "./playlist.interface";
 export interface userDataInterface {
   playlists: playlistInterface[];
   watchLater: string[];
+  history: string[];
 }
 
 export enum userDataActionTypes {
@@ -14,6 +15,10 @@ export enum userDataActionTypes {
   ADD_TO_WATCHLATER = "ADD_TO_WATCHLATER",
   POPULATE_WATCHLATER = "POPULATE_WATCHLATER",
   CLEAR_WATCHLATER = "CLEAR_WATCHLATER",
+  POPULATE_HISTORY = "POPULATE_HISTORY",
+  ADD_TO_HISTORY = "ADD_TO_HISTORY",
+  REMOVE_FROM_HISTORY = "REMOVE_FROM_HISTORY",
+  CLEAR_HISTORY = "CLEAR_HISTORY",
 }
 
 interface DeletePlaylistAction {
@@ -60,13 +65,36 @@ interface UpdateWatchLatertAction {
   };
 }
 
+interface UpdateHistoryActions {
+  type: userDataActionTypes.POPULATE_HISTORY;
+  payload: {
+    updatedHistory: string[];
+  };
+}
+
+interface SoloHistoryActions {
+  type: userDataActionTypes.CLEAR_HISTORY;
+}
+
+interface HistoryVideoActions {
+  type:
+    | userDataActionTypes.ADD_TO_HISTORY
+    | userDataActionTypes.REMOVE_FROM_HISTORY;
+  payload: {
+    videoID: string;
+  };
+}
+
 export type userDataActions =
   | DeletePlaylistAction
   | PlaylistVideoActions
   | SoleWatchLaterActions
   | WatchLaterVideoActions
   | UpdatePlaylistAction
-  | UpdateWatchLatertAction;
+  | UpdateWatchLatertAction
+  | UpdateHistoryActions
+  | SoloHistoryActions
+  | HistoryVideoActions;
 
 export interface userDataContextInterface {
   userData: userDataInterface;
