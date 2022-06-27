@@ -50,9 +50,7 @@ export async function addToHistory(
 ) {
   try {
     if (loadingState) loadingState(true);
-    const result = await baseAxiosInstance().post(
-      `/history?videoID=${videoID}`
-    );
+    const result = await baseAxiosInstance().post(`/history/${videoID}`);
     if (result.status === 200 && successCallback) {
       successCallback(result);
     }
@@ -66,7 +64,7 @@ export async function addToHistory(
   }
 }
 
-export async function deleteHistory(
+export async function clearHistory(
   loadingState?: React.SetStateAction<any>,
   successCallback?: (result: any) => void,
   failureCallback?: (err: object) => void

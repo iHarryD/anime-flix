@@ -13,7 +13,7 @@ import { useUserData } from "../../contexts";
 import { toastEmitterConfig } from "../../data/toastEmitterConfig";
 import { getErrorMessage } from "../../helpers/getErrorMessage";
 import { userDataActionTypes, videoCardInterface } from "../../interfaces";
-import { getAllHistoryVideos, getHistory } from "../../services";
+import { clearHistory, getAllHistoryVideos, getHistory } from "../../services";
 import {
   HistoryHeadingButtonContainer,
   IconOnlyButton,
@@ -42,6 +42,8 @@ export default function HistoryPage() {
               (result) => setAllHistoryVideos(result.data),
               (err) => toast.error(getErrorMessage(err), toastEmitterConfig)
             );
+          } else {
+            setAllHistoryVideos([]);
           }
         },
         (err) => toast.error(getErrorMessage(err), toastEmitterConfig)
@@ -86,7 +88,7 @@ export default function HistoryPage() {
       <PageHeading>
         <HistoryHeadingButtonContainer>
           History
-          <IconOnlyButton title="Clear history">
+          <IconOnlyButton title="Clear history" onClick={() => clearHistory()}>
             <FontAwesomeIcon icon={faTrash} />
           </IconOnlyButton>
         </HistoryHeadingButtonContainer>

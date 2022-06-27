@@ -31,11 +31,15 @@ export default function HistoryPage() {
               type: userDataActionTypes.POPULATE_WATCHLATER,
               payload: { updatedWatchLater: result.data },
             });
-            getWatchLaterVideos(
-              setIsLoading,
-              (result) => setAllWatchLaterVideos(result.data),
-              (err) => toast.error(getErrorMessage(err), toastEmitterConfig)
-            );
+            if (result.data.length > 0) {
+              getWatchLaterVideos(
+                setIsLoading,
+                (result) => setAllWatchLaterVideos(result.data),
+                (err) => toast.error(getErrorMessage(err), toastEmitterConfig)
+              );
+            } else {
+              setAllWatchLaterVideos([]);
+            }
           },
           (err) => toast.error(getErrorMessage(err), toastEmitterConfig)
         );

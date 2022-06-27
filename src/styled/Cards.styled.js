@@ -7,10 +7,11 @@ export const VerticleCardContainer = styled.div`
   font-size: 0.85rem;
   padding: 1rem;
   min-width: 18rem;
-  max-width: 20rem;
+  max-width: 22rem;
 
   iframe {
     display: block;
+    width: 100%;
   }
 `;
 
