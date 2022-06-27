@@ -30,7 +30,7 @@ export function SingleVideo({ videoID }: { videoID: string }) {
           views: result.data.views,
           videoID,
           uploadedOn: result.data.uploadedOn,
-          channel: result.data.channel?.name,
+          channel: result.data.uploadedBy.name,
         },
       });
       addToHistory(videoID);
