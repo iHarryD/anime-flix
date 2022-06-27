@@ -3,9 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import {
+  EmptyPageTemplate,
   PageContainerMain,
   PageHeading,
   VerticleVideoCard,
+  VideoCardLoadingSkeleton,
 } from "../../components";
 import { useUserData } from "../../contexts";
 import { toastEmitterConfig } from "../../data/toastEmitterConfig";
@@ -21,8 +23,8 @@ import {
 export default function HistoryPage() {
   const { userData, userDataDispatcher } = useUserData();
   const [allHistoryVideos, setAllHistoryVideos] = useState<
-    videoCardInterface[]
-  >([]);
+    videoCardInterface[] | null
+  >(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -53,6 +55,28 @@ export default function HistoryPage() {
     }
   }, []);
 
+  function toRender() {
+    if (isLoading || allHistoryVideos === null) {
+      return <VideoCardLoadingSkeleton />;
+    } else if (allHistoryVideos.length === 0) {
+      return <EmptyPageTemplate />;
+    } else {
+      return (
+        <HistoryVideosContainer>
+          {allHistoryVideos.map(({ title, uploadedOn, url, _id }) => (
+            <VerticleVideoCard
+              key={_id}
+              _id={_id}
+              title={title}
+              uploadedOn={uploadedOn}
+              url={url}
+            />
+          ))}
+        </HistoryVideosContainer>
+      );
+    }
+  }
+
   return (
     <PageContainerMain>
       <PageHeading>
@@ -63,17 +87,7 @@ export default function HistoryPage() {
           </IconOnlyButton>
         </HistoryHeadingButtonContainer>
       </PageHeading>
-      <HistoryVideosContainer>
-        {allHistoryVideos.map(({ title, uploadedOn, url, _id }) => (
-          <VerticleVideoCard
-            key={_id}
-            _id={_id}
-            title={title}
-            uploadedOn={uploadedOn}
-            url={url}
-          />
-        ))}
-      </HistoryVideosContainer>
+      {toRender()}
     </PageContainerMain>
   );
 }
