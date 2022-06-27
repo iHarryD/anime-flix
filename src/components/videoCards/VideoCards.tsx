@@ -18,18 +18,20 @@ export function VerticleVideoCard({
 }: videoCardInterface) {
   return (
     <VerticleCardContainer>
-      <VideoPreviewContainer>
-        <iframe
-          title="Youtubr"
-          width="unset"
-          height="unset"
-          src={`${url}`}
-          frameBorder="0"
-        ></iframe>
-        <VideoPreviewOverlay>
-          {false && <VideoDuration>{null}</VideoDuration>}
-        </VideoPreviewOverlay>
-      </VideoPreviewContainer>
+      <Link to={`/watch/${_id}`}>
+        <VideoPreviewContainer>
+          <iframe
+            title="Youtubr"
+            width="unset"
+            height="unset"
+            src={url}
+            frameBorder="0"
+          ></iframe>
+          <VideoPreviewOverlay>
+            {false && <VideoDuration>{null}</VideoDuration>}
+          </VideoPreviewOverlay>
+        </VideoPreviewContainer>
+      </Link>
       <VideoCardTextContainer>
         <Link to={`/watch/${_id}`}>
           <VideoHeading title={title}>{title}</VideoHeading>

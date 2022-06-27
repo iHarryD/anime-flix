@@ -29,6 +29,7 @@ export const VideoCardTextContainer = styled.div`
 export const VideoPreviewContainer = styled.div`
   border-radius: 10px;
   overflow: hidden;
+  pointer-events: none;
   position: relative;
   z-index: 1;
 `;
