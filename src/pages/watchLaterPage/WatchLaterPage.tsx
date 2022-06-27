@@ -50,13 +50,13 @@ export default function HistoryPage() {
   }, []);
 
   function toRender() {
-    if (isLoading) {
+    if (isLoading || allWatchLaterVideos === null) {
       return (
         <HistoryVideosContainer>
           <VideoCardLoadingSkeleton />
         </HistoryVideosContainer>
       );
-    } else if (allWatchLaterVideos?.length === 0) {
+    } else if (allWatchLaterVideos.length === 0) {
       return <EmptyPageTemplate />;
     } else {
       return (
