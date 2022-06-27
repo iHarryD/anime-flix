@@ -10,9 +10,9 @@ import {
 import {
   IconOnlyButton,
   PlaylistItemTrashContainer,
-  PlaylistVideosContainer,
   SinglePlaylistDetailsContainer,
   SinglePlaylistNameContainer,
+  VideoCardsContainerWithBackground,
 } from "../../styled";
 import { useUserData } from "../../contexts";
 import { userDataActionTypes, videoCardInterface } from "../../interfaces";
@@ -101,7 +101,7 @@ export default function SinglePlaylistPage() {
               </IconOnlyButton>
             </PlaylistItemTrashContainer>
           </SinglePlaylistDetailsContainer>
-          <PlaylistVideosContainer>
+          <VideoCardsContainerWithBackground>
             {playlistDetails.videos.map((video) => (
               <VerticleVideoCard
                 title={video.title}
@@ -111,7 +111,7 @@ export default function SinglePlaylistPage() {
                 key={video._id}
               />
             ))}
-          </PlaylistVideosContainer>
+          </VideoCardsContainerWithBackground>
         </>
       );
     }

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ExploreVideosContainer } from "./ExplorePage.styled";
 
 export const VerticleFlexWithGap = styled.div`
   display: flex;
@@ -11,4 +12,9 @@ export const AuthWarningText = styled.p`
   max-width: 25ch;
   font-size: 0.9rem;
   text-align: center;
+`;
+
+export const VideoCardsContainerWithBackground = styled(ExploreVideosContainer)`
+  background: var(--SECONDARY-ACCENT-CLR);
+  padding: 1rem;
 `;

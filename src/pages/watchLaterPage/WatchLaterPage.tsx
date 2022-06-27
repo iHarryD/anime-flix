@@ -6,13 +6,13 @@ import {
   VerticleVideoCard,
   VideoCardLoadingSkeleton,
 } from "../../components";
-import { HistoryVideosContainer } from "../../styled";
 import { useUserData } from "../../contexts";
 import { userDataActionTypes, videoCardInterface } from "../../interfaces";
 import { getWatchLater, getWatchLaterVideos } from "../../services";
 import { toast } from "react-toastify";
 import { getErrorMessage } from "../../helpers/getErrorMessage";
 import { toastEmitterConfig } from "../../data/toastEmitterConfig";
+import { VideoCardsContainerWithBackground } from "../../styled";
 
 export default function HistoryPage() {
   const { userData, userDataDispatcher } = useUserData();
@@ -52,15 +52,15 @@ export default function HistoryPage() {
   function toRender() {
     if (isLoading || allWatchLaterVideos === null) {
       return (
-        <HistoryVideosContainer>
+        <VideoCardsContainerWithBackground>
           <VideoCardLoadingSkeleton />
-        </HistoryVideosContainer>
+        </VideoCardsContainerWithBackground>
       );
     } else if (allWatchLaterVideos.length === 0) {
       return <EmptyPageTemplate />;
     } else {
       return (
-        <HistoryVideosContainer>
+        <VideoCardsContainerWithBackground>
           {allWatchLaterVideos &&
             allWatchLaterVideos.map(({ _id, url, uploadedOn, title }) => (
               <VerticleVideoCard
@@ -70,7 +70,7 @@ export default function HistoryPage() {
                 uploadedOn={uploadedOn}
               />
             ))}
-        </HistoryVideosContainer>
+        </VideoCardsContainerWithBackground>
       );
     }
   }

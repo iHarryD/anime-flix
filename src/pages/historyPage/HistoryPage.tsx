@@ -16,8 +16,8 @@ import { userDataActionTypes, videoCardInterface } from "../../interfaces";
 import { getAllHistoryVideos, getHistory } from "../../services";
 import {
   HistoryHeadingButtonContainer,
-  HistoryVideosContainer,
   IconOnlyButton,
+  VideoCardsContainerWithBackground,
 } from "../../styled";
 
 export default function HistoryPage() {
@@ -57,12 +57,16 @@ export default function HistoryPage() {
 
   function toRender() {
     if (isLoading || allHistoryVideos === null) {
-      return <VideoCardLoadingSkeleton />;
+      return (
+        <VideoCardsContainerWithBackground>
+          <VideoCardLoadingSkeleton />
+        </VideoCardsContainerWithBackground>
+      );
     } else if (allHistoryVideos.length === 0) {
       return <EmptyPageTemplate />;
     } else {
       return (
-        <HistoryVideosContainer>
+        <VideoCardsContainerWithBackground>
           {allHistoryVideos.map(({ title, uploadedOn, url, _id }) => (
             <VerticleVideoCard
               key={_id}
@@ -72,7 +76,7 @@ export default function HistoryPage() {
               url={url}
             />
           ))}
-        </HistoryVideosContainer>
+        </VideoCardsContainerWithBackground>
       );
     }
   }

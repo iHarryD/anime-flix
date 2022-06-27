@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { ExploreVideosContainer } from "./ExplorePage.styled";
 
 export const SinglePlaylistDetailsContainer = styled.div`
   background: var(--ACCENT-CLR);
@@ -17,9 +16,4 @@ export const SinglePlaylistNameContainer = styled.div`
 export const PlaylistItemTrashContainer = styled.div`
   display: flex;
   justify-content: space-between;
-`;
-
-export const PlaylistVideosContainer = styled(ExploreVideosContainer)`
-  background: var(--SECONDARY-ACCENT-CLR);
-  padding: 1rem;
 `;
