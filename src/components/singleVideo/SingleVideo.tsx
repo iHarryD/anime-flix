@@ -10,6 +10,7 @@ import {
   addToHistory,
 } from "../../services";
 import { useUserData, useAuth } from "../../contexts";
+import { CommentsContainer } from "../commentsContainer/CommentsContainer";
 
 export function SingleVideo({ videoID }: { videoID: string }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -75,6 +76,7 @@ export function SingleVideo({ videoID }: { videoID: string }) {
           channel={videoData.channel}
           description={videoData.description}
         />
+        <CommentsContainer videoID={videoID} />
       </div>
     </StyledSingleVideoContainer>
   );

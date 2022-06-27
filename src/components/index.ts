@@ -1,5 +1,7 @@
 export * from "./backdrop";
 export * from "./buttonSpinner";
+export * from "./comment";
+export * from "./commentsContainer";
 export * from "./emptyPageTemplate";
 export * from "./footer";
 export * from "./header";

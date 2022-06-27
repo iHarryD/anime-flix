@@ -16,6 +16,7 @@ import {
   ButtonPairContainer,
   CenteredFlexJustifyBetween,
   VideoUtilityButton,
+  DivWithDisplayNone,
 } from "../../styled";
 import {
   utilityBarProps,
@@ -135,7 +136,9 @@ export function VideoUtilityBar({
 
   return (
     <>
-      <ToastContainer />
+      <DivWithDisplayNone>
+        <ToastContainer />
+      </DivWithDisplayNone>
       {isPlaylistModalActive && (
         <PlaylistModal
           videoID={videoID}

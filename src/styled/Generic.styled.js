@@ -18,3 +18,7 @@ export const VideoCardsContainerWithBackground = styled(ExploreVideosContainer)`
   background: var(--SECONDARY-ACCENT-CLR);
   padding: 1rem;
 `;
+
+export const DivWithDisplayNone = styled.div`
+  display: unset;
+`;

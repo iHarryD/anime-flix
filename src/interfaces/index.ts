@@ -2,6 +2,7 @@ export * from "./axiosError.interface";
 export * from "./backdrop.interface";
 export * from "./backgroundVideo.interface";
 export * from "./buttonSpinner.interface";
+export * from "./comment.interface";
 export * from "./filter.interface";
 export * from "./generic.interface";
 export * from "./modal.interface";

@@ -1,6 +1,8 @@
 export * from "./Backdrop.styled";
 export * from "./Buttons.styled";
 export * from "./Cards.styled";
+export * from "./CommentInputComponents.styled";
+export * from "./CommentsContainer.styled";
 export * from "./EmptyPageComponents";
 export * from "./ExplorePage.styled";
 export * from "./Footer.styled";
@@ -9,6 +11,7 @@ export * from "./Global.styled";
 export * from "./HistoryPageComponents.styled";
 export * from "./Input.styled";
 export * from "./LandingPage.styled";
+export * from "./Loaders.styled";
 export * from "./LoginPageComponents.styled";
 export * from "./Logo.styled";
 export * from "./Modal.styled";
