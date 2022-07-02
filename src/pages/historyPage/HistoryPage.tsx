@@ -57,6 +57,17 @@ export default function HistoryPage() {
     }
   }, []);
 
+  function handleClearHistory() {
+    clearHistory(
+      undefined,
+      () => {
+        userDataDispatcher({ type: userDataActionTypes.CLEAR_HISTORY });
+        setAllHistoryVideos([]);
+      },
+      (err) => toast.error(getErrorMessage(err), toastEmitterConfig)
+    );
+  }
+
   function toRender() {
     if (isLoading || allHistoryVideos === null) {
       return (
@@ -88,7 +99,10 @@ export default function HistoryPage() {
       <PageHeading>
         <HistoryHeadingButtonContainer>
           History
-          <IconOnlyButton title="Clear history" onClick={() => clearHistory()}>
+          <IconOnlyButton
+            title="Clear history"
+            onClick={() => handleClearHistory()}
+          >
             <FontAwesomeIcon icon={faTrash} />
           </IconOnlyButton>
         </HistoryHeadingButtonContainer>
