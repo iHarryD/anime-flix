@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCompass,
@@ -7,10 +6,36 @@ import {
   faClockRotateLeft,
   faGear,
 } from "@fortawesome/free-solid-svg-icons";
-import { PageNavItems, StyledPageNavbar } from "../../styled";
+import {
+  MobilePageNavItems,
+  PageNavItems,
+  StyledMobilePageNavbar,
+  StyledPageNavbar,
+} from "../../styled";
+import useInMobileView from "../../hooks/useInMobileView";
 
 export function PageNavbar() {
-  return (
+  const { inMobileView } = useInMobileView();
+
+  return inMobileView ? (
+    <StyledMobilePageNavbar>
+      <MobilePageNavItems title="Setting" to="/setting">
+        <FontAwesomeIcon icon={faGear} />
+      </MobilePageNavItems>
+      <MobilePageNavItems title="History" to="/history">
+        <FontAwesomeIcon icon={faClockRotateLeft} />
+      </MobilePageNavItems>
+      <MobilePageNavItems title="Explore" to="/explore">
+        <FontAwesomeIcon icon={faCompass} />
+      </MobilePageNavItems>
+      <MobilePageNavItems title="Watch Later" to="/watch-later">
+        <FontAwesomeIcon icon={faBookmark} />
+      </MobilePageNavItems>
+      <MobilePageNavItems title="Playlists" to="/playlists">
+        <FontAwesomeIcon icon={faList} />
+      </MobilePageNavItems>
+    </StyledMobilePageNavbar>
+  ) : (
     <StyledPageNavbar>
       <div>
         <PageNavItems title="Explore" to="/explore">

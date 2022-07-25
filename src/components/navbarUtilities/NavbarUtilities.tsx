@@ -8,15 +8,19 @@ import {
   SecondaryButton,
   NavbarUtilitiesContainer,
 } from "../../styled";
+import useInMobileView from "../../hooks/useInMobileView";
 
 export function LoggedOutNavbarUtitilies() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { inMobileView } = useInMobileView();
   return (
     <NavbarUtilitiesContainer gap="1rem">
-      <SecondaryButton onClick={() => navigate("/signup")}>
-        Sign up
-      </SecondaryButton>
+      {inMobileView === false && (
+        <SecondaryButton onClick={() => navigate("/signup")}>
+          Sign up
+        </SecondaryButton>
+      )}
       <PrimaryButton
         onClick={() =>
           navigate("/login", {
