@@ -31,7 +31,7 @@ export const GlobalStyles = createGlobalStyle`
 
     main {
     min-height: 100vh;
-    padding: 1em;
+    padding: var(--HAS-PADDING-VALUE);
     }
 
     img {
@@ -78,9 +78,10 @@ export const GlobalStyles = createGlobalStyle`
 
     :root {
       --BTN-PADDING-Y: 0.6em;
-      --BTN-PADDING-X: 1.3em;
+      --BTN-PADDING-X: clamp(0.7em, 1vw + 0.5em, 1.3em);
       --HAS-GAP-VALUE: 1em;
-      --SECTION-PADDING-X: 1rem;
+      --HAS-PADDING-VALUE: clamp(0.6em, 1vw + 0.5em, 1em);
+      --SECTION-PADDING-X: clamp(0.6rem, 2vw + 0.5em, 1rem);
       --ICON-BTN-PADDING: 0.6em;
       --INPUT-PADDING-Y: var(--BTN-PADDING-Y);
       --INPUT-PADDING-X: var(--BTN-PADDING-X);

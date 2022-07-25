@@ -8,7 +8,7 @@ export const StyledPageContainerMain = styled.main`
 export const PageSection = styled.section`
   margin-left: 1rem;
   flex-basis: 100%;
-  padding: 0 1rem;
+  padding: 0 var(--HAS-PADDING-VALUE);
 `;
 
 export const MainForAuthPages = styled.main`

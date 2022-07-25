@@ -16,7 +16,17 @@ export default function AllRoutes() {
   const { userCredentials } = useAuth();
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
+      <Route
+        path="/"
+        element={
+          <PrivateRoute
+            isAuthenticated={!userCredentials.token}
+            redirectTo="/explore"
+          >
+            <LandingPage />
+          </PrivateRoute>
+        }
+      />
       <Route path="/explore" element={<ExplorePage />} />
       <Route path="/watch/:videoID" element={<SingleVideoPage />} />
       <Route
@@ -40,7 +50,10 @@ export default function AllRoutes() {
       <Route
         path="/login"
         element={
-          <PrivateRoute isAuthenticated={!userCredentials.token} redirectTo="/">
+          <PrivateRoute
+            isAuthenticated={!userCredentials.token}
+            redirectTo="/explore"
+          >
             <LoginPage />
           </PrivateRoute>
         }
@@ -48,7 +61,10 @@ export default function AllRoutes() {
       <Route
         path="/signup"
         element={
-          <PrivateRoute isAuthenticated={!userCredentials.token} redirectTo="/">
+          <PrivateRoute
+            isAuthenticated={!userCredentials.token}
+            redirectTo="/explore"
+          >
             <SignupPage />
           </PrivateRoute>
         }

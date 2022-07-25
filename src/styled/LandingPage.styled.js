@@ -13,9 +13,9 @@ export const LandingPageContainer = styled.div`
 
 export const LandingPageForeground = styled.div`
   position: absolute;
-  left: 5rem;
+  left: clamp(2rem, 5vw + 1.2rem, 5rem);
   top: 50%;
-  width: 50ch;
+  width: min(50ch, 80%);
   transform: translateY(-50%);
 `;
 
@@ -24,7 +24,7 @@ export const LandingPageTextContainer = styled.div`
 `;
 
 export const LandingPageHeading = styled(motion.p)`
-  font-size: 3rem;
+  font-size: clamp(2rem, 1vw + 1.8rem, 3rem);
   font-weight: 700;
   text-transform: uppercase;
 }`;

@@ -4,10 +4,10 @@ import { IconOnlyButton, TextButton } from "./Buttons.styled";
 
 export const StyledSingleVideoContainer = styled.div`
   background: var(--SECONDARY-ACCENT-CLR);
-  padding: 1rem;
+  padding: var(--HAS-PADDING-VALUE);
   iframe {
     width: 100%;
-    height: 80vh;
+    height: 80vmin;
   }
 `;
 

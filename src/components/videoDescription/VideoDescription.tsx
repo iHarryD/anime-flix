@@ -7,6 +7,7 @@ import {
   CenteredFlexJustifyBetween,
   DescriptionTextButton,
   DescriptionTextContainer,
+  VerticleFlexWithGap,
   ViewUploadDateContainer,
 } from "../../styled";
 import { verticallyExpandingVariant } from "../../variants";
@@ -21,7 +22,7 @@ export function VideoDescription({
   const [isShowingDescription, setIsShowingDescription] =
     useState<boolean>(false);
   return (
-    <div>
+    <VerticleFlexWithGap>
       <CenteredFlexJustifyBetween>
         <div>
           <ViewUploadDateContainer>
@@ -56,6 +57,6 @@ export function VideoDescription({
           )}
         </AnimatePresence>
       </DescriptionTextContainer>
-    </div>
+    </VerticleFlexWithGap>
   );
 }

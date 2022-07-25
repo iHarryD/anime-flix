@@ -10,7 +10,7 @@ export const SearchBarContainer = styled.div`
 
 export const StyledNavbarSearchBar = styled(StyledInput)`
   border: none;
-  width: max(30vw, 15rem);
+  width: max(30vw, 10rem);
 
   &::placeholder {
     color: inherit;
