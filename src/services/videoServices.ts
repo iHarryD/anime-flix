@@ -1,15 +1,32 @@
 import { AxiosResponse } from "axios";
 import { Dispatch, SetStateAction } from "react";
+import { videoCardInterface } from "../interfaces";
 import { baseAxiosInstance } from "./baseAxiosInstance";
 
 export async function fetchAllVideos(
+  searchQuery?: string,
+  page?: number,
   loadingState?: Dispatch<SetStateAction<boolean>>,
-  successCallback?: (result: AxiosResponse) => void,
+  successCallback?: (
+    result: AxiosResponse<{
+      currentPage: number;
+      nextPage: number | null;
+      resultCount: number;
+      videos: videoCardInterface[];
+    }>
+  ) => void,
   failureCallback?: (err: object) => void
 ) {
   try {
     if (loadingState) loadingState(true);
-    const result = await baseAxiosInstance().get("/video/fetch-all");
+    const result: AxiosResponse<{
+      currentPage: number;
+      nextPage: number | null;
+      resultCount: number;
+      videos: videoCardInterface[];
+    }> = await baseAxiosInstance().get(
+      `/video/fetch-all/?page=${page}&query=${searchQuery}`
+    );
     if (result.status === 200 && successCallback) successCallback(result);
   } catch (err: unknown) {
     if (failureCallback) failureCallback(err as object);

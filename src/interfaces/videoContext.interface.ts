@@ -1,7 +1,7 @@
-import React from "react";
+import { Dispatch, SetStateAction } from "react";
 import { videoCardInterface } from "./video.interface";
 
 export interface videoContextInterface {
   allVideos: videoCardInterface[];
-  setAllVideos: React.Dispatch<React.SetStateAction<any>>;
+  setAllVideos: Dispatch<SetStateAction<videoCardInterface[]>>;
 }

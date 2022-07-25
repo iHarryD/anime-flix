@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { GlobalStyles } from "./styled";
 import { AuthProvider, VideosProvider, UserDataProvider } from "./contexts";
+import { SearchProvider } from "./contexts/SearchContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,8 +16,10 @@ root.render(
       <AuthProvider>
         <VideosProvider>
           <UserDataProvider>
-            <GlobalStyles />
-            <App />
+            <SearchProvider>
+              <GlobalStyles />
+              <App />
+            </SearchProvider>
           </UserDataProvider>
         </VideosProvider>
       </AuthProvider>

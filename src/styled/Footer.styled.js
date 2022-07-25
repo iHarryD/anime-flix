@@ -5,11 +5,7 @@ export const StyledFooter = styled.footer`
   background: var(--ACCENT-CLR);
   padding: var(--SECTION-PADDING-X);
   color: var(--ACCENT-FONT-CLR);
-  padding: 1rem;
-  postition: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  padding: var(--HAS-PADDING-VALUE);
 `;
 
 export const FooterUpperSection = styled.div`

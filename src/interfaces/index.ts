@@ -11,6 +11,7 @@ export * from "./pageHeader.interface";
 export * from "./playlist.interface";
 export * from "./playlistModal.interface";
 export * from "./privateRoute.interface";
+export * from "./searchContext.interface";
 export * from "./singleVideo.interface";
 export * from "./singleVideoReducer.interface";
 export * from "./userContext.interface";
