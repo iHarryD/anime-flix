@@ -38,7 +38,7 @@ export function SingleVideo({ videoID }: { videoID: string }) {
   }, [videoID]);
 
   useEffect(() => {
-    if (userCredentials._id === null) return;
+    if (userCredentials === null) return;
     if (userData.playlists.length === 0) {
       getPlaylists(undefined, (result) =>
         userDataDispatcher({
@@ -55,7 +55,7 @@ export function SingleVideo({ videoID }: { videoID: string }) {
         })
       );
     }
-  }, []);
+  }, [userCredentials]);
 
   return isLoading || !videoData ? (
     <h1>Loading...</h1>

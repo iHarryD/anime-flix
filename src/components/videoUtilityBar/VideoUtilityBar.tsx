@@ -39,6 +39,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { toastEmitterConfig } from "../../data/toastEmitterConfig";
 import { getErrorMessage } from "../../helpers/getErrorMessage";
 
+const youNeedToLoginMessage = "You need to login.";
+
 export function VideoUtilityBar({
   videoID,
   likes,
@@ -51,6 +53,7 @@ export function VideoUtilityBar({
     useState<boolean>(false);
 
   function handleRemoveLikeVideo(videoID: string) {
+    if (userCredentials === null) return;
     singleVideoReducer({
       type: singleVideoActionTypes.REMOVE_LIKE,
       payload: { userID: userCredentials._id },
@@ -65,6 +68,10 @@ export function VideoUtilityBar({
   }
 
   function handleDislikeVideo(videoID: string) {
+    if (userCredentials === null) {
+      toast.error(youNeedToLoginMessage, toastEmitterConfig);
+      return;
+    }
     singleVideoReducer({
       type: singleVideoActionTypes.DISLIKE,
       payload: { userID: userCredentials._id },
@@ -79,6 +86,7 @@ export function VideoUtilityBar({
   }
 
   function handleRemoveDislikeVideo(videoID: string) {
+    if (userCredentials === null) return;
     singleVideoReducer({
       type: singleVideoActionTypes.REMOVE_DISLIKE,
       payload: { userID: userCredentials._id },
@@ -93,6 +101,10 @@ export function VideoUtilityBar({
   }
 
   function handleLikeVideo(videoID: string) {
+    if (userCredentials === null) {
+      toast.error(youNeedToLoginMessage, toastEmitterConfig);
+      return;
+    }
     singleVideoReducer({
       type: singleVideoActionTypes.LIKE,
       payload: { userID: userCredentials._id },
@@ -107,6 +119,10 @@ export function VideoUtilityBar({
   }
 
   function handleAddToWatchLater(videoID: string) {
+    if (userCredentials === null) {
+      toast.error(youNeedToLoginMessage, toastEmitterConfig);
+      return;
+    }
     userDataDispatcher({
       type: userDataActionTypes.ADD_TO_WATCHLATER,
       payload: { videoID },
@@ -121,6 +137,7 @@ export function VideoUtilityBar({
   }
 
   function handleRemoveFromWatchLater(videoID: string) {
+    if (userCredentials === null) return;
     userDataDispatcher({
       type: userDataActionTypes.REMOVE_FROM_WATCHLATER,
       payload: { videoID },
@@ -148,7 +165,7 @@ export function VideoUtilityBar({
       <CenteredFlexJustifyBetween>
         <ButtonPairContainer>
           <ButtonWithTextContainer>
-            {likes.includes(userCredentials._id) ? (
+            {userCredentials && likes.includes(userCredentials._id) ? (
               <VideoUtilityButton
                 variants={utilityButtonVariant}
                 whileHover="whileHover"
@@ -170,7 +187,7 @@ export function VideoUtilityBar({
             <span>{likes.length} likes</span>
           </ButtonWithTextContainer>
           <ButtonWithTextContainer>
-            {dislikes.includes(userCredentials._id) ? (
+            {userCredentials && dislikes.includes(userCredentials._id) ? (
               <VideoUtilityButton
                 variants={utilityButtonVariant}
                 whileHover="whileHover"

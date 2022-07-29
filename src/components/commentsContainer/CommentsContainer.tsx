@@ -59,7 +59,7 @@ export function CommentsContainer({ videoID }: { videoID: string }) {
   return (
     <VerticleFlexWithGap>
       <h3>Comments</h3>
-      {userCredentials.token && (
+      {userCredentials && (
         <CommentInputContainer>
           <CommentInput placeholder="Type your comment" ref={commentInputRef} />
           <PostCommentButton

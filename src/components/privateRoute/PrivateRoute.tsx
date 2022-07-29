@@ -10,9 +10,7 @@ export function PrivateRoute({
   const location = useLocation();
   const { userCredentials } = useAuth();
 
-  return (
-    isAuthenticated !== undefined ? isAuthenticated : userCredentials.token
-  ) ? (
+  return (isAuthenticated !== undefined ? isAuthenticated : userCredentials) ? (
     children
   ) : (
     <Navigate

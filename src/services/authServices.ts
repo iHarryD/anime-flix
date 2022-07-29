@@ -8,10 +8,11 @@ export async function login(
   loadingState: React.SetStateAction<any>,
   successCallback?: (
     result: AxiosResponse<{
-      firstName: string;
-      token: string;
       _id: string;
+      email: string;
+      firstName: string;
       message: string;
+      token: string;
     }>
   ) => void,
   failureCallback?: (err: AxiosError<any> | Error) => void

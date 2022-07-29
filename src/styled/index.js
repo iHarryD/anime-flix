@@ -22,6 +22,7 @@ export * from "./PageHeading.styled";
 export * from "./PageNavbar.styled";
 export * from "./PlaylistModalComponents.styled";
 export * from "./SearchBars.styled";
+export * from "./SettingPageComponents.styled";
 export * from "./SignupPageComponents.styled";
 export * from "./SinglePlaylistPageComponents.styled";
 export * from "./SingleVideoComponents.styled";

@@ -9,6 +9,7 @@ export const StyledPageNavbar = styled.nav`
   gap: 2rem;
   height: fit-content;
   justify-content: space-between;
+  overflow: hidden;
   position: sticky;
   top: 50%;
   left: var(--SECTION-PADDING-X);

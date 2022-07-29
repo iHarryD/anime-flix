@@ -11,6 +11,7 @@ import SingleVideoPage from "./singleVideoPage/SingleVideoPage";
 import LandingPage from "./landingPage/LandingPage";
 import Page404 from "./page404/Page404";
 import SinglePlaylistPage from "./singlePlaylistPage/SinglePlaylistPage";
+import SettingPage from "./settingPage/SettingPage";
 
 export default function AllRoutes() {
   const { userCredentials } = useAuth();
@@ -20,7 +21,7 @@ export default function AllRoutes() {
         path="/"
         element={
           <PrivateRoute
-            isAuthenticated={!userCredentials.token}
+            isAuthenticated={!userCredentials}
             redirectTo="/explore"
           >
             <LandingPage />
@@ -45,13 +46,35 @@ export default function AllRoutes() {
           </PrivateRoute>
         }
       />
-      <Route path="/history" element={<HistoryPage />} />
-      <Route path="/watch-later" element={<WatchLaterPage />} />
+      <Route
+        path="/history"
+        element={
+          <PrivateRoute>
+            <HistoryPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/watch-later"
+        element={
+          <PrivateRoute>
+            <WatchLaterPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/setting"
+        element={
+          <PrivateRoute>
+            <SettingPage />
+          </PrivateRoute>
+        }
+      />
       <Route
         path="/login"
         element={
           <PrivateRoute
-            isAuthenticated={!userCredentials.token}
+            isAuthenticated={!userCredentials}
             redirectTo="/explore"
           >
             <LoginPage />
@@ -62,7 +85,7 @@ export default function AllRoutes() {
         path="/signup"
         element={
           <PrivateRoute
-            isAuthenticated={!userCredentials.token}
+            isAuthenticated={!userCredentials}
             redirectTo="/explore"
           >
             <SignupPage />

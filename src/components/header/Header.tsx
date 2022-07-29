@@ -14,7 +14,7 @@ export function Header() {
       <StyledNavbar>
         <Logo />
         <NavbarSearchBar />
-        {userCredentials.firstName && userCredentials.token ? (
+        {userCredentials ? (
           <LoggedInNavbarUtitilies />
         ) : (
           <LoggedOutNavbarUtitilies />
