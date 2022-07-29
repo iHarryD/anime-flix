@@ -50,6 +50,10 @@ export function PlaylistModal({
           type: userDataActionTypes.POPULATE_PLAYLIST,
           payload: { updatedPlaylist: result.data },
         });
+        handleAddToPlaylist(result.data[result.data.length - 1]._id, videoID);
+        if (playlistNameInputRef.current) {
+          playlistNameInputRef.current.value = "";
+        }
       }
     );
   }
