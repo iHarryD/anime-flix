@@ -14,7 +14,7 @@ export function NavbarSearchBar() {
       <StyledNavbarSearchBar
         id="navbar_search-bar"
         value={searchQuery}
-        placeholder="search by title, characters, cast, etc"
+        placeholder="search by title"
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
           setSearchQuery(e.target.value)
         }

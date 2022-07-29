@@ -1,9 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts";
 import {
-  IconOnlyButton,
   PrimaryButton,
   SecondaryButton,
   NavbarUtilitiesContainer,
@@ -38,12 +35,5 @@ export function LoggedOutNavbarUtitilies() {
 
 export function LoggedInNavbarUtitilies() {
   const { logout } = useAuth();
-  return (
-    <NavbarUtilitiesContainer gap="2rem">
-      <IconOnlyButton size="1.5rem">
-        <FontAwesomeIcon icon={faBell} />
-      </IconOnlyButton>
-      <SecondaryButton onClick={() => logout()}>Logout</SecondaryButton>
-    </NavbarUtilitiesContainer>
-  );
+  return <SecondaryButton onClick={() => logout()}>Logout</SecondaryButton>;
 }
