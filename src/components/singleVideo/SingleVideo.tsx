@@ -33,7 +33,12 @@ export function SingleVideo({ videoID }: { videoID: string }) {
           channel: result.data.uploadedBy.name,
         },
       });
-      addToHistory(videoID);
+      addToHistory(videoID, undefined, (result) => {
+        userDataDispatcher({
+          type: userDataActionTypes.POPULATE_HISTORY,
+          payload: { updatedHistory: result.data },
+        });
+      });
     });
   }, [videoID]);
 

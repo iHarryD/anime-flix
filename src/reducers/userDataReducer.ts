@@ -64,6 +64,8 @@ export default function userDataReducer(
       };
     case userDataActionTypes.POPULATE_WATCHLATER:
       return { ...state, watchLater: [...action.payload.updatedWatchLater] };
+    case userDataActionTypes.POPULATE_HISTORY:
+      return { ...state, watchLater: [...action.payload.updatedHistory] };
     default:
       return state;
   }

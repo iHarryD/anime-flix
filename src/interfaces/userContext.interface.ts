@@ -16,9 +16,6 @@ export enum userDataActionTypes {
   POPULATE_WATCHLATER = "POPULATE_WATCHLATER",
   CLEAR_WATCHLATER = "CLEAR_WATCHLATER",
   POPULATE_HISTORY = "POPULATE_HISTORY",
-  ADD_TO_HISTORY = "ADD_TO_HISTORY",
-  REMOVE_FROM_HISTORY = "REMOVE_FROM_HISTORY",
-  CLEAR_HISTORY = "CLEAR_HISTORY",
 }
 
 interface DeletePlaylistAction {
@@ -72,19 +69,6 @@ interface UpdateHistoryActions {
   };
 }
 
-interface SoloHistoryActions {
-  type: userDataActionTypes.CLEAR_HISTORY;
-}
-
-interface HistoryVideoActions {
-  type:
-    | userDataActionTypes.ADD_TO_HISTORY
-    | userDataActionTypes.REMOVE_FROM_HISTORY;
-  payload: {
-    videoID: string;
-  };
-}
-
 export type userDataActions =
   | DeletePlaylistAction
   | PlaylistVideoActions
@@ -92,9 +76,7 @@ export type userDataActions =
   | WatchLaterVideoActions
   | UpdatePlaylistAction
   | UpdateWatchLatertAction
-  | UpdateHistoryActions
-  | SoloHistoryActions
-  | HistoryVideoActions;
+  | UpdateHistoryActions;
 
 export interface userDataContextInterface {
   userData: userDataInterface;

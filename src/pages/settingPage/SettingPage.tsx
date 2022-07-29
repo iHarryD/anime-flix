@@ -4,7 +4,7 @@ import { SecondaryButton, VerticleFlexWithGap } from "../../styled";
 import { LoggedInUserDetailsContainer } from "../../styled/SettingPageComponents.styled";
 
 export default function SettingPage() {
-  const { userCredentials } = useAuth();
+  const { userCredentials, logout } = useAuth();
   return (
     <PageContainerMain>
       <VerticleFlexWithGap gap="2rem">
@@ -14,12 +14,16 @@ export default function SettingPage() {
             <div>
               <div>
                 <span>Logged in as </span>
-                <span>{userCredentials?.firstName},</span>
+                <strong>{userCredentials?.firstName},</strong>
               </div>
-              <p>{userCredentials?.email}</p>
+              <p>
+                <strong>{userCredentials?.email}</strong>
+              </p>
             </div>
             <div>
-              <SecondaryButton>Log out</SecondaryButton>
+              <SecondaryButton onClick={() => logout()}>
+                Log out
+              </SecondaryButton>
             </div>
           </LoggedInUserDetailsContainer>
         </VerticleFlexWithGap>
