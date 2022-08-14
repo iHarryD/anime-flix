@@ -12,21 +12,24 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { fetchAllVideos } from "../../services";
 import { videoCardInterface } from "../../interfaces";
 import { useNavigate } from "react-router-dom";
+import useDebounce from "../../hooks/useDebounce";
 
 export function NavbarSearchBar() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchResults, setSearchResults] = useState<videoCardInterface[]>([]);
+  const query = useDebounce(searchQuery, 500);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    if (searchQuery.length > 0) {
-      fetchAllVideos(searchQuery, 1, undefined, (result) => {
+    if (query.length > 0) {
+      fetchAllVideos(query, 1, setIsLoading, (result) => {
         setSearchResults(result.data.videos);
       });
     } else {
       setSearchResults([]);
     }
-  }, [searchQuery]);
+  }, [query]);
 
   return (
     <SearchBarItemsContainer>
@@ -50,20 +53,24 @@ export function NavbarSearchBar() {
           <FontAwesomeIcon icon={faClose} />
         </IconOnlyButton>
       </SearchBarContainer>
-      {searchResults.length > 0 && (
+      {(searchResults.length > 0 || isLoading) && (
         <SearchItemsContainer>
-          {searchResults.map((video) => (
-            <SearchItem>
-              <button
-                onClick={() => {
-                  navigate(`/watch/${video._id}`);
-                  setSearchResults([]);
-                }}
-              >
-                {video.title}
-              </button>
-            </SearchItem>
-          ))}
+          {isLoading ? (
+            <SearchItem>Loading...</SearchItem>
+          ) : (
+            searchResults.map((video) => (
+              <SearchItem>
+                <button
+                  onClick={() => {
+                    navigate(`/watch/${video._id}`);
+                    setSearchResults([]);
+                  }}
+                >
+                  {video.title}
+                </button>
+              </SearchItem>
+            ))
+          )}
         </SearchItemsContainer>
       )}
     </SearchBarItemsContainer>

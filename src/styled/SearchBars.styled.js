@@ -24,6 +24,7 @@ export const StyledNavbarSearchBar = styled(StyledInput)`
 `;
 
 export const SearchItemsContainer = styled.ul`
+  box-shadow: 5px 10px 30px #0003;
   margin: 0.5rem 0;
   max-height: 30rem;
   overflow: auto;
