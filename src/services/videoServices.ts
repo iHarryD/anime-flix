@@ -25,7 +25,9 @@ export async function fetchAllVideos(
       resultCount: number;
       videos: videoCardInterface[];
     }> = await baseAxiosInstance().get(
-      `/video/fetch-all/?page=${page}&query=${searchQuery}`
+      `/video/fetch-all/?${page ? `page=${page}` : ""}${
+        searchQuery ? `&query=${searchQuery}` : ""
+      }`
     );
     if (result.status === 200 && successCallback) successCallback(result);
   } catch (err: unknown) {

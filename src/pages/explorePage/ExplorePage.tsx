@@ -20,12 +20,10 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { useSearch } from "../../contexts/SearchContext";
 
 export default function ExplorePage() {
   const { allVideos, setAllVideos } = useVideos();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { searchQuery } = useSearch();
   const [paginationPages, setPaginationPages] = useState<{
     previousPage: number | null;
     nextPage: number | null;
@@ -34,7 +32,7 @@ export default function ExplorePage() {
 
   useEffect(() => {
     fetchAllVideos(
-      searchQuery,
+      undefined,
       paginationPages.currentPage,
       setIsLoading,
       (result) => {
@@ -49,7 +47,7 @@ export default function ExplorePage() {
       },
       (err) => toast.error(getErrorMessage(err), toastEmitterConfig)
     );
-  }, [paginationPages.currentPage, searchQuery]);
+  }, [paginationPages.currentPage]);
 
   return (
     <>
