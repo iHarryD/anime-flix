@@ -109,6 +109,7 @@ export default function SinglePlaylistPage() {
                 url={video.url}
                 _id={video._id}
                 key={video._id}
+                thumbnail={video.thumbnail}
               />
             ))}
           </VideoCardsContainerWithBackground>

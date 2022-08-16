@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import ReactPlayer from "react-player/youtube";
 import { motion } from "framer-motion";
+import { IconOnlyButton } from "./Buttons.styled";
 
 export const VerticleCardContainer = styled.div`
   cursor: default;
@@ -8,6 +8,7 @@ export const VerticleCardContainer = styled.div`
   padding: 1rem;
   min-width: 18rem;
   max-width: 22rem;
+  position: relative;
 
   iframe {
     display: block;
@@ -30,27 +31,25 @@ export const VideoCardTextContainer = styled.div`
 export const VideoPreviewContainer = styled.div`
   border-radius: 10px;
   overflow: hidden;
-  pointer-events: none;
   position: relative;
   z-index: 1;
-`;
 
-export const VideoPreview = styled(ReactPlayer)`
-  video {
+  &::after {
+    background: linear-gradient(180deg, #000, #0000);
+    content: "";
+    height: 50%;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  img {
     display: block;
-    height: 10rem;
+    height: 100%;
     width: 100%;
   }
-`;
-
-export const VideoPreviewOverlay = styled.div`
-  padding: 1rem;
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
 `;
 
 export const VideoDuration = styled.span`
@@ -98,4 +97,13 @@ export const PlaylistCardDetailsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 1rem;
+`;
+
+export const VideoTooltipButton = styled(IconOnlyButton)`
+  font-size: 1.2rem;
+  padding: 5px;
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  z-index: 1;
 `;

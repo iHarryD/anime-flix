@@ -66,14 +66,17 @@ export default function HistoryPage() {
       return (
         <VideoCardsContainerWithBackground>
           {allWatchLaterVideos &&
-            allWatchLaterVideos.map(({ _id, url, uploadedOn, title }) => (
-              <VerticleVideoCard
-                _id={_id}
-                url={url}
-                title={title}
-                uploadedOn={uploadedOn}
-              />
-            ))}
+            allWatchLaterVideos.map(
+              ({ _id, url, uploadedOn, title, thumbnail }) => (
+                <VerticleVideoCard
+                  _id={_id}
+                  url={url}
+                  title={title}
+                  uploadedOn={uploadedOn}
+                  thumbnail={thumbnail}
+                />
+              )
+            )}
         </VideoCardsContainerWithBackground>
       );
     }

@@ -60,12 +60,12 @@ export default function userDataReducer(
     case userDataActionTypes.POPULATE_PLAYLIST:
       return {
         ...state,
-        playlists: [...action.payload.updatedPlaylist],
+        playlists: action.payload.updatedPlaylist,
       };
     case userDataActionTypes.POPULATE_WATCHLATER:
-      return { ...state, watchLater: [...action.payload.updatedWatchLater] };
+      return { ...state, watchLater: action.payload.updatedWatchLater };
     case userDataActionTypes.POPULATE_HISTORY:
-      return { ...state, watchLater: [...action.payload.updatedHistory] };
+      return { ...state, watchLater: action.payload.updatedHistory };
     default:
       return state;
   }

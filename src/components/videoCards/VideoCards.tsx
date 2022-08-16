@@ -2,36 +2,42 @@ import { Link } from "react-router-dom";
 import {
   VerticleCardContainer,
   VideoCardTextContainer,
-  VideoDuration,
   VideoHeading,
   VideoPreviewContainer,
-  VideoPreviewOverlay,
+  VideoTooltipButton,
   VideoUploadDate,
 } from "../../styled";
 import { videoCardInterface } from "../../interfaces";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+import { VideoCardMenu } from "../videoCardMenu";
+import { useState } from "react";
+import { useAuth } from "../../contexts";
 
 export function VerticleVideoCard({
   url,
   title,
   _id,
+  thumbnail,
   uploadedOn,
 }: videoCardInterface) {
+  const [isVideoMenuActive, setIsVideoMenuActive] = useState<boolean>(false);
+  const { userCredentials } = useAuth();
   return (
     <VerticleCardContainer>
-      <Link to={`/watch/${_id}`}>
-        <VideoPreviewContainer>
-          <iframe
-            title="Youtubr"
-            width="unset"
-            height="unset"
-            src={url}
-            frameBorder="0"
-          ></iframe>
-          <VideoPreviewOverlay>
-            {false && <VideoDuration>{null}</VideoDuration>}
-          </VideoPreviewOverlay>
-        </VideoPreviewContainer>
-      </Link>
+      {isVideoMenuActive && <VideoCardMenu videoID={_id} />}
+      <VideoPreviewContainer>
+        {userCredentials && (
+          <VideoTooltipButton
+            onClick={() => setIsVideoMenuActive((prev) => !prev)}
+          >
+            <FontAwesomeIcon icon={faEllipsisH} />
+          </VideoTooltipButton>
+        )}
+        <Link to={`/watch/${_id}`}>
+          <img src={thumbnail} alt={url} />
+        </Link>
+      </VideoPreviewContainer>
       <VideoCardTextContainer>
         <Link to={`/watch/${_id}`}>
           <VideoHeading title={title}>{title}</VideoHeading>

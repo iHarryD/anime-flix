@@ -69,15 +69,18 @@ export default function HistoryPage() {
     } else {
       return (
         <VideoCardsContainerWithBackground>
-          {allHistoryVideos.map(({ title, uploadedOn, url, _id }) => (
-            <VerticleVideoCard
-              key={_id}
-              _id={_id}
-              title={title}
-              uploadedOn={uploadedOn}
-              url={url}
-            />
-          ))}
+          {allHistoryVideos.map(
+            ({ title, uploadedOn, url, _id, thumbnail }) => (
+              <VerticleVideoCard
+                key={_id}
+                _id={_id}
+                title={title}
+                uploadedOn={uploadedOn}
+                thumbnail={thumbnail}
+                url={url}
+              />
+            )
+          )}
         </VideoCardsContainerWithBackground>
       );
     }

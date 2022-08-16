@@ -19,5 +19,6 @@ export * from "./singleVideo";
 export * from "./skeletonLoaders";
 export * from "./videoBackground";
 export * from "./videoCards";
+export * from "./videoCardMenu";
 export * from "./videoDescription";
 export * from "./videoUtilityBar";

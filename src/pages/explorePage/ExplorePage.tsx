@@ -59,12 +59,19 @@ export default function ExplorePage() {
                 <VideoCardLoadingSkeleton key={index} />
               ))
             : allVideos.map(
-                ({ url, title, _id, uploadedOn }: videoCardInterface) => (
+                ({
+                  url,
+                  title,
+                  _id,
+                  thumbnail,
+                  uploadedOn,
+                }: videoCardInterface) => (
                   <VerticleVideoCard
                     key={_id}
                     url={url}
                     title={title}
                     _id={_id}
+                    thumbnail={thumbnail}
                     uploadedOn={uploadedOn}
                   />
                 )

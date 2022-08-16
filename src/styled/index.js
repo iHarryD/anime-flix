@@ -27,4 +27,5 @@ export * from "./SignupPageComponents.styled";
 export * from "./SinglePlaylistPageComponents.styled";
 export * from "./SingleVideoComponents.styled";
 export * from "./Skeletons.styled";
+export * from "./VideoCardMenuComponents.styled";
 export * from "./VideoForBackground.styled";
