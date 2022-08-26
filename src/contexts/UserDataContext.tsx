@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useContext, useEffect, useReducer } from "react";
 import {
   userDataActionTypes,
@@ -20,7 +21,11 @@ export function UserDataProvider({ children }: { children: React.ReactNode }) {
   const { userCredentials } = useAuth();
 
   useEffect(() => {
-    if (userCredentials === null) return;
+    if (
+      userCredentials === null ||
+      axios.defaults.headers.common.authorization === undefined
+    )
+      return;
     getPlaylists(undefined, (result) =>
       userDataDispatcher({
         type: userDataActionTypes.POPULATE_PLAYLIST,
