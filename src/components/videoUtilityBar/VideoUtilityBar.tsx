@@ -16,7 +16,6 @@ import {
   ButtonPairContainer,
   CenteredFlexJustifyBetween,
   VideoUtilityButton,
-  DivWithDisplayNone,
 } from "../../styled";
 import {
   utilityBarProps,
@@ -34,7 +33,7 @@ import {
 import { useUserData, useAuth } from "../../contexts";
 import { PlaylistModal } from "../../components";
 import { utilityButtonVariant } from "../../variants";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toastEmitterConfig } from "../../data/toastEmitterConfig";
 import { getErrorMessage } from "../../helpers/getErrorMessage";
@@ -153,9 +152,6 @@ export function VideoUtilityBar({
 
   return (
     <>
-      <DivWithDisplayNone>
-        <ToastContainer />
-      </DivWithDisplayNone>
       {isPlaylistModalActive && (
         <PlaylistModal
           videoID={videoID}
